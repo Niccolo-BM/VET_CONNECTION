@@ -18,6 +18,7 @@ input{
     background-color:#79d5bb;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     width: 100%;
     color: #017991;
     position: relative;
@@ -79,11 +80,19 @@ input{
     display: block;
 text-align: center;
 }
+.nav{
+    width: 20%;
+    display: flex;
+    gap: 10%;
+    border:solid 2px black;
+}
+
 #icons{
     display: flex;
-    margin-right: 2%;
+    gap: 5%;
     justify-content: space-evenly;
     align-items: center;
+    padding: 1%;
     
 }
 #icons2{
@@ -95,9 +104,10 @@ text-align: center;
     height: 25px;
     margin: 10px;
     border-radius: 100%;
+    margin-left: 50%;
 }
 #img1{
-    width: 120px;
+    width: 130px;
     height: 110px;
     padding: 10px;
     margin-top: 15px;
@@ -116,19 +126,21 @@ text-align: center;
 }
 #title{
     color: #0e3604;
-    margin-top: 10px;
     text-align: center;
+    margin-left: 15%;
 }
 #btn{
     background-color: #017991;
     color: white;
-    border-radius: 10%;
+    border-radius: 10px;
     display: flex;
+    justify-content: center;
+    border: none;
     align-items: center;
     text-align: center;
-    padding: 10%;
-    margin: 5%;
-    width: 100px;
+    width: 200px;
+    height: 40px;
+    
 }
 .lista{
     display: block;
