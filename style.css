@@ -14,8 +14,11 @@ a{
 input{
     text-decoration: none;
 }
+footer{
+    background-color: #cce6e0;
+}
 .header{
-    background-color:#79d5bb;
+    background-color:#bcd8c1;
     display: flex;
     justify-content: space-between;
     align-items: center;
