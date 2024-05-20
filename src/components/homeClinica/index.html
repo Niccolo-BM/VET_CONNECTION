@@ -3,10 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="/src/assets/img/Logo_VetConnection.png">
-    <title>VC Perfil</title>
+    <!--Favicon-->
+    <link rel="icon" href="../../assets/img/Logo_VetConnection.png">
+    <!--CSS Link-->
+    <link rel="stylesheet" href="./style.css">
+    <!--JavaScript Link-->
+    <script src="./index.js" defer></script>
+    <!--Font Type: Roboto-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alata&family=Anton&family=Bungee+Spice&family=Hind+Madurai:wght@300;400;500;600;700&family=Kalam:wght@300;400;700&family=Kaushan+Script&family=Lilita+One&family=Madimi+One&family=Patrick+Hand&family=Platypi:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Tilt+Neon&display=swap" rel="stylesheet">
+    <!--Title-->
+    <title>Veterinary Clinic Profile</title>
 </head>
 <body>
-    
+    <!--Section 1-->
+    <section>
+        <!--Header-->
+        <header id="header">
+            <h1>¡Amamos conectar vidas!</h1>
+        </header>
+        <!--Container Section1-->
+        <div id="divSection1">
+            <!--Profile Title-->
+            <h2>CLÍNICA VETERINARIA</h2>
+            <!--ClinicData & Circles Container-->
+            <div id="divCircleData">
+                <!--Circles Container-->
+                <div id="divCircleContainer">
+                    <!--Profile Picture-->
+                    <div id="divProfilePicture">
+                        <img src="../../assets/img/sinFotoPerfil.png" alt="sinFotoPerfil" id="imgProfile">
+                        <!--divMenu-->
+                        <div class="divCircles" id="menuIcon">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                        <!--div SubMenu-->
+                        <div id="gridSubMenu">
+                            <div class="subMenuText top">Añadir</div>
+                            <div class="subMenuText top">Eliminar</div>
+                            <div class="subMenuText top">Sitio</div>
+                            <div class="subMenuText top">Buscar</div>
+                            <div class="subMenuText bottom">foto de perfil</div>
+                            <div class="subMenuText bottom">perfil</div>
+                            <div class="subMenuText bottom">Web</div>
+                            <div class="subMenuText bottom">Mascota</div>
+                        </div>
+                        <!--Create Doctor-->
+                        <div class="divCircles" id="createDoctor">
+                            <p>Crear Médico</p>
+                        </div>
+                        <!--Exit-->
+                        <div class="divCircles" id="exit">
+                            <p>Salir</p>
+                        </div>
+                    </div>
+                </div>
+                <!--divClinicData-->
+                <div id="gridClinicData">
+                    <div>Nombre:</div>
+                    <div>Dirección:</div>
+                    <div>Ciudad:</div>
+                    <div>NIT: </div>
+                    <div>Celular:</div>
+                    <div>Servicios:</div>
+                    <div>Representante:</div>
+                    <button type="button" id="updateButton">Actualizar Datos</button>
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
 </html>
