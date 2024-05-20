@@ -1,3 +1,4 @@
+//Section 1
 // OPEN SUBMENU
 //Add a click event to the browser window that triggers a function with the window information in the "e" parameter. 
 window.addEventListener('click', function(e){   

@@ -62,6 +62,10 @@
     position: relative;
 }
 
+#imgProfile{
+    width: 100%;
+}
+
 /*divCircles*/
 .divCircles{
     border: 1px solid #017991;
