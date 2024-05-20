@@ -87,7 +87,7 @@ footer{
     background-color: #0a3200;
     color: white;
     display: block;
-text-align: center;
+    text-align: center;
 }
 .nav{
     width: 20%;
@@ -97,9 +97,10 @@ text-align: center;
 }
 
 #icons{
+    background-color: yellowgreen;
     display: flex;
     gap: 5%;
-    justify-content: space-evenly;
+    /* justify-content: space-evenly; */
     align-items: center;
     padding: 1%;
     
@@ -116,6 +117,7 @@ text-align: center;
     margin-left: 50%;
 }
 #img1{
+    background-color: #0e3604;
     width: 130px;
     height: 110px;
     padding: 10px;
