@@ -42,8 +42,9 @@ aside:hover{
     align-items: center;
 }
 .searchHidden{
-    visibility: hidden;
+    visibility: initial;
     position: absolute;
+    left: 200%;
 }
 
 .viewMenu{
@@ -71,6 +72,8 @@ aside:hover{
     transform: translateX(-100%);
     border: none;
     border-radius: 200px;
+    left: 100%;
+
 }
 
 .viewSearch:focus{
@@ -208,5 +211,5 @@ text-align: center;
     color: #017991;
     display: flex;
     justify-content: space-around;
-    align-items: center;
+    align-content: center;
 }
