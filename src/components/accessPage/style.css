@@ -11,12 +11,6 @@ body{
 a{
     text-decoration: none;
 }
-.container1{
-    display: flex;
-    justify-content: space-between;
-
-}
-
 
 /* header information page */
 .header{
@@ -191,6 +185,12 @@ footer{
 .contFooter1{
     display: flex;
     justify-content: space-around;
+}
+
+.container1{
+    display: flex;
+    justify-content:baseline;
+
 }
 
 .subFooter{
