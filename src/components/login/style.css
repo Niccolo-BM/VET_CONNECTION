@@ -230,7 +230,7 @@ footer{
 #icons{
     display: flex;
     transform: translateX(-10%);
-    gap: 7%;
+    gap: 5%;
     align-items: center;
     padding: 1%;
     
