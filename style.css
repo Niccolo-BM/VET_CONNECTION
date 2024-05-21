@@ -107,13 +107,10 @@ input{
 
 .whatsapp { 
     position: fixed;
-    bottom: 10px; 
+    bottom: 150px; 
     right: 50px;
-    }
-.whatsappwhatsapp:hover{
-    opacity: 1;  
-    height: 30px;
 }
+
 /* general information footer */
 footer{
     background-color: #cce6e0;

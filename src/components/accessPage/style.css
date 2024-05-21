@@ -170,6 +170,12 @@ gap: 20px;
 ol{
     list-style-type: none;
 }
+.whatsapp { 
+    position: fixed;
+    right: 50px;
+    bottom: 200px; 
+    
+}
 /* general information footer */
 footer{
     background-color: #cce6e0;
