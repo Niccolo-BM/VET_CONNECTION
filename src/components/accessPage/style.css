@@ -42,9 +42,20 @@ a{
     border-radius: 10px;
     transition: .3s;
     margin-top: 2.5%;
-    transform: translateX(-90%);
+    transform: translateX(-65%);
+    transform: translatez(20%);
+
     
 
+}
+aside:hover{
+    display: flex;
+    justify-content: center;
+    background-color: #1e6d7d94;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    align-items: center;
 }
 .viewSearch{
     visibility: initial;
@@ -52,8 +63,8 @@ a{
     background-color: #7af1d0d7;
     border-radius: 10px;
     transition: .3s;
-    margin-top: 3%;
-    transform: translateX(-90%);
+    transform: translateX(-85%);
+    transform: translateY(-5%);
     border: none;
     border-radius: 200px;
 }
@@ -71,16 +82,16 @@ a{
 #title{
     color: #0e3604;
     text-align: center;
-    transform: translateX(-63%);
+    font-size: 30px;
+    transform: translateX(-100%);
 }
 
 input{
     text-decoration: none;
 }
 #logo{
-    width:25%;
-    height: 43%;
-    margin: 10px;
+    width:20%;
+    height:33%;
     transform: translateX(40%);
 }
 #img3{
@@ -111,6 +122,7 @@ input{
 }
 /* acces main  */
 .breadCrumb{
+    font-size: 10px;
     display: flex;
     gap: 10px;
     background-color: #cbe5f7;

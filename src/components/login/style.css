@@ -48,6 +48,15 @@ a{
     
 
 }
+aside:hover{
+    display: flex;
+    justify-content: center;
+    background-color: #1e6d7d94;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    align-items: center;
+}
 .viewSearch{
     visibility: initial;
     padding: 20px;
@@ -74,9 +83,8 @@ input{
     text-decoration: none;
 }
 #logo{
-    width:25%;
-    height: 43%;
-    margin: 10px;
+    width:20%;
+    height:33%;
     transform: translateX(40%);
 }
 
@@ -103,7 +111,7 @@ input{
 #title{
     color: #0e3604;
     text-align: center;
-    transform: translateX(-63%);
+    transform: translateX(-100%);
 }
 
 .lista{
@@ -134,6 +142,7 @@ input{
 /* Start information */
 }
 .breadCrumb{
+    font-size: 10px;
     display: flex;
     gap: 10px;
     background-color: #cbe5f7;
@@ -222,6 +231,8 @@ footer{
 #title{
     color: #0e3604;
     text-align: center;
+    font-size: 30px;
+    transform: translateX(-60%);
   
 }
 
