@@ -1,20 +1,13 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portafolio1.0">
-    <meta name="keywords" content="Maria, Veronica, Jhonatan, Nicolas">
-    <meta name="sistedomain" content="https://VetConnection.com">
-    <meta name="keywords" content="Maria, Veronica, Jhonatan, Nicolas">
-    <meta name="robots" content="index,folow">
-    <meta name="googlebot" content="index,folow">
-    <meta name="revisit-after" content="15days">
+    <link rel="icon" href="/src/assets/img/Logo_VetConnection.png">
+    <link rel="stylesheet" href="style.css">
     <link rel="icon" href="/src/assets/img/LOGO.png">
-    <link rel="stylesheet" href="/style.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-
-    <title>VET CONNECTION</title>
+    <title>VC Login</title>
 </head>
 <body>
     <!-- general page header -->
@@ -34,9 +27,6 @@
              <a href="" class="link">Contáctanos</a>
          </nav>
      </div>
-         <a href="/src/components/accessPage/index.html"> 
-             <button id="btn">Acceder</button>
-         </a>  
      <div>
          <img src="/src/assets/img/search_24dp_FILL0_wght400_GRAD0_opsz24 (1).png" alt="" id="img3" class="material-symbols-outlined1">
          <div>
@@ -49,9 +39,50 @@
 </header>
 <a href="https://wa.me/573502014028/?text=Hola!   
 Necesito mas infomracion para mi Peludito" target="blank"><img class="whatsapp" src="/src/assets/img/whatsapp_3670051.png" width="60"  title="Contacto Ws"></a>
-<!-- main to modify -->
+<!-- main Acces -->
 <main>
-
+<!-- breadcrumb -->
+ <nav aria-label="bredCrumb" >
+ <ol class="breadCrumb">
+     <li class="bredCrumb-item"><a href="/index.html">HOME  ></a></li> 
+     <li aria-current="page" class="bredCrumb-item active">ACCEDER</li>
+ </ol>
+    </nav>
+ <!-- interactive section of the page -->
+ <section>
+     <h1 id="wellcome1"> ¡Bienvenido a Vet Connection!</h1>
+     <div class="containerAcces">
+         <div id="textAcces">
+             <p>
+                 Vet connecion esta diseñado para facilitar las interacciones entre profesionales de la salud y los amantes de los animales
+             </p>
+         </div>
+         <div class="imgAcces">
+             <h4> Accede como:</h4>
+             <div class="imgAcces1">
+                <div class="imgAcces2">
+                    <a href="/src/components/login/index.html"> <img src="/src/assets/img/clínica.png" alt="" id="imgAccesIcon"></a>
+                     <a href="/src/components/login/index.html"><button id="btn" class="buttonAcces">
+                         <h5>Clinica Veterinaria</h5>
+                     </button></a>
+                 </div>
+                 <div class="imgAcces2">
+                     <a href="/src/components/login/index.html"> <img src="/src/assets/img/médico.png" alt="" id="imgAccesIcon"></a>
+                      <a href="/src/components/login/index.html"><button id="btn" class="buttonAcces">
+                          <h5>Medico Veterinario</h5>
+                      </button></a>
+                  </div>
+                  <div class="imgAcces2">
+                     <a href="/src/components/login/index.html"> <img src="/src/assets/img/miMascota.png" alt="" id="imgAccesIcon"></a>
+                      <a href="/src/components/login/index.html"><button id="btn" class="buttonAcces">
+                          <h5>Mi Mascota</h5>
+                      </button></a>
+                  </div>
+             </div>
+             
+         </div>
+     </div>
+ </section>
 </main>
 <!-- general page footer -->
 <footer>
@@ -84,7 +115,7 @@ Necesito mas infomracion para mi Peludito" target="blank"><img class="whatsapp" 
      <div id="text">
          <p>Siguenos y descubre nuestro <br>contenido de interes</p>
          <div id="text1">
-             <p>Blog</p> <img src="/src/assets/img/icons8-instagram-24.png" alt="" id="img2"> <img src="/src/assets/img/icons8-facebook-nuevo-50 (1).png" alt="" id="img2"> <img src="/src/assets/img/icons8-tik-tok-30.png" alt="" id="img2"> <img src="/src/assets/img/icons8-youtube-50.png" alt="" id="img2"> <p>APP</p>
+             <p>Blog</p> <img src="img/icons8-instagram-24.png" alt="" id="img2"> <img src="img/icons8-facebook-nuevo-50 (1).png" alt="" id="img2"> <img src="img/icons8-tik-tok-30.png" alt="" id="img2"> <img src="img/icons8-youtube-50.png" alt="" id="img2"> <p>APP</p>
          </div>
      </div>
  </div>
@@ -93,6 +124,8 @@ Necesito mas infomracion para mi Peludito" target="blank"><img class="whatsapp" 
 </footer>
 
 
-<script src="/script.js"></script>
+<script src="/src/components/accessPage/script.js"></script>
+
+
 </body>
 </html>
