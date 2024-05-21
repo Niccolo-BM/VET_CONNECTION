@@ -13,6 +13,7 @@ a{
 }
 
 /* header information page */
+
 .header{
     background-color:#bcd8c1;
     display: flex;
@@ -22,10 +23,12 @@ a{
     color: #017991;
     position: relative;
 }
+
 .menuHidden{
     visibility: hidden;
     position: absolute;
 }
+
 .searchHidden{
     visibility: hidden;
     position: absolute;
@@ -44,10 +47,8 @@ a{
     margin-top: 2.5%;
     transform: translateX(-65%);
     transform: translatez(20%);
-
-    
-
 }
+
 aside:hover{
     display: flex;
     justify-content: center;
@@ -57,6 +58,7 @@ aside:hover{
     border-radius: 100%;
     align-items: center;
 }
+
 .viewSearch{
     visibility: initial;
     padding: 20px;
@@ -79,6 +81,7 @@ aside:hover{
     gap: 10%;
     border:solid 2px black;
 }
+
 #title{
     color: #0e3604;
     text-align: center;
@@ -89,17 +92,20 @@ aside:hover{
 input{
     text-decoration: none;
 }
+
 #logo{
     width:20%;
     height:33%;
     transform: translateX(40%);
 }
+
 #img3{
     width: 20px;
     height: 20px;
     margin: 3px;
     filter:invert(100%);
 }
+
 #btn{
     background-color: #017991;
     color: white;
@@ -113,6 +119,7 @@ input{
     height: 40px;
     
 }
+
 #icons{
     display: flex;
     gap: 7%;
@@ -120,6 +127,7 @@ input{
     padding: 1%;
     
 }
+
 /* acces main  */
 .breadCrumb{
     font-size: 10px;

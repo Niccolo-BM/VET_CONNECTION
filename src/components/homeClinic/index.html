@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--Favicon-->
-    <link rel="icon" href="../../assets/img/Logo_VetConnection.png">
+    <link rel="icon" href="../../assets/img/LOGO.png">
     <!--CSS Link-->
     <link rel="stylesheet" href="./style.css">
+    <!--Font Awesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!--JavaScript Link-->
     <script src="./index.js" defer></script>
     <!--Font Type: Roboto-->
@@ -17,23 +19,47 @@
     <title>Veterinary Clinic Profile</title>
 </head>
 <body>
+        <!--Header-->
+        <header class="header">
+            <a href="/index.html"> <img src="/src/assets/img/LOGO.png" alt="" id="logo" ></a>
+             <h3 id="title">¡Amamos conectar vidas!</h3>
+             <div id="icons">
+                 <div>
+                     <div class="material-symbols-outlined">
+                     <aside><img src="/src/assets/img/icons8-menú-50.png" alt="" id="img3" ></aside>
+                     </div>
+                     <nav class="menuHidden">
+                         <a href="/index.html" class="link">Inicio</a>
+                         <a href="" class="link">Nosotros</a>
+                         <a href="" class="link">Servicios</a>
+                         <a href="" class="link">Blog</a>
+                         <a href="" class="link">Contáctanos</a>
+                     </nav>
+                 </div>
+                 <div>
+                     <aside><img src="/src/assets/img/search_24dp_FILL0_wght400_GRAD0_opsz24 (1).png" alt="" id="img3" class="material-symbols-outlined1"></aside>
+                     <div>
+                         <input class="searchHidden" type="search" name="search" id="search" placeholder="buscar">
+                     </div>
+                 </div>
+             </div>
+        </header>
+
     <!--Section 1-->
     <section>
-        <!--Header-->
-        <header id="header">
-            <h1>¡Amamos conectar vidas!</h1>
-        </header>
         <!--Container Section1-->
         <div id="divSection1">
             <!--Profile Title-->
-            <h2>CLÍNICA VETERINARIA</h2>
+            <h2><b>CLÍNICA VETERINARIA</b></h2>
             <!--ClinicData & Circles Container-->
             <div id="divCircleData">
                 <!--Circles Container-->
                 <div id="divCircleContainer">
                     <!--Profile Picture-->
                     <div id="divProfilePicture">
-                        <img src="../../assets/img/sinFotoPerfil.png" alt="sinFotoPerfil" id="imgProfile">
+                        <div id="divProfile">
+                            <img src="../../assets/img/conejoPerfil.jpg" alt="sinFotoPerfil" id="imgProfile">
+                        </div>
                         <!--divMenu-->
                         <div class="divCircles" id="menuIcon">
                             <div></div>
@@ -41,15 +67,15 @@
                             <div></div>
                         </div>
                         <!--div SubMenu-->
-                        <div id="gridSubMenu">
-                            <div class="subMenuText top">Añadir</div>
-                            <div class="subMenuText top">Eliminar</div>
-                            <div class="subMenuText top">Sitio</div>
-                            <div class="subMenuText top">Buscar</div>
-                            <div class="subMenuText bottom">foto de perfil</div>
-                            <div class="subMenuText bottom">perfil</div>
-                            <div class="subMenuText bottom">Web</div>
-                            <div class="subMenuText bottom">Mascota</div>
+                        <div id="gridSubMenu" hidden>
+                            <div class="subMenuText top left"><b>Añadir</b></div>
+                            <div class="subMenuText top"><b>Eliminar</b></div>
+                            <div class="subMenuText top"><b>Sitio</b></div>
+                            <div class="subMenuText top"><b>Buscar</b></div>
+                            <div class="subMenuText bottom left"><b>foto de perfil</b></div>
+                            <div class="subMenuText bottom"><b>perfil</b></div>
+                            <div class="subMenuText bottom"><b>Web</b></div>
+                            <div class="subMenuText bottom"><b>Mascota</b></div>
                         </div>
                         <!--Create Doctor-->
                         <div class="divCircles" id="createDoctor">
@@ -63,17 +89,73 @@
                 </div>
                 <!--divClinicData-->
                 <div id="gridClinicData">
-                    <div>Nombre:</div>
-                    <div>Dirección:</div>
-                    <div>Ciudad:</div>
-                    <div>NIT: </div>
-                    <div>Celular:</div>
-                    <div>Servicios:</div>
-                    <div>Representante:</div>
-                    <button type="button" id="updateButton">Actualizar Datos</button>
+                    <div><b>Nombre:</b></div>
+                    <div><b>Dirección:</b></div>
+                    <div><b>Ciudad:</b></div>
+                    <div><b>NIT:</b></div>
+                    <div><b>Celular:</b></div>
+                    <div><b>Servicios:</b></div>
+                    <div><b>Representante:</b></div>
+                    <button type="button" id="updateButton"><b>Actualizar Datos</b></button>
                 </div>
             </div>
         </div>
     </section>
+
+    <!--Section 2-->
+    <section id = section2>
+    <h1><b>VETERINARIOS ASOCIADOS</b></h1>
+    <div id="divSearch">
+        <p>Buscar</p>
+        <i class="fa fa-search" id="searchIcon"></i>
+    </div>
+    </section>
+
+
+
+
+<!--Footer-->
+<footer>
+    <div class="contFooter">
+        <div class="contFooter1">
+            <img src="/src/assets/img/logo.png" alt="" id="img1">
+            <div class="lista">
+                <div>CONTÁCTANOS</div>
+                <div class="container1">
+                    <div ><img src="/src/assets/img/icons8-teléfono-24.png" alt="" id="img2"></div>
+                    <p>Linea de atencion al cliente</p>
+                </div>
+                <div class="container1">
+                    <div>
+                        <img src="/src/assets/img/icons8-whatsapp-50.png" alt="" id="img2">
+                    </div>
+                    <p>(+57) 350 2014028</p>
+                </div>
+                <div class="container1">
+                    <div>
+                        <img src="/src/assets/img/icons8-correo-50.png" alt="" id="img2">
+                    </div>
+                    <p>CorreEjemplo@gmail.com</p>
+                </div>
+                  
+            </div>
+        </div>
+        <div id="text">
+            <p>Siguenos y descubre nuestro <br>contenido de interes</p>
+            <div id="text1">
+               <a href="#"><h3>Blog</h3></a>
+               <a href="#"><img src="/src/assets/img/icons8-instagram-24.png" alt="" id="img2"></a>
+               <a href="#"><img src="/src/assets/img/icons8-facebook-nuevo-50 (1).png" alt="" id="img2"></a>
+               <a href="#"><img src="/src/assets/img/icons8-tik-tok-30.png" alt="" id="img2"></a>
+               <a href="#"><img src="/src/assets/img/icons8-youtube-50.png" alt="" id="img2"></a>
+               <a href="#"><h3>APP</h3></a>
+            </div>
+        </div>
+    </div>
+    <div class="subFooter">Vet Connection 2024  ©  Medellín, Antioquia <br>
+        Diseñado y desarrollado por Vet Connection S.A © 2024  
+    </div>
+</footer>
+
 </body>
 </html>
