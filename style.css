@@ -110,6 +110,18 @@ input{
     bottom: 150px; 
     right: 50px;
 }
+.whatsapp-text {
+    color: white;
+    background-color: #128C7E;
+    border-radius: 15px;
+    padding: 2px 10px;
+    font-size: 12px;
+    display: inline-block;
+    position: fixed;
+    bottom: 131px;
+    right: 42px;
+    transition: background-color 0.3s;
+}
 
 /* general information footer */
 footer{
