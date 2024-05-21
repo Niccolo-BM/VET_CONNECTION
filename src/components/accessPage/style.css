@@ -4,15 +4,32 @@
     padding: 0;
     box-sizing: border-box;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    cursor: url("/src/assets/img/icons8-cat-footprint-20.png") 0 0, pointer;
 }
 body{
     overflow-x: hidden;
+}
+body::-webkit-scrollbar {
+    width: 12px;               /* width of the entire scrollbar */
+}
+body::-webkit-scrollbar-track {
+    background: none;        /* color of the tracking area */
+    opacity:0;
+}
+body::-webkit-scrollbar-thumb {
+    background-color: rgba(63, 62, 62, 0.205);    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    opacity:0;
+}
+  body::-webkit-scrollbar-thumb:hover{
+      background-color: gray;
 }
 a{
     text-decoration: none;
 }
 
 /* header information page */
+
 .header{
     background-color:#bcd8c1;
     display: grid;
@@ -23,10 +40,12 @@ a{
     color: #017991;
     position: relative;
 }
+
 .menuHidden{
     visibility: hidden;
     position: absolute;
 }
+
 .searchHidden{
     visibility: hidden;
     position: absolute;
@@ -76,6 +95,7 @@ aside:hover{
     border-radius: 100%;
     align-items: center;
 }
+
 .viewSearch{
     visibility: initial;
     padding: 20px;
@@ -98,6 +118,7 @@ aside:hover{
     gap: 10%;
     border:solid 2px black;
 }
+
 #title{
     color: #0e3604;
     text-align: center;
@@ -108,17 +129,21 @@ aside:hover{
 input{
     text-decoration: none;
 }
+
 #logo{
-    width:20%;
+    width:85px;
     height:33%;
     transform: translateX(40%);
+    margin: 6px;
 }
+
 #img3{
     width: 20px;
     height: 20px;
     margin: 3px;
     filter:invert(100%);
 }
+
 #btn{
     background-color: #017991;
     color: white;
@@ -132,6 +157,7 @@ input{
     height: 40px;
     
 }
+
 #icons{
     display: flex;
     transform: translateX(-10%);
@@ -144,9 +170,9 @@ input{
 .breadCrumb{
     font-size: 10px;
     display: flex;
-    gap: 10px;
+    gap: 8px;
     background-color: #cbe5f7;
-    padding: 1%;
+    padding: .5%;
 
 }
 .containerAcces{
@@ -204,16 +230,33 @@ ol{
 }
 .whatsapp { 
     position: fixed;
+    bottom: 150px; 
     right: 50px;
-    bottom: 200px; 
-    
+    opacity: .8;
+}
+.whatsapp:hover{
+    opacity: 1;
+}
+.whatsapp-text {
+    color: white;
+    background-color: #128C7E;
+    border-radius: 15px;
+    padding: 2px 10px;
+    font-size: 12px;
+    display: inline-block;
+    position: fixed;
+    bottom: 131px;
+    right: 42px;
+    transition: background-color 0.3s;
+    opacity: .8;
+}
+.whatsapp-text:hover {
+     opacity: 1;
 }
 /* general information footer */
 footer{
     background-color: #cce6e0;
 }
-
-
 .contFooter{
     display: flex;
     justify-content: space-around;
@@ -224,26 +267,28 @@ footer{
     display: flex;
     justify-content: space-around;
 }
-
 .container1{
     display: flex;
     justify-content:baseline;
 
 }
-
 .subFooter{
     background-color: #0a3200;
     color: white;
     display: block;
-    text-align: center;
+text-align: center;
 }
 
-
+#icons2{
+    display: flex;
+    justify-content: baseline;
+}
 
 #img1{
     width: 130px;
     height: 110px;
     padding: 10px;
+    margin-top: 15px;
 }
 #img2{
     width: 20px;
@@ -251,7 +296,12 @@ footer{
     margin: 3px;
     
 }
-
+#img3{
+    width: 20px;
+    height: 20px;
+    margin: 3px;
+    filter:invert(100%);
+}
 
 .lista{
     display: block;
@@ -260,7 +310,6 @@ footer{
     color: #017991;
     padding: 10px;
 }
-
 #text{
     text-align: center;
     margin-top: 20px;

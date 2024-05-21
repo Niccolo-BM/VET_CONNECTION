@@ -1,19 +1,122 @@
-/*Body*/
+/*BODY*/
 body{
     margin: 0px;
+    overflow-x: hidden;
 }
 
-/*Header*/
-#header{
-    border : solid 2px #bcd8c1;
-    width : 100%;
-    height: 80px;
-    background-color: #bcd8c1;
+/*HEADER*/
+.header{
+    background-color:#bcd8c1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    color: #017991;
+    position: relative;
 }
 
-/*Header Title*/
-#header > h1{
+.menuHidden{
+    visibility: hidden;
+    position: absolute;
+}
+
+.searchHidden{
+    visibility: hidden;
+    position: absolute;
+}
+
+.viewMenu{
+    visibility: initial;
+    padding: 20px;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    position: absolute;
+    background-color: #7af1d0d7;
+    border-radius: 10px;
+    transition: .3s;
+    margin-top: 2.5%;
+    transform: translateX(-65%);
+    transform: translatez(20%);
+}
+
+aside:hover{
+    display: flex;
+    justify-content: center;
+    background-color: #1e6d7d94;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    align-items: center;
+}
+
+.viewSearch{
+    visibility: initial;
+    padding: 20px;
+    background-color: #7af1d0d7;
+    border-radius: 10px;
+    transition: .3s;
+    transform: translateX(-85%);
+    transform: translateY(-5%);
+    border: none;
+    border-radius: 200px;
+}
+
+.viewSearch:focus{
+    outline: none;
+}
+
+.nav{
+    width: 20%;
+    display: flex;
+    gap: 10%;
+    border:solid 2px black;
+}
+
+#title{
+    color: #0e3604;
     text-align: center;
+    font-size: 30px;
+    transform: translateX(-100%);
+}
+
+input{
+    text-decoration: none;
+}
+
+#logo{
+    width:20%;
+    height:33%;
+    transform: translateX(40%);
+}
+
+#img3{
+    width: 20px;
+    height: 20px;
+    margin: 3px;
+    filter:invert(100%);
+}
+
+#btn{
+    background-color: #017991;
+    color: white;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    border: none;
+    align-items: center;
+    text-align: center;
+    width: 200px;
+    height: 40px;
+    
+}
+
+#icons{
+    display: flex;
+    gap: 7%;
+    align-items: center;
+    padding: 1%;
+    
 }
 
 /*SECTION 1*/
@@ -21,7 +124,6 @@ body{
 /*Container Section1*/
 #divSection1{
     border: solid 2px #6fb2a5;
-    width: 100%;
     height: 600px;
     background-color: #f1f9ff;
 }
@@ -30,7 +132,6 @@ body{
 #divSection1 > h2 {
     text-align: center;
     font-family: "Roboto", sans-serif;
-    font-weight: 900;
     font-style: normal;
     font-size: 25px;
     color: #017991;
@@ -64,11 +165,19 @@ body{
 
 #imgProfile{
     width: 100%;
+    height: 100%;
+}
+
+#divProfile{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 100%;
 }
 
 /*divCircles*/
 .divCircles{
-    border: 3px solid #ffffff;
+    border: 3px solid #E9D985;
     background-color: rgba(1, 121, 145, 0.8);
     width: 130px;
     height: 130px;
@@ -86,6 +195,7 @@ body{
     z-index: 9999;
 }
 
+/*Hover para divCircles*/
 .divCircles:hover {
     background-color: rgba(1, 121, 145);
 }
@@ -121,7 +231,7 @@ body{
 #gridClinicData{
   display:grid;
   grid-template-rows: auto auto auto auto auto auto auto;
-  border: 2px solid #bcd8c1;
+  border: 2px solid #017991;
   width: 400px;
   height: 400px;
   padding-top: 20px;
@@ -129,7 +239,6 @@ body{
   border-radius: 10%;
   background-color: #d7f6dc;
   font-family: "Roboto", sans-serif;
-  font-weight: 900;
   font-style: normal;
   color: #017991;
   font-size: 20px;
@@ -139,12 +248,12 @@ body{
 /*Update Button*/
 #updateButton{
     font-family: "Roboto", sans-serif;
-    font-weight: 800;
     font-style: normal;
     font-size: 15px;
     color:#ffffff;
     background-color: #017991;
     border: none;
+    border-radius:20px;
     height: 40px;
     margin-right: 10%;
     position: absolute;
@@ -156,8 +265,8 @@ body{
 /*subMenu*/
 #gridSubMenu{
     font-size: 16px;
-    display: grid;
-    grid-template-columns: 111px 111px 111px 111px;
+    display: none;
+    grid-template-columns: auto auto auto auto;
     grid-template-rows: auto auto;
     border: 2px solid #017991;
     background-color: #d7f6dc;
@@ -172,7 +281,6 @@ body{
     white-space: nowrap;
     transition: width 2s;
     font-family: "Roboto", sans-serif;
-    font-weight: 800;
     font-style: normal;
 }
 
@@ -181,7 +289,7 @@ body{
 }
 
 .left{
-    padding-left: 80px;
+    padding-left: 8px;
 }
 
 .bottom{
@@ -191,6 +299,116 @@ body{
 /*SubMenu text*/
 .subMenuText{
     word-wrap: break-word;
+}
+
+/*SECTION2*/
+
+#section2{
+    border: 1px solid black;
+    height: 600px;
+    display:flex;
+    justify-content: space-around;
+}
+
+#section2 > h1 {
+    color:#017991;
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-size:25;
+}
+
+/*Search*/
+#divSearch{
+    width:290px;
+    height: 30px;
+    border: 1px solid black;
+    margin-top:20px;
+    border-radius:30px;
+    display:flex;
+    align-items: center;
+    background-color: #d7f6dc;
+    border:none;
+}
+
+#divSearch > p{
+    padding-left:20px;
+    font-family: "Roboto", sans-serif;
+    font-style: normal; 
+}
+
+/*Search Icon*/
+#searchIcon{
+    padding-left:180px;
+    color:#017991;
+    
+}
+
+/*Search Icon*/
+.fa fa-search{
+    font-size: 48px;
+}
+
+/*FOOTER*/
+footer{
+    background-color: #cce6e0;
+}
+
+.contFooter{
+    display: flex;
+    justify-content: space-around;
+    border: #017991;
+    margin: 3%;
+}
+
+.contFooter1{
+    display: flex;
+    justify-content: space-around;
+}
+
+.container1{
+    display: flex;
+    justify-content:baseline;
+
+}
+
+.subFooter{
+    background-color: #0a3200;
+    color: white;
+    display: block;
+    text-align: center;
+}
+
+#img1{
+    width: 130px;
+    height: 110px;
+    padding: 10px;
+}
+
+#img2{
+    width: 20px;
+    height: 20px;
+    margin: 3px;
+}
+
+.lista{
+    display: block;
+    align-items: center;
+    text-decoration: none;
+    color: #017991;
+    padding: 10px;
+}
+
+#text{
+    text-align: center;
+    margin-top: 20px;
+    color: #017991;
+}
+
+#text1{
+    color: #017991;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
 
