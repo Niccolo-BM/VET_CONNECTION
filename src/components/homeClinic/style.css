@@ -1,7 +1,7 @@
 /*Body*/
-/* body{
+body{
     margin: 0px;
-} */
+}
 
 /*Header*/
 #header{
@@ -68,8 +68,8 @@
 
 /*divCircles*/
 .divCircles{
-    border: 1px solid #017991;
-    background-color: #017991;
+    border: 3px solid #ffffff;
+    background-color: rgba(1, 121, 145, 0.8);
     width: 130px;
     height: 130px;
     border-radius: 100%;
@@ -84,6 +84,10 @@
     font-weight: 700;
     font-style: normal;
     z-index: 9999;
+}
+
+.divCircles:hover {
+    background-color: rgba(1, 121, 145);
 }
 
 /*Menu Icon*/
@@ -135,7 +139,7 @@
 /*Update Button*/
 #updateButton{
     font-family: "Roboto", sans-serif;
-    font-weight: 900;
+    font-weight: 800;
     font-style: normal;
     font-size: 15px;
     color:#ffffff;
@@ -146,44 +150,47 @@
     position: absolute;
     right: -30px;
     bottom: -60px;
+    width: 40%;
 }
 
 /*subMenu*/
 #gridSubMenu{
-    font-size: 14px;
+    font-size: 16px;
     display: grid;
     grid-template-columns: 111px 111px 111px 111px;
     grid-template-rows: auto auto;
     border: 2px solid #017991;
     background-color: #d7f6dc;
     position: absolute;
-    top: -4px;
-    left: 188px;
+    top: -6px;
+    left: 180px;
     width: 1%;
-    height: 50px;
+    height: 70px;
     border-radius: 10px;
     text-align: center;
     overflow: hidden;
     white-space: nowrap;
     transition: width 2s;
     font-family: "Roboto", sans-serif;
-    font-weight: 900;
+    font-weight: 800;
     font-style: normal;
 }
 
 .top{
-    padding-top:10px;
+    padding-top:12px;
+}
+
+.left{
+    padding-left: 80px;
 }
 
 .bottom{
-    padding-bottom:10px;
+    padding-bottom:12px;
 }
 
 /*SubMenu text*/
 .subMenuText{
     word-wrap: break-word;
 }
-
-
 
 
