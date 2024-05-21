@@ -4,9 +4,25 @@
     padding: 0;
     box-sizing: border-box;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    cursor: url("/src/assets/img/icons8-cat-footprint-20.png") 0 0, pointer;
 }
 body{
     overflow-x: hidden;
+}
+body::-webkit-scrollbar {
+    width: 12px;               /* width of the entire scrollbar */
+}
+body::-webkit-scrollbar-track {
+    background: none;        /* color of the tracking area */
+    opacity:0;
+}
+body::-webkit-scrollbar-thumb {
+    background-color: rgba(63, 62, 62, 0.205);    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    opacity:0;
+}
+  body::-webkit-scrollbar-thumb:hover{
+      background-color: gray;
 }
 a{
     text-decoration: none;
@@ -178,7 +194,7 @@ ol{
     height: 100%;
     width: 50%;
     border: solid 2px #9dccd1;
-    border-radius: 10px;
+    border-radius: 30px;
     background-color: #cbe5f7;
     padding: 5%;
 }
@@ -203,12 +219,37 @@ ol{
     height: 33px;
     
 }
+
+.whatsapp { 
+    position: fixed;
+    bottom: 150px; 
+    right: 50px;
+    opacity: .8;
+}
+.whatsapp:hover{
+    opacity: 1;
+}
+.whatsapp-text {
+    color: white;
+    background-color: #128C7E;
+    border-radius: 15px;
+    padding: 2px 10px;
+    font-size: 12px;
+    display: inline-block;
+    position: fixed;
+    bottom: 131px;
+    right: 42px;
+    transition: background-color 0.3s;
+    opacity: .8;
+}
+.whatsapp-text:hover {
+     opacity: 1;
+}
+
 /* general information footer */
 footer{
     background-color: #cce6e0;
 }
-
-
 .contFooter{
     display: flex;
     justify-content: space-around;
@@ -219,27 +260,28 @@ footer{
     display: flex;
     justify-content: space-around;
 }
+.container1{
+    display: flex;
+    justify-content:baseline;
 
+}
 .subFooter{
     background-color: #0a3200;
     color: white;
     display: block;
-    text-align: center;
+text-align: center;
 }
 
-#icons{
+#icons2{
     display: flex;
-    transform: translateX(-10%);
-    gap: 5%;
-    align-items: center;
-    padding: 1%;
-    
+    justify-content: baseline;
 }
 
 #img1{
     width: 130px;
     height: 110px;
     padding: 10px;
+    margin-top: 15px;
 }
 #img2{
     width: 20px;
@@ -247,17 +289,20 @@ footer{
     margin: 3px;
     
 }
-
-#title{
-    color: #0e3604;
-    text-align: center;
-    font-size: 30px;
-    transform: translateX(-60%);
-  
+#img3{
+    width: 20px;
+    height: 20px;
+    margin: 3px;
+    filter:invert(100%);
 }
 
-
-
+.lista{
+    display: block;
+    align-items: center;
+    text-decoration: none;
+    color: #017991;
+    padding: 10px;
+}
 #text{
     text-align: center;
     margin-top: 20px;
