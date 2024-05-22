@@ -1,0 +1,215 @@
+
+body{
+    background-color: #edf2fb;;
+}
+a{
+    text-decoration: none;
+}
+
+*{
+    margin: 0;padding: 0;box-sizing: border-box;
+}
+.containerNav{
+    width: 100%;
+    height: 10vh;
+    background-color: #abc4ff ;
+    display: flex;
+    position: relative;
+}
+
+li{
+    font-size: 30px;
+}
+
+i{
+    color: black;
+}
+
+
+
+.list{
+    list-style: none;
+    display: flex;
+    width: 30%;
+    height: 100%;
+    gap: 5%;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.containerCreateAcouunt{
+    transform: translateY(5vh);
+    margin: auto;
+    width: 50%;
+    height: 160vh;
+    background-color:#abc4ff  ;
+    border-radius: 20px;
+}
+
+
+
+form{
+    padding: 20px;
+    margin-top: 200px;
+    width: 80%;
+    height: 95%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    gap: 5%;
+}
+
+
+.logo{
+    width: 100%;
+    object-fit: contain;   
+}
+
+form h1{
+    color: #edf2fb;
+    font-family: sans-serif;
+}
+
+input{
+    height: 8%;
+    width:80%;
+    text-align: center;
+    font-size: 20px;
+    border: none;
+    border-radius: 7px;
+    border-bottom: 1px solid ;
+    transition: .2s;
+    background-color: transparent;
+}
+
+.feedBack{
+    width:450px;
+
+    font-size: 20px;
+    font-family: sans-serif;
+    border: 1px solid #48e;
+    border-radius: 7px;
+    transition: .2s;
+}
+
+.feedBack:focus{
+    outline: none;
+    border: 1px solid #edf2fb;
+    transition: .2s;
+}
+
+input:focus{
+    outline: none;
+    transition: .2s;
+    border-top: 5px solid #edf2fb;
+
+}
+
+form button{
+    width: 50%;
+    height: 9vh;
+    font-size: 15px;
+    background-color: #edf2fbce;
+    border: none;
+    border-radius: 7px ;
+    color: #48e;
+}
+
+form button:hover{
+    transition-timing-function: linear;
+    background-color: #edf2fb;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+
+.jump{
+    background-color:#49e;
+    padding: 40px;
+}
+
+.feed{
+    position: absolute;
+    transform: translateX(-100vw);
+    font-size: 18px;
+    color:rgb(255, 255, 255);
+}
+
+
+.jump button{
+    width: 50%;
+    height: 7vh;
+    border: none;
+    border-radius: 7px ;
+    cursor:pointer;
+    font-size: 16px;
+    font-family: sans-serif;
+    position: relative;
+}
+
+.return{
+    position:relative;
+    transition: .3s;
+    transform: translateX(0vw);
+}
+
+.see:first-child{
+    display: none;
+}
+
+
+.see{
+    font-size: 20px;
+}
+
+span{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+/*footer*/
+
+footer{
+    margin-top: 50px;
+    width: 100%;
+    height: 30vh;
+    background-color: #fff;
+}
+
+.hide{
+    display: none;
+}
+
+.singOff{
+    width: 20%;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    padding: 20px;
+    visibility: hidden;
+}
+
+.zonaPerfil{
+    width: 100%;
+    height: 90vh;
+    transition: .2s;
+    background-color: red;
+}
+
+.password{
+    position: relative;
+}
+
+.eye{
+    position: absolute;
+    top: 0;
+}
