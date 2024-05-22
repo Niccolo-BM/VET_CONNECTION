@@ -23,4 +23,4 @@ body.addEventListener("click",(e)=>{
         searchHidden.classList.remove("viewSearch");
     }
 
-})
+});
