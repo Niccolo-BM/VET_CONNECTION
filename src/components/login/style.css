@@ -238,7 +238,18 @@ ol{
 .whatsapp-text:hover {
      opacity: 1;
 }
-
+#startColor{
+    color:#017991;
+}
+#vetColor{
+    color:#369534;
+}
+#input{
+    padding: 2%;
+    border-radius: 10px;
+    text-decoration: none;
+    border: solid 2px #83bdc9;
+}
 /* general information footer */
 footer{
     background-color: #cce6e0;
@@ -306,4 +317,7 @@ text-align: center;
     display: flex;
     justify-content: space-around;
     align-content: center;
+}
+#blogColor{
+    color: #017991;
 }
