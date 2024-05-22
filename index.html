@@ -17,6 +17,11 @@
     <title>VET CONNECTION</title>
 </head>
 <body class="body">
+    <div class="whatsapp-contact">
+        <a href="https://wa.me/573502014028/?text=Hola!   
+        Necesito mas infomracion para mi Peludito" target="_blank"><img class="whatsapp" src="/src/assets/img/whatsapp_3670051.png" width="60"  title="Contacto Ws"></a>
+        <div class="whatsapp-text">Escríbenos</div>
+        </div>
     <!-- general page header -->
 <header class="header">
 <a href="/index.html"> <img src="/src/assets/img/LOGO.png" alt="" id="logo" ></a>
@@ -46,15 +51,50 @@
     </div>
 
 </header>
-<div class="whatsapp-contact">
-<a href="https://wa.me/573502014028/?text=Hola!   
-Necesito mas infomracion para mi Peludito" target="_blank"><img class="whatsapp" src="/src/assets/img/whatsapp_3670051.png" width="60"  title="Contacto Ws"></a>
-<div class="whatsapp-text">Escríbenos</div>
-</div>
+
 <!-- main to modify -->
-<main>
-
-
+<main class="main">
+    <div class="slider">
+        <div class="slides">
+            <div class="slide">
+                <img src="/src/assets/img/slide 1.jfif" alt="Veterinario con gato">
+                <div class="text">
+                    <h2>Título</h2>
+                    <p>texto descripcion</p>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="/src/assets/img/slide 2.gif" alt="Veterinario con perro">
+                <div class="text">
+                    <h2>Título</h2>
+                    <p>texto descripcion</p>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="/src/assets/img/slide 3.png" alt="Veterinario con otro gato">
+                <div class="text">
+                    <h2>Título</h2>
+                    <p>texto descripcion</p>
+                </div>
+            </div>
+        </div> 
+        <div class="button">
+            <button id="prev" onclick="moveSlide(-1)">&#10094;</button>
+            <button id="next" onclick="moveSlide(1)">&#10095;</button>
+        </div>
+        <div class="indicators">
+            <span class="indicator" onclick="currentSlide(0)"></span>
+            <span class="indicator" onclick="currentSlide(1)"></span>
+            <span class="indicator" onclick="currentSlide(2)"></span>
+        </div>
+    </div>
+    <div class="infoPage">
+        <div class="text2">
+            <h2>¡Bienvenido a Vet Connection!</h2>
+            <br>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam odit excepturi neque culpa nam architecto impedit ducimus. Est, fuga veritatis totam deleniti laboriosam sed aliquam voluptatum saepe unde, odit ab?</p>
+        </div>
+    </div>   
 </main>
 <!-- general page footer -->
 <footer>
