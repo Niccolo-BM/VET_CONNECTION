@@ -318,35 +318,36 @@ input{
 }
 
 /*Search*/
-#divSearch{
+#inputSearch{
     width:290px;
     height: 30px;
     border: 1px solid black;
-    margin-top:20px;
-    border-radius:30px;
-    display:flex;
-    align-items: center;
-    background-color: #d7f6dc;
     border:none;
-}
-
-#divSearch > p{
+    margin-top:20px;
     padding-left:20px;
+    border-radius:30px;
+    background-color: #d7f6dc;
+    position:relative;
     font-family: "Roboto", sans-serif;
-    font-style: normal; 
+    font-style: normal;
 }
 
 /*Search Icon*/
 #searchIcon{
     padding-left:180px;
     color:#017991;
-    
+    position: absolute;
+    right: 215px;
 }
 
 /*Search Icon*/
 .fa fa-search{
     font-size: 48px;
 }
+
+
+
+
 
 /*FOOTER*/
 footer{
@@ -368,7 +369,6 @@ footer{
 .container1{
     display: flex;
     justify-content:baseline;
-
 }
 
 .subFooter{
