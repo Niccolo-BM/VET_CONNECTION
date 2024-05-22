@@ -35,16 +35,18 @@ a{
     background-color:#bcd8c1;
     display: grid;
     grid-template-columns: 50% 40% 20%;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     width: 100%;
     color: #017991;
     position: relative;
 }
+
 .menuHidden{
     visibility: hidden;
     position: absolute;
 }
+
 .searchHidden{
     visibility: hidden;
     position: absolute;
@@ -61,7 +63,9 @@ a{
     border-radius: 10px;
     transition: .3s;
     margin-top: 2.5%;
-    transform: translateX(-90%);
+    transform: translateX(-65%);
+    transform: translatez(20%);
+
     
 
 }
@@ -92,14 +96,15 @@ aside:hover{
     border-radius: 100%;
     align-items: center;
 }
+
 .viewSearch{
     visibility: initial;
     padding: 20px;
     background-color: #7af1d0d7;
     border-radius: 10px;
     transition: .3s;
-    margin-top: 3%;
-    transform: translateX(-90%);
+    transform: translateX(-100%);
+    margin-top: 10%;
     border: none;
     border-radius: 200px;
 }
@@ -114,14 +119,30 @@ aside:hover{
     gap: 10%;
     border:solid 2px black;
 }
+
+#title{
+    color: #0e3604;
+    text-align: center;
+    font-size: 30px;
+    transform: translateX(-50%);
+}
+
 input{
     text-decoration: none;
 }
+
 #logo{
     width:85px;
     height:33%;
     transform: translateX(40%);
     margin: 6px;
+}
+
+#img3{
+    width: 20px;
+    height: 20px;
+    margin: 3px;
+    filter:invert(100%);
 }
 
 #btn{
@@ -138,45 +159,16 @@ input{
     
 }
 
-#img3{
-    width: 20px;
-    height: 20px;
-    margin: 3px;
-    filter:invert(100%);
-}
-#title{
-    color: #0e3604;
-    text-align: center;
-    transform: translateX(-100%);
-}
-
-.lista{
-    display: block;
-    align-items: center;
-    text-decoration: none;
-    color: #017991;
-    padding: 10px;
-}
-.container1{
+#icons{
     display: flex;
-    justify-content: space-between;
-
+    transform: translateX(-10%);
+    gap: 5%;
+    align-items: center;
+    padding: 1%;
+    
 }
-
-#startColor{
-    color: #017990;
-}
-#vetColor{
-    color: #369535;
-}
-#input{
-    width: 85%;
-    padding: 2%;
-    border-radius: 10px;
-    border: solid 1.5px #017990;
 
 /* Start information */
-}
 .breadCrumb{
     font-size: 10px;
     display: flex;
@@ -246,7 +238,18 @@ ol{
 .whatsapp-text:hover {
      opacity: 1;
 }
-
+#startColor{
+    color:#017991;
+}
+#vetColor{
+    color:#369534;
+}
+#input{
+    padding: 2%;
+    border-radius: 10px;
+    text-decoration: none;
+    border: solid 2px #83bdc9;
+}
 /* general information footer */
 footer{
     background-color: #cce6e0;
@@ -297,7 +300,7 @@ text-align: center;
     filter:invert(100%);
 }
 
-.lista{
+.list{
     display: block;
     align-items: center;
     text-decoration: none;
@@ -314,4 +317,7 @@ text-align: center;
     display: flex;
     justify-content: space-around;
     align-content: center;
+}
+#blogColor{
+    color: #017991;
 }

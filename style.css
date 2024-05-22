@@ -349,7 +349,7 @@ text-align: center;
     filter:invert(100%);
 }
 
-.lista{
+.list{
     display: block;
     align-items: center;
     text-decoration: none;
@@ -366,4 +366,7 @@ text-align: center;
     display: flex;
     justify-content: space-around;
     align-content: center;
+}
+#blogColor{
+    color: #017991;
 }

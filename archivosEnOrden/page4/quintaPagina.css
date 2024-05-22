@@ -1,0 +1,550 @@
+*{
+    margin: 0;padding: 0;
+    font-family: sans-serif;
+
+}
+body{
+    overflow-x: hidden;
+    background-color:#f1f9ff;
+    
+    min-height: 200vh;
+    position: relative;
+}
+
+a{
+    text-decoration: none;
+    color: #48e;
+}
+
+button{
+    cursor: pointer;
+    border: none;
+}
+
+.containerNav{
+    width: 100%;
+    height: 8vh;
+    display: flex;
+   gap: 51%;
+    align-items: center;
+    margin-bottom: 50px;
+    background-color: #edf2fb;
+}
+
+.list1{
+    width: 40%;
+    list-style: none;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15%;
+    font-size: 20px;
+}
+
+
+.signOut{
+    cursor: pointer;
+}
+
+/*contaier Section 1*/
+
+.containerWelcom{
+    margin: auto;
+    width: 80%;
+    height: 80vh;
+    font-size: 20px;
+    display: flex;
+    gap: 30px;
+    justify-content: space-between;
+    color: #48e;
+    padding: 50px;
+}
+.balance{
+    font-family: sans-serif;
+    font-size: 20px;
+}
+
+
+a{
+    text-decoration: none;
+    color:#48e;
+    cursor: pointer;
+}
+
+.containerPhoto{
+    width: 35%;
+    height: 60vh;
+    position: relative;
+    background-image: url(/img/dog-2063281_1920.jpg);
+    background-size: cover;
+    background-position: top;
+    border-radius: 50%;
+    border: 2px solid #acd4df;
+
+    
+}
+
+.containerPhoto button{
+    position: absolute;
+    width: 30%;
+    height: 30%;
+    border-radius: 50%;
+    transition: .5s;
+    cursor: pointer;
+    border: 2px solid #acd4df;
+    background-color:  #017991e0;
+    z-index: 20;
+    color: #f1f9ff;
+    font-weight: 700;
+}
+
+.viewProfiles{
+    position: relative;
+    top: -10%;
+    left:10%;
+    font-size: 30px;
+    z-index: 20;
+
+}
+
+.viewProfiles:hover{
+ 
+    transition: .5s;
+    z-index: 10;
+
+    background-color: #017991;
+
+
+}
+
+
+.create{
+    left: -15%;
+    font-size: 15px;
+    top: 36%;
+}
+
+.create:hover{
+    transition: .5s;
+    background-color: #017991;
+
+}
+
+.exit{
+    bottom: -10%;
+    font-size: 15px;
+    left: 10%;
+}
+.exit:hover{
+    background-color: #017991;
+
+}
+
+.containerOptions{
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 15%;
+    width: 5%;
+    height: 10%;
+    font-size: 0px;
+    transition: .4s;
+    z-index: 1;
+    display: flex;
+    transition: .3s;
+    color: #017991;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color:#d7f6dc;
+    border-radius: 10px;
+    border: 2px solid #017991;
+
+}
+
+.viewOptions{
+    position: absolute;
+    width: 70%;
+    height: 15%;
+    top: 0;
+    left: 35%;
+    visibility: visible;
+    font-size: 10px;
+    display: flex;
+    transition: .3s;
+    z-index: 1;
+    color: #017991;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color:#d7f6dc;
+    border-radius: 10px;
+    border: 2px solid #017991;
+}
+
+.containerOptions span{
+    font-weight: 700;
+    cursor: pointer;
+}
+
+
+.photo{
+    border-left: 2px solid #017991;
+}
+
+
+/* CONTAINER OF INFORMATION DOCTOR*/
+.container_information{
+    width: 35%;
+    height: 50vh;
+    background-color: #d7f6dc;
+    border-radius: 20px;
+    position: relative;
+}
+
+.innerPart{
+    width: 90%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.updateData{
+    position: absolute;
+    bottom: -20%;
+    right: 0;
+    background-color: #017991;
+    width: 50%;
+    height: 13%;
+    border-radius: 10px;
+    color: #f1f9ff;
+}
+
+ul{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    list-style: none;
+    font-size:14px ;
+    justify-content:space-between;
+    padding: 20px;
+}
+
+ul input{
+    width: 200%;
+    height: 240%;
+    border: none;
+    font-size: 20px;
+}
+
+li{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    color: black;
+}
+
+strong{
+    color: #128397;
+
+}
+
+input:focus{
+    outline: none;
+}
+
+
+/*containerOtherPets*/
+
+.petsSameOwner{
+    width: 100%;
+    min-height: 2vh;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+}
+
+.petsSameOwnerChild{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+
+
+
+
+
+.carta{
+    margin: 15px 0;
+    width: 20%;
+    height: 40vh;
+    border: 1px solid rgb(0, 0, 0);
+    font-size: 20px;
+    padding: 20px;
+    background-color:#edf2fb;
+    border-radius: 200px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5%;
+}
+
+
+
+.valor{
+    background-color:#edf2fb;
+    border: none;
+    outline: none;
+    color: black;
+}
+
+
+.sinFace{
+    width: 50%;
+    height: 30%;
+    object-fit: contain;
+    object-position:center ;
+    margin: 10px;
+}
+
+.carta2{
+    font-size: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+/*section clinicalHistorys*/
+.containerFeed{
+    width: 100%;
+    min-height: 20vh;
+    text-align: center;
+    margin-bottom: 100px;
+    background-color:#f1f9ff;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+
+}
+
+.visualizarHistoriaClinica{
+    width: 100%;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.grid{
+    width: 80%;
+    min-height: 50vh;
+    display: grid;
+    grid-template-columns: repeat(2,50%);
+    grid-template-rows: 100%;
+    background-color:#edf2fb;
+    border: 3px solid #79b7a9;
+}
+
+
+.containerHistoria{
+    grid-column: 1/2;
+    grid-row: 1/2;
+    font-size: 14px;
+}
+
+.containerHistoria h2{
+    font-size: 25px;
+    padding: 2%;
+    text-align: center;
+    border-bottom: 3px solid #79b7a9;
+    color: #017991;
+
+}
+
+
+.containerComments{
+    grid-column: 2/3;
+    grid-row: 1/2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    font-size: 14px;
+    border-left: 3px solid #79b7a9;;
+}
+
+.containerComments h2{
+    width: 97%;
+    position: absolute;
+    font-size: 25px;
+    border-bottom: 3px solid #79b7a9;
+    color: #017991;
+    padding: 1.5%;
+    top:2%;
+}
+
+ .date-clinical-history{
+    position: absolute;
+    display: block;
+    bottom: 2%;
+    right: 2%;
+    font-size: 25px;
+    width: 100%;
+    height: 10%;
+ 
+}
+
+
+.viewComment{
+    position: absolute;
+    font-size: 2000%;
+    background-color: red;
+}
+
+.siNoHayNada{
+    color: white;
+}
+
+/*ContainerListaAnimal*/
+
+
+.form1{
+    width:90%;
+    height: 170vh;
+    background-color:#edf2fb;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 10px;
+    border: 4px solid #017991;
+}
+
+.titleAdd{
+    margin-bottom: 40px;
+    color: #017991;
+}
+
+.feedBack{
+    width: 100%;
+    height: 25%;
+    border: none;
+    font-size: 20px;
+    background-color: #fff;
+    border: 1px solid #48e;
+}
+
+.feedBack:focus{
+    outline: none;
+}
+
+.send{
+    width: 40%;
+    height: 70px;
+    border: none;
+    background-color: #48e;
+    color: #edf2fb;
+    font-size: 16px;
+    transition: .6s;
+
+}
+
+.send:hover{
+    border-radius: 10px;
+    transition: .6s;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/*Container de historias clinicas*/
+
+
+
+
+
+
+
+/*container para segunda conformacion para realizar cambios*/
+.containerSecurity{
+    transform: translateY(-110vw);
+    position: absolute;
+    z-index: 20;
+    width: 40%;
+    height: 50vh;
+    background-color: rgb(19, 19, 19);
+    transition: .5s;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-image: url(/img/dog-3277416_1920.jpg);
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+    border: 10px solid black;
+
+}
+.returnModal{
+    transform: translateY(100%);
+    margin: auto;
+    transition: .5s;
+    bottom: 500px;
+    left: 30%;
+    z-index: 10;
+}
+
+
+.aceptar{
+    width: 150px;
+    height: 50px;
+    border: none;
+    border-radius: 10px;
+    background-color: black;
+    color: white;cursor: pointer;
+}
+
+
+
+.cancelar{
+    width: 150px;
+    height: 50px;
+    border: none;
+    border-radius: 10px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
+
+.big{
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
+    width: 100vw;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.432);
+}

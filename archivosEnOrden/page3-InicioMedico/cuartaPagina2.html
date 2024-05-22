@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
+    rel="stylesheet"
+/>
+    <link rel="stylesheet" href="/page3-InicioMedico/cuartaPagina2.css">
+</head>
+<body>
+
+    <div class="container">
+        <!-- <ul class="list">
+            <li class="element"><a href="" class="enlace"> Historias-clinicas</a></li>
+        </ul> -->
+    </div>
+
+
+    <div class="containerWelcom">
+        <div class="containerPhoto">
+            <button class="viewProfiles"><i class="ri-menu-line"></i></button>
+            <div class="containerOptions">
+                <span class="patients">Ver pacientes</span>
+                <span class="photo">Añadir foto de perfil</span>
+            </div>
+
+            <button class="create">Registrar Peludito</button>
+            <button class="exit">Salir</button>
+        </div>
+
+        <div class="container_information">
+            <!-- <h1 class="title">Informacion Medico</h1> -->
+            <div class="innerPart"></div>
+            <button class="updateData">Actualizar datos</button>
+        </div>
+    </div>
+    
+    <a href="#down" class="goSearch"></a>
+    <div class="containerCreateProfiles">  
+        <h1>Registra un nuevo peludito</h1>
+        <form action="" class="formNewProfile">
+            <span class="equis">X</span>
+            <input type="text"  class="name" placeholder="Nombre del peludito" required>
+            <input type="text" class="ownerName" placeholder="Nombre del Acudiente" required>
+            <input type="text" class="id" placeholder="documento Asociado al peludito" required>
+            <input type="text" class="specie" placeholder="specie" required>
+            <input type="text" class="raza" placeholder="Raza" required>
+            <input type="text" class="telephone" placeholder="Telefono del acudiente" required>
+            <input type="text" class="password" placeholder="password del peludito" required>
+            <div class="mistakes"></div>
+            <button class="createProfile">create Perfil</button>
+        </form>
+    </div>
+    
+    <input type="file" name="" id="" accept=".jpg, .jpeg, .png" class="inputArchivo"><br>
+    <button class="inputFoto">Enviar foto</button>
+
+    <div class="containerFoto2"></div>
+
+    
+
+
+    <div class="containerSearchPatients">
+        <h2> Pacientes</h2>
+        <input type="text" class="searchPatients" placeholder="Introduce la cedula del dueño">
+        <i class="ri-search-line"></i>
+    </div>
+    <a href="" id="down"></a>
+    <div class="containerPatients" id="down"></div>
+  
+
+
+    <script  src="/page3-InicioMedico/cuartaPagina2.js"></script>
+    <a class="iniciar" href="/page2/terceraPagina.html"></a>
+</body>
+</html>
