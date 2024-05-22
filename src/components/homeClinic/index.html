@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="./style.css">
     <!--Font Awesome-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--Material Symbols Outlined-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <!--JavaScript Link-->
     <script src="./index.js" defer></script>
     <!--Font Type: Roboto-->
@@ -23,27 +25,30 @@
         <header class="header">
             <a href="/index.html"> <img src="/src/assets/img/LOGO.png" alt="" id="logo" ></a>
              <h3 id="title">¡Amamos conectar vidas!</h3>
-             <div id="icons">
-                 <div>
-                     <div class="material-symbols-outlined">
-                     <aside><img src="/src/assets/img/icons8-menú-50.png" alt="" id="img3" ></aside>
-                     </div>
-                     <nav class="menuHidden">
-                         <a href="/index.html" class="link">Inicio</a>
-                         <a href="" class="link">Nosotros</a>
-                         <a href="" class="link">Servicios</a>
-                         <a href="" class="link">Blog</a>
-                         <a href="" class="link">Contáctanos</a>
-                     </nav>
-                 </div>
-                 <div>
-                     <aside><img src="/src/assets/img/search_24dp_FILL0_wght400_GRAD0_opsz24 (1).png" alt="" id="img3" class="material-symbols-outlined1"></aside>
-                     <div>
-                         <input class="searchHidden" type="search" name="search" id="search" placeholder="buscar">
-                     </div>
-                 </div>
-             </div>
-        </header>
+                <div id="icons">
+                    <div>
+                        <aside class="material-symbols-outlined "  class="menu">
+                        menu
+                        </aside>
+                        <nav class="menuHidden">
+                            <a href="/index.html" class="link">Inicio</a>
+                            <a href="" class="link">Nosotros</a>
+                            <a href="" class="link">Servicios</a>            
+                            <a href="" class="link">Blog</a>
+                            <a href="" class="link">Contáctanos</a>
+                        </nav>
+                    </div>
+                         
+                    <aside class="material-symbols-outlined1">
+                        <img src="/src/assets/img/search_24dp_FILL0_wght400_GRAD0_opsz24 (1).png" alt="" id="img3">
+                        <div>
+                            <input class="searchHidden" type="search" name="search" id="search" placeholder="buscar">
+                        </div>
+                    </aside>
+                                
+                </div>
+            
+            </header>
 
     <!--Section 1-->
     <section>
@@ -54,9 +59,27 @@
             <!--ClinicData & Circles Container-->
             <div id="divCircleData">
                 <!--Circles Container-->
-                <div id="divCircleContainer">
-                    <!--Profile Picture-->
+                <div id="divCircleContainer">                
+                    <!--Profile Picture--> 
                     <div id="divProfilePicture">
+                         <!--Search Pet-->
+                    <div id="searchPet">
+                        <h3><i class="fa fa-search" id="searchPetIcon"></i> Buscar Mascota</h3>
+                        <div class="divSelectDocument">
+                            <select name="chooseId" class="chooseWriteId">
+                                <option value="cedula de ciudadania">Cédula de Ciudadanía</option>
+                                <option value="cedula de extranjeria colombiana">Cédula de Extranjería Colombiana</option>
+                                <option value="cedula extranjera">Cédula Extranjera</option>
+                                <option value="documento extranjero">Documento Extranjero</option>
+                                <option value="pasaporte">Pasaporte</option>
+                                <option value="registro civil">Registro Civil</option>
+                                <option value="registro civil">Tarjeta de identidad</option>
+                            </select>
+                        </div>
+                        <div class="divSelectDocument">
+                            <input type="text" placeholder="Escriba el documento del acudiente" id="documentInput">
+                        </div>
+                    </div>  
                         <div id="divProfile">
                             <img src="../../assets/img/conejoPerfil.jpg" alt="sinFotoPerfil" id="imgProfile">
                         </div>
@@ -105,8 +128,10 @@
     <!--Section 2-->
     <section id=section2>
         <h1><b>VETERINARIOS ASOCIADOS</b></h1>
-        <input type="text" placeholder="Buscar" id="inputSearch">
-        <i class="fa fa-search" id="searchIcon"></i>
+        <div id="divInputSearch">
+            <input type="text" placeholder="Buscar" id="inputSearch">
+            <i class="fa fa-search" id="searchIcon"></i>
+        </div>
     </section>
 
 

@@ -3,7 +3,7 @@
 let icon=document.querySelector(".material-symbols-outlined");
 let menuHidden=document.querySelector(".menuHidden");
 let searchHidden=document.querySelector(".searchHidden");
-
+let body=document.querySelector(".body");
 
 icon.addEventListener("click",(e)=>{
     menuHidden.classList.toggle("viewMenu");
@@ -17,7 +17,7 @@ search.addEventListener("click",(e)=>{
     searchHidden.classList.toggle("viewSearch");
 });
 
-
+//CLINIC PROFILE
 //Section 1
 // OPEN SUBMENU
 //Add a click event to the browser window that triggers a function with the window information in the "e" parameter. 
