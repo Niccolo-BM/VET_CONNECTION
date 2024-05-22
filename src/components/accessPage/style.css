@@ -102,11 +102,13 @@ aside:hover{
     background-color: #7af1d0d7;
     border-radius: 10px;
     transition: .3s;
-    transform: translateX(-85%);
-    transform: translateY(-5%);
+    margin-top: 10%;
+    transform: translateX(-100%);
     border: none;
     border-radius: 200px;
+
 }
+
 
 .viewSearch:focus{
     outline: none;
