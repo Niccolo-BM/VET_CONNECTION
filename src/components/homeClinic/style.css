@@ -463,10 +463,6 @@ color:#017991;
     font-size: 48px;
 }
 
-
-
-
-
 /*FOOTER*/
 footer{
     background-color: #cce6e0;
@@ -474,9 +470,10 @@ footer{
 
 .contFooter{
     display: flex;
+    padding-top: 20px;
+    margin-bottom: 30px;
     justify-content: space-around;
-    border: #017991;
-    margin: 3%;
+    border: #017991;   
 }
 
 .contFooter1{
