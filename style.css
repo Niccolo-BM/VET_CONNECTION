@@ -77,7 +77,6 @@ input{
 .menuHidden{
     visibility: hidden;
     position: absolute;
-    
 }
 aside:hover{
     display: flex;
@@ -96,15 +95,16 @@ aside:hover{
 
 .viewMenu{
     visibility: initial;
+    position: absolute;
     padding: 20px;
     display: flex;
     gap: 10px;
     flex-direction: column;
-    position: absolute;
     background-color: #7af1d0d7;
     border-radius: 10px;
     transition: .3s;
     margin-top: .5%;
+    z-index: 40;
     transform: translateX(-80%); 
 }
 .viewSearch{
@@ -118,7 +118,6 @@ aside:hover{
     border: none;
     border-radius: 200px;
     left: 100%;
-
 }
 
 .viewSearch:focus{
@@ -200,12 +199,10 @@ aside:hover{
 
 .slider {
     position: relative;
-    
     width: 100%;
     height: 60vh; 
     overflow: hidden;
     z-index: -.5;    
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
 
 .slides {
@@ -266,12 +263,11 @@ button:hover {
 }
 
 #prev{
-    left: 50px;
-    
+    left: 60px;    
 }
 
 #next {
-    right: 50px;
+    right: 60px;
 }
 
 .indicators {
