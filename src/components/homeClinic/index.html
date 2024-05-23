@@ -12,18 +12,20 @@
     <!--Material Symbols Outlined-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <!--JavaScript Link-->
-    <script src="/src/components/homeClinic/script.js" defer></script>
+    <script src="../../components/homeClinic/script.js" defer></script>
     <!--Font Type: Roboto-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Alata&family=Anton&family=Bungee+Spice&family=Hind+Madurai:wght@300;400;500;600;700&family=Kalam:wght@300;400;700&family=Kaushan+Script&family=Lilita+One&family=Madimi+One&family=Patrick+Hand&family=Platypi:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Tilt+Neon&display=swap" rel="stylesheet">
+    <!--Font Type Footer-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
     <!--Title-->
     <title>Veterinary Clinic Profile</title>
 </head>
 <body>
     <div class="whatsapp-contact">
         <a href="https://wa.me/573502014028/?text=Hola!   
-        Necesito mas infomracion para mi Peludito" target="_blank"><img class="whatsapp" src="/src/assets/img/whatsapp_3670051.png" width="60"  title="Contacto Ws"></a>
+        Necesito más información para mi Peludito" target="_blank"><img class="whatsapp" src="/src/assets/img/whatsapp_3670051.png" width="60"  title="Contacto Ws"></a>
         <div class="whatsapp-text">Escríbenos</div>
     </div>
         <!--Header-->
@@ -69,24 +71,53 @@
                     <div id="divProfilePicture">
                          <!--Search Pet-->
                     <div id="searchPet">
-                        <h3><i class="fa fa-search" id="searchPetIcon"></i> Buscar Mascota</h3>
+                        <h3><i class="fa fa-search" id="searchPetIcon"></i> Buscar Mascota</h3><div id="closeSearchPet"><b>x</b></div>
                         <div class="divSelectDocument">
                             <select name="chooseId" class="chooseWriteId">
                                 <option value="cedula de ciudadania">Cédula de Ciudadanía</option>
-                                <option value="cedula de extranjeria colombiana">Cédula de Extranjería Colombiana</option>
-                                <option value="cedula extranjera">Cédula Extranjera</option>
-                                <option value="documento extranjero">Documento Extranjero</option>
+                                <option value="cedula extranjera">Cédula de Extranjería</option>
                                 <option value="pasaporte">Pasaporte</option>
-                                <option value="registro civil">Registro Civil</option>
-                                <option value="registro civil">Tarjeta de identidad</option>
+                                <option value="registro civil">NIT</option>
                             </select>
                         </div>
                         <div class="divSelectDocument">
                             <input type="text" placeholder="Escriba el documento del acudiente" id="documentInput">
                         </div>
+                        <button type="button" id="searchButton">Buscar</button>
                     </div>  
+                    
+                    <!--Create Doctor Form-->
+                    <!-- <div id="createDoctorForm">
+                        <h3>Crear médico</h3>
+                        <div class="divSelectDocument">
+                            <input type="text" placeholder="Nombre:" id="documentInput">
+                        </div>
+                        <div class="divSelectDocument">
+                            <input type="text" placeholder="Cargo:" id="documentInput">
+                        </div> -->
+                        <!--Especialidades-->
+                        <!-- <div class="divSelectDocument">
+                            <select name="chooseId" class="chooseWriteId">
+                                <option value="especialidad">Especialidad</option>
+                                <option value="cirugia">Cirugía</option>
+                                <option value="dermatologia">Dermatología</option>
+                                <option value="oftalmologia">Oftalmología</option>
+                                <option value="odontologia">Odontología</option>
+                                <option value="emergencias">Emergencias y cuidados intensivos</option>
+                                <option value="nutricion">Nutrición</option>
+                            </select>
+                        </div>
+                        <div class="divSelectDocument">
+                            <input type="text" placeholder="Ciudad:" id="documentInput">
+                        </div>
+                        <div class="divSelectDocument">
+                            <input type="text" placeholder="Clínica:" id="documentInput">
+                        </div>
+                        <button type="button" id="searchButton">Crear</button>
+                    </div> -->
+
                         <div id="divProfile">
-                            <img src="../../assets/img/conejoPerfil.jpg" ralt="sinFotoPerfil" id="imgProfile">
+                            <img src="../../assets/img/logoClinica.png" alt="sinFotoPerfil" id="imgProfile">
                         </div>
                         <!--divMenu-->
                         <div class="divCircles" id="menuIcon">
@@ -95,15 +126,15 @@
                             <div></div>
                         </div>
                         <!--div SubMenu-->
-                        <div id="gridSubMenu" hidden>
+                        <div id="gridSubMenu">
                             <div class="subMenuText top left"><b>Añadir</b></div>
                             <div class="subMenuText top"><b>Eliminar</b></div>
                             <div class="subMenuText top"><b>Sitio</b></div>
-                            <div class="subMenuText top"><b>Buscar</b></div>
+                            <div class="subMenuText top eventSearchPet"><b>Buscar</b></div>
                             <div class="subMenuText bottom left"><b>foto de perfil</b></div>
                             <div class="subMenuText bottom"><b>perfil</b></div>
                             <div class="subMenuText bottom"><b>Web</b></div>
-                            <div class="subMenuText bottom"><b>Mascota</b></div>
+                            <div class="subMenuText bottom eventSearchPet"><b>Mascota</b></div>
                         </div>
                         <!--Create Doctor-->
                         <div class="divCircles" id="createDoctor">
@@ -147,11 +178,11 @@
     <div class="contFooter">
         <div class="contFooter1">
             <img src="/src/assets/img/logo.png" alt="" id="img1">
-            <div class="lista">
+            <div class="list">
                 <div>CONTÁCTANOS</div>
                 <div class="container1">
                     <div ><img src="/src/assets/img/icons8-teléfono-24.png" alt="" id="img2"></div>
-                    <p>Linea de atencion al cliente</p>
+                    <p>Linea de atención al cliente</p>
                 </div>
                 <div class="container1">
                     <div>
@@ -163,27 +194,27 @@
                     <div>
                         <img src="/src/assets/img/icons8-correo-50.png" alt="" id="img2">
                     </div>
-                    <p>CorreEjemplo@gmail.com</p>
+                    <p>CorreoEjemplo@gmail.com</p>
                 </div>
                   
             </div>
+            
+   
         </div>
         <div id="text">
-            <p>Siguenos y descubre nuestro <br>contenido de interes</p>
+            <p>Síguenos y descubre nuestro<br>contenido de interés</p>
             <div id="text1">
-               <a href="#"><h3>Blog</h3></a>
+               <a href="#" id="blogColor"><h3>Blog</h3></a>
                <a href="#"><img src="/src/assets/img/icons8-instagram-24.png" alt="" id="img2"></a>
                <a href="#"><img src="/src/assets/img/icons8-facebook-nuevo-50 (1).png" alt="" id="img2"></a>
                <a href="#"><img src="/src/assets/img/icons8-tik-tok-30.png" alt="" id="img2"></a>
                <a href="#"><img src="/src/assets/img/icons8-youtube-50.png" alt="" id="img2"></a>
-               <a href="#"><h3>APP</h3></a>
+               <a href="#" id="blogColor"><h3>APP</h3></a>
             </div>
         </div>
     </div>
     <div class="subFooter">Vet Connection 2024  ©  Medellín, Antioquia <br>
-        Diseñado y desarrollado por Vet Connection S.A © 2024  
-    </div>
-</footer>
-
+        Diseñado y desarrollado por Vet Connection S.A © 2024  </div>
+   </footer>
 </body>
 </html>

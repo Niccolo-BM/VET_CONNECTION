@@ -17,6 +17,7 @@ search.addEventListener("click",(e)=>{
     searchHidden.classList.toggle("viewSearch");
 });
 
+
 //CLINIC PROFILE
 //Section 1
 // OPEN SUBMENU
@@ -26,7 +27,7 @@ window.addEventListener('click', function(e){
     if (document.getElementById('menuIcon').contains(e.target)){
         document.getElementById("gridSubMenu").style.display="grid";
         //Get the width of gridSubMenu and if is equal to 8 then enter the if statement.
-        if (document.getElementById("gridSubMenu").offsetWidth == 8){
+        if (document.getElementById("gridSubMenu").offsetWidth == 4){
                 //Change the value of the width in gridSubmenu to 115%.            
                 document.getElementById("gridSubMenu").style.width = "115%";
             }
@@ -50,6 +51,38 @@ window.addEventListener('click', function(e){
         }, 2000);
     }
   });
+
+//Event Search Pet
+let searchPetClinicArray = document.querySelectorAll(".eventSearchPet");
+searchPetClinicArray.forEach(function(searchPetClinic){
+    searchPetClinic.addEventListener("click",(e) =>{
+           let showDiv = document.getElementById("searchPet");
+           if(showDiv.style.display === "none"){
+            showDiv.style.display = "block";
+           } else {
+            showDiv.style.display = "none";
+           }
+    });
+});
+
+//Close Search Pet
+let closeSearchPet = document.querySelector("#closeSearchPet");
+closeSearchPet.addEventListener('click',(e) => {
+    alert("entró");
+    let searchPet = searchPet.style.display = "none";
+});
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

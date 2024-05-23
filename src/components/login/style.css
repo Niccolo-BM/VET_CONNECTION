@@ -65,6 +65,7 @@ a{
     width: 100%;
     color: #017991;
     position: relative;
+    z-index: 9;
 }
 
 .menuHidden{
@@ -80,7 +81,7 @@ a{
 .viewMenu{
     visibility: initial;
     padding: 20px;
-    display: flex;
+    display: block;
     gap: 10px;
     flex-direction: column;
     position: absolute;
@@ -89,10 +90,9 @@ a{
     transition: .3s;
     margin-top: 2.5%;
     transform: translateX(-65%);
-    transform: translatez(20%);
-
-    
-
+}
+#imgSlider{
+    z-index: -999;
 }
 .material-symbols-outlined{
     display: flex;

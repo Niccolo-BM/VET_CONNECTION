@@ -64,6 +64,7 @@ a{
     width: 100%;
     color: #017991;
     position: relative;
+    z-index: 9;
 }
 
 .menuHidden{
