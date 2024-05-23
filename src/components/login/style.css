@@ -256,9 +256,11 @@ footer{
 }
 .contFooter{
     display: flex;
+    padding-top: 20px;
+    margin-bottom: 30px;
     justify-content: space-around;
     border: #017991;
-    margin: 3%;
+    
 }
 .contFooter1{
     display: flex;
