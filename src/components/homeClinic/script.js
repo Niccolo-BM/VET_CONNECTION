@@ -26,7 +26,7 @@ window.addEventListener('click', function(e){
     if (document.getElementById('menuIcon').contains(e.target)){
         document.getElementById("gridSubMenu").style.display="grid";
         //Get the width of gridSubMenu and if is equal to 8 then enter the if statement.
-        if (document.getElementById("gridSubMenu").offsetWidth == 8){
+        if (document.getElementById("gridSubMenu").offsetWidth == 4){
                 //Change the value of the width in gridSubmenu to 115%.            
                 document.getElementById("gridSubMenu").style.width = "115%";
             }

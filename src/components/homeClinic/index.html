@@ -17,6 +17,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Alata&family=Anton&family=Bungee+Spice&family=Hind+Madurai:wght@300;400;500;600;700&family=Kalam:wght@300;400;700&family=Kaushan+Script&family=Lilita+One&family=Madimi+One&family=Patrick+Hand&family=Platypi:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Tilt+Neon&display=swap" rel="stylesheet">
+    <!--Font Type Footer-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
     <!--Title-->
     <title>Veterinary Clinic Profile</title>
 </head>
@@ -68,7 +70,7 @@
                     <!--Profile Picture--> 
                     <div id="divProfilePicture">
                          <!--Search Pet-->
-                    <div id="searchPet">
+                    <!-- <div id="searchPet">
                         <h3><i class="fa fa-search" id="searchPetIcon"></i> Buscar Mascota</h3>
                         <div class="divSelectDocument">
                             <select name="chooseId" class="chooseWriteId">
@@ -82,7 +84,36 @@
                             <input type="text" placeholder="Escriba el documento del acudiente" id="documentInput">
                         </div>
                         <button type="button" id="searchButton">Buscar</button>
-                    </div>  
+                    </div>   -->
+                    <!--Create Doctor Form-->
+                    <div id="createDoctorForm">
+                        <h3>Crear médico</h3>
+                        <div class="divSelectDocument">
+                            <input type="text" placeholder="Nombre:" id="documentInput">
+                        </div>
+                        <div class="divSelectDocument">
+                            <input type="text" placeholder="Cargo:" id="documentInput">
+                        </div>
+                        <!--Especialidades-->
+                        <div class="divSelectDocument">
+                            <select name="chooseId" class="chooseWriteId">
+                                <option value="especialidad">Especialidad</option>
+                                <option value="cirugia">Cirugía</option>
+                                <option value="dermatologia">Dermatología</option>
+                                <option value="oftalmologia">Oftalmología</option>
+                                <option value="odontologia">Odontología</option>
+                                <option value="emergencias">Emergencias y cuidados intensivos</option>
+                                <option value="nutricion">Nutrición</option>
+                            </select>
+                        </div>
+                        <div class="divSelectDocument">
+                            <input type="text" placeholder="Ciudad:" id="documentInput">
+                        </div>
+                        <div class="divSelectDocument">
+                            <input type="text" placeholder="Clínica:" id="documentInput">
+                        </div>
+                    </div>
+
                         <div id="divProfile">
                             <img src="../../assets/img/logoClinica.png" alt="sinFotoPerfil" id="imgProfile">
                         </div>
@@ -93,7 +124,7 @@
                             <div></div>
                         </div>
                         <!--div SubMenu-->
-                        <div id="gridSubMenu" hidden>
+                        <div id="gridSubMenu">
                             <div class="subMenuText top left"><b>Añadir</b></div>
                             <div class="subMenuText top"><b>Eliminar</b></div>
                             <div class="subMenuText top"><b>Sitio</b></div>
@@ -145,11 +176,11 @@
     <div class="contFooter">
         <div class="contFooter1">
             <img src="/src/assets/img/logo.png" alt="" id="img1">
-            <div class="lista">
+            <div class="list">
                 <div>CONTÁCTANOS</div>
                 <div class="container1">
                     <div ><img src="/src/assets/img/icons8-teléfono-24.png" alt="" id="img2"></div>
-                    <p>Linea de atencion al cliente</p>
+                    <p>Linea de atención al cliente</p>
                 </div>
                 <div class="container1">
                     <div>
@@ -161,27 +192,27 @@
                     <div>
                         <img src="/src/assets/img/icons8-correo-50.png" alt="" id="img2">
                     </div>
-                    <p>CorreEjemplo@gmail.com</p>
+                    <p>CorreoEjemplo@gmail.com</p>
                 </div>
                   
             </div>
+            
+   
         </div>
         <div id="text">
-            <p>Siguenos y descubre nuestro <br>contenido de interes</p>
+            <p>Síguenos y descubre nuestro<br>contenido de interés</p>
             <div id="text1">
-               <a href="#"><h3>Blog</h3></a>
+               <a href="#" id="blogColor"><h3>Blog</h3></a>
                <a href="#"><img src="/src/assets/img/icons8-instagram-24.png" alt="" id="img2"></a>
                <a href="#"><img src="/src/assets/img/icons8-facebook-nuevo-50 (1).png" alt="" id="img2"></a>
                <a href="#"><img src="/src/assets/img/icons8-tik-tok-30.png" alt="" id="img2"></a>
                <a href="#"><img src="/src/assets/img/icons8-youtube-50.png" alt="" id="img2"></a>
-               <a href="#"><h3>APP</h3></a>
+               <a href="#" id="blogColor"><h3>APP</h3></a>
             </div>
         </div>
     </div>
     <div class="subFooter">Vet Connection 2024  ©  Medellín, Antioquia <br>
-        Diseñado y desarrollado por Vet Connection S.A © 2024  
-    </div>
-</footer>
-
+        Diseñado y desarrollado por Vet Connection S.A © 2024  </div>
+   </footer>
 </body>
 </html>
