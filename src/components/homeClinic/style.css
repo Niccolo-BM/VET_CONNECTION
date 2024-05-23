@@ -1,4 +1,4 @@
-/* general information page */
+/* General Information page */
 *{
     margin: 0%;
     padding: 0;
@@ -52,6 +52,7 @@ a{
 .whatsapp-text:hover {
      opacity: 1;
 }
+
 /*HEADER*/
 .header{
     background-color:#bcd8c1;
@@ -87,9 +88,6 @@ a{
     margin-top: 2.5%;
     transform: translateX(-65%);
     transform: translatez(20%);
-
-    
-
 }
 .material-symbols-outlined{
     display: flex;
@@ -131,7 +129,6 @@ aside:hover{
     border-radius: 200px;
 
 }
-
 
 .viewSearch:focus{
     outline: none;
@@ -197,7 +194,7 @@ input{
 /*Container Section1*/
 #divSection1{
     border: solid 2px #6fb2a5;
-    height: 600px;
+    height: 700px;
     background-color: #f1f9ff;
 }
 
@@ -208,6 +205,7 @@ input{
     font-style: normal;
     font-size: 25px;
     color: #017991;
+    margin-top:50px;
     margin-bottom: 50px;
 }
 
@@ -222,6 +220,7 @@ input{
 /*divCircles*/
 #divCircleContainer{
     /* border: 1px solid #017991; */
+    margin-top:60px;
     width: 400px;
     height: 400px;
 }
@@ -245,7 +244,7 @@ input{
     height: 280px;
     position:absolute;
     z-index:20;
-    top: 90px;
+    top: 55px;
     left: 180px;
 }
 
@@ -266,6 +265,7 @@ input{
     font-family: "Roboto", sans-serif;
     font-style: normal;
     margin-top:30px;
+    padding-left: 8px;
 }
 
 .divSelectDocument{
@@ -280,10 +280,42 @@ input{
     font-family: "Roboto", sans-serif;
     font-style: normal;
     margin-top: 30px;
+    padding-left:15px;
 }
 
 #searchButton{
-    
+    position:relative;
+    top:40px;
+    right:-340px;
+    width: 70px;
+    height: 30px;
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    background-color: #017991;
+    color:white;
+    border-radius:10px;
+    border:none;
+}
+
+#createDoctorForm{
+    border: 1px solid #017991;
+    background-color: #cce5f8;
+    border-radius:20px;
+    width:115%;
+    height: 425px;
+    position:absolute;
+    z-index:20;
+    top: 55px;
+    left: 180px;
+}
+
+#createDoctorForm > h3{
+    padding-left:30px;
+    font-size: 22px;
+    color:#017991;
+    margin-top:20px;
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
 }
 
 #imgProfile{
@@ -300,7 +332,7 @@ input{
 
 /*divCircles*/
 .divCircles{
-    border: 3px solid #E9D985;
+    border: 3px solid #BFFFF1;
     background-color: rgba(1, 121, 145, 0.8);
     width: 130px;
     height: 130px;
@@ -325,7 +357,7 @@ input{
 
 /*Menu Icon*/
 #menuIcon{
-    top: -40px;
+    top: -60px;
     left: 70px;
     flex-direction:column;
 }
@@ -333,12 +365,12 @@ input{
 /*Create Doctor*/
 #createDoctor{
     top: 130px;
-    left: -50px;
+    left: -60px;
 }
 
-/*exit*/
+/*Exit*/
 #exit{
-    top: 300px;
+    top: 325px;
     left: 70px;
 }
 
@@ -354,11 +386,12 @@ input{
 #gridClinicData{
   display:grid;
   grid-template-rows: auto auto auto auto auto auto auto;
-  border: 2px solid #017991;
+  border: 4px solid #c3dfc8;
   width: 400px;
   height: 400px;
   padding-top: 20px;
   padding-left: 20px;
+  margin-top:40px;
   border-radius: 10%;
   background-color: #d7f6dc;
   font-family: "Roboto", sans-serif;
@@ -380,7 +413,7 @@ input{
     height: 40px;
     margin-right: 10%;
     position: absolute;
-    right: -30px;
+    right: -40px;
     bottom: -60px;
     width: 40%;
 }
@@ -394,7 +427,7 @@ input{
     border: 2px solid #017991;
     background-color: #d7f6dc;
     position: absolute;
-    top: -6px;
+    top: -30px;
     left: 180px;
     width: 1%;
     height: 70px;
@@ -405,6 +438,7 @@ input{
     transition: width 2s;
     font-family: "Roboto", sans-serif;
     font-style: normal;
+    color:#017991;
 }
 
 .top{
@@ -438,6 +472,7 @@ input{
     font-family: "Roboto", sans-serif;
     font-style: normal;
     font-size:25;
+    margin-top:50px;
 }
 
 /*Search*/
@@ -446,7 +481,7 @@ input{
     height: 30px;
     border: 1px solid black;
     border:none;
-    margin-top:20px;
+    margin-top:55px;
     padding-left:20px;
     border-radius:30px;
     background-color: #d7f6dc;
@@ -459,7 +494,7 @@ input{
     padding-left:180px;
     color:#017991;
     position: absolute;
-    top: 26px;
+    top: 60px;
     right: 15px;
 }
 
@@ -476,63 +511,72 @@ input{
 footer{
     background-color: #cce6e0;
 }
-
 .contFooter{
     display: flex;
     padding-top: 20px;
     margin-bottom: 30px;
     justify-content: space-around;
-    border: #017991;   
+    border: #017991;
+    
 }
-
 .contFooter1{
     display: flex;
     justify-content: space-around;
 }
-
 .container1{
     display: flex;
     justify-content:baseline;
-}
 
+}
 .subFooter{
     background-color: #0a3200;
     color: white;
     display: block;
-    text-align: center;
+text-align: center;
+}
+
+#icons2{
+    display: flex;
+    justify-content: baseline;
 }
 
 #img1{
     width: 130px;
     height: 110px;
     padding: 10px;
+    margin-top: 15px;
 }
-
 #img2{
     width: 20px;
     height: 20px;
     margin: 3px;
+    
+}
+#img3{
+    width: 20px;
+    height: 20px;
+    margin: 3px;
+    filter:invert(100%);
 }
 
-.lista{
+.list{
     display: block;
     align-items: center;
     text-decoration: none;
     color: #017991;
     padding: 10px;
 }
-
 #text{
     text-align: center;
     margin-top: 20px;
     color: #017991;
 }
-
 #text1{
     color: #017991;
     display: flex;
     justify-content: space-around;
-    align-items: center;
+    align-content: center;
 }
-
-
+#blogColor{
+    color: #017991;
+}
