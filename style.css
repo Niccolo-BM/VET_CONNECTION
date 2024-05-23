@@ -73,6 +73,7 @@ input{
     width: 100%;
     color: #017991;
     position: relative;
+    z-index: 9;
 }
 .menuHidden{
     visibility: hidden;
@@ -106,6 +107,7 @@ aside:hover{
     transition: .3s;
     margin-top: .5%;
     transform: translateX(-80%); 
+    z-index: 999;
 }
 .viewSearch{
     visibility: initial;
@@ -363,7 +365,9 @@ text-align: center;
     margin: 3px;
     filter:invert(100%);
 }
-
+#imgSlider{
+    z-index: -999;
+}
 .list{
     display: block;
     align-items: center;
