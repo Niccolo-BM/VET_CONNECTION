@@ -17,6 +17,7 @@ search.addEventListener("click",(e)=>{
     searchHidden.classList.toggle("viewSearch");
 });
 
+
 //CLINIC PROFILE
 //Section 1
 // OPEN SUBMENU
@@ -50,6 +51,38 @@ window.addEventListener('click', function(e){
         }, 2000);
     }
   });
+
+//Event Search Pet
+let searchPetClinicArray = document.querySelectorAll(".eventSearchPet");
+searchPetClinicArray.forEach(function(searchPetClinic){
+    searchPetClinic.addEventListener("click",(e) =>{
+           let showDiv = document.getElementById("searchPet");
+           if(showDiv.style.display === "none"){
+            showDiv.style.display = "block";
+           } else {
+            showDiv.style.display = "none";
+           }
+    });
+});
+
+//Close Search Pet
+let closeSearchPet = document.querySelector("#closeSearchPet");
+closeSearchPet.addEventListener('click',(e) => {
+    alert("entró");
+    let searchPet = searchPet.style.display = "none";
+});
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

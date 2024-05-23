@@ -246,6 +246,7 @@ input{
     z-index:20;
     top: 55px;
     left: 180px;
+    display:block;
 }
 
 #searchPet > h3{
@@ -255,6 +256,21 @@ input{
     margin-top:20px;
     font-family: "Roboto", sans-serif;
     font-style: normal;
+    width:80%;
+}
+
+#closeSearchPet{
+    position: absolute;
+    height: 50px;
+    top: 18px;
+    width: 50px;
+    right: 20px;
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    color: #017991;
+    font-size: 20px;
+    z-index: 20;
+    text-align: center;
 }
 
 .chooseWriteId{
@@ -302,7 +318,7 @@ input{
     background-color: #cce5f8;
     border-radius:20px;
     width:115%;
-    height: 425px;
+    height: 430px;
     position:absolute;
     z-index:20;
     top: 55px;

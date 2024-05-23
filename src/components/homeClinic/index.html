@@ -70,8 +70,8 @@
                     <!--Profile Picture--> 
                     <div id="divProfilePicture">
                          <!--Search Pet-->
-                    <!-- <div id="searchPet">
-                        <h3><i class="fa fa-search" id="searchPetIcon"></i> Buscar Mascota</h3>
+                    <div id="searchPet">
+                        <h3><i class="fa fa-search" id="searchPetIcon"></i> Buscar Mascota</h3><div id="closeSearchPet"><b>x</b></div>
                         <div class="divSelectDocument">
                             <select name="chooseId" class="chooseWriteId">
                                 <option value="cedula de ciudadania">Cédula de Ciudadanía</option>
@@ -84,18 +84,19 @@
                             <input type="text" placeholder="Escriba el documento del acudiente" id="documentInput">
                         </div>
                         <button type="button" id="searchButton">Buscar</button>
-                    </div>   -->
+                    </div>  
+                    
                     <!--Create Doctor Form-->
-                    <div id="createDoctorForm">
+                    <!-- <div id="createDoctorForm">
                         <h3>Crear médico</h3>
                         <div class="divSelectDocument">
                             <input type="text" placeholder="Nombre:" id="documentInput">
                         </div>
                         <div class="divSelectDocument">
                             <input type="text" placeholder="Cargo:" id="documentInput">
-                        </div>
+                        </div> -->
                         <!--Especialidades-->
-                        <div class="divSelectDocument">
+                        <!-- <div class="divSelectDocument">
                             <select name="chooseId" class="chooseWriteId">
                                 <option value="especialidad">Especialidad</option>
                                 <option value="cirugia">Cirugía</option>
@@ -112,7 +113,8 @@
                         <div class="divSelectDocument">
                             <input type="text" placeholder="Clínica:" id="documentInput">
                         </div>
-                    </div>
+                        <button type="button" id="searchButton">Crear</button>
+                    </div> -->
 
                         <div id="divProfile">
                             <img src="../../assets/img/logoClinica.png" alt="sinFotoPerfil" id="imgProfile">
@@ -128,11 +130,11 @@
                             <div class="subMenuText top left"><b>Añadir</b></div>
                             <div class="subMenuText top"><b>Eliminar</b></div>
                             <div class="subMenuText top"><b>Sitio</b></div>
-                            <div class="subMenuText top"><b>Buscar</b></div>
+                            <div class="subMenuText top eventSearchPet"><b>Buscar</b></div>
                             <div class="subMenuText bottom left"><b>foto de perfil</b></div>
                             <div class="subMenuText bottom"><b>perfil</b></div>
                             <div class="subMenuText bottom"><b>Web</b></div>
-                            <div class="subMenuText bottom"><b>Mascota</b></div>
+                            <div class="subMenuText bottom eventSearchPet"><b>Mascota</b></div>
                         </div>
                         <!--Create Doctor-->
                         <div class="divCircles" id="createDoctor">
