@@ -180,8 +180,7 @@ input{
     align-items: center;
     text-align: center;
     width: 200px;
-    height: 40px;
-    
+    height: 40px;   
 }
 
 #icons{
@@ -189,8 +188,7 @@ input{
     transform: translateX(-10%);
     gap: 5%;
     align-items: center;
-    padding: 1%;
-    
+    padding: 1%;  
 }
 
 /* Start information */

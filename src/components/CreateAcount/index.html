@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/src/assets/img/Logo_VetConnection.png">
+    <link rel="stylesheet" href="/src/components/accessPage/CreateAcount/style.css">
+    <link rel="stylesheet" href="/src/components/accessPage/script.js">
+    <link rel="icon" href="/src/assets/img/LOGO.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="/src/components/CreateAcount/style.css">
+    <script src="/src/components/CreateAcount/script.js" defer></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="whatsapp-contact">
+        <a href="https://wa.me/573502014028/?text=Hola!   
+        Necesito mas infomracion para mi Peludito" target="_blank"><img class="whatsapp" src="/src/assets/img/whatsapp_3670051.png" width="60"  title="Contacto Ws"></a>
+        <div class="whatsapp-text">Escríbenos</div>
+    </div>
+       <!-- general page header -->
+   <header class="header">
+   <a href="/index.html"> <img src="/src/assets/img/LOGO.png" alt="" id="logo" ></a>
+    <h3 id="title">¡Amamos conectar vidas!</h3>
+    <div id="icons">
+        <div>
+            <aside class="material-symbols-outlined ">
+            menu
+            </aside>
+            <nav class="menuHidden">
+                <a href="/index.html" class="link">Inicio</a>
+                <a href="" class="link">Nosotros</a>
+                <a href="" class="link">Servicios</a>             
+                <a href="" class="link">Blog</a>
+                <a href="" class="link">Contáctanos</a>
+            </nav>
+        </div>
+             
+        <aside class="material-symbols-outlined1">
+            <img src="/src/assets/img/search_24dp_FILL0_wght400_GRAD0_opsz24 (1).png" alt="" id="img3">
+            <div>
+                <input class="searchHidden" type="search" name="search" id="search" placeholder="buscar">
+            </div>
+        </aside>
+                    
+        </div>
+    </header>
+    <main>
+        <nav aria-label="bredCrumb" >
+            <ol class="breadCrumb">
+                <li class="bredCrumb-item"><a href="/index.html">HOME  ></a></li> 
+                <li class="bredCrumb-item"><a href="/src/components/accessPage/index.html">ACCEDER  ></a></li> 
+                <li aria-current="page" class="bredCrumb-item active"> INICIAR SESIÓN</li>
+            </ol>
+            </nav>
+
+        <div class="container">
+            <h2>¡Crear cuenta!</h2>
+            <form id="registerForm">
+                <label for="clinicName">Nombre clínica *</label>
+                <input type="text" id="clinicName" name="clinicName" required>
+    
+                <label for="documentType">Seleccione tipo de documento *</label>
+                <select id="documentType" name="documentType" required>
+                    <option value="">Seleccione...</option>
+                    <option value="DNI">Cedula de Ciudadania</option>
+                    <option value="Pasaporte">Ceduala de Extranjeria</option>
+                    <option value="Licencia">Pasaporte</option>
+                    <option value="Licencia">Nit</option>
+                </select>
+    
+                <label for="documentNumber">Numero de Documento *</label>
+                <input type="number" id="documentNumber" name="documentNumber" required>
+    
+                <label for="contactNumber">Número de contacto *</label>
+                <input type="number" id="contactNumber" name="contactNumber" required>
+    
+                <label for="address">Dirección centro veterinario *</label>
+                <input type="text" id="address" name="address" required>
+    
+                <label for="city">Ciudad *</label>
+                <input type="text" id="city" name="city" required>
+    
+                <label for="email">E-mail *</label>
+                <input type="email" id="email" name="email" required>
+    
+                <label for="password">Crear contraseña *</label>
+                <input type="password" id="password" name="password" placeholder="Debe ser de 8 a 20 Caracteres" required>
+    
+                <label for="confirm-password">Confirmar contraseña *</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
+                
+                <div class="register">
+                    <button type="submit">Registrate</button>
+                </div>
+            </form>
+        </div>
+    </main>
+    <footer>
+        <div class="contFooter">
+            <div class="contFooter1">
+                <img src="/src/assets/img/logo.png" alt="" id="img1">
+                <div class="list">
+                    <div>CONTÁCTANOS</div>
+                    <div class="container1">
+                        <div ><img src="/src/assets/img/icons8-teléfono-24.png" alt="" id="img2"></div>
+                        <p>Linea de atencion al cliente</p>
+                    </div>
+                    <div class="container1">
+                        <div>
+                            <img src="/src/assets/img/icons8-whatsapp-50.png" alt="" id="img2">
+                        </div>
+                        <p>(+57) 350 2014028</p>
+                    </div>
+                    <div class="container1">
+                        <div>
+                            <img src="/src/assets/img/icons8-correo-50.png" alt="" id="img2">
+                        </div>
+                        <p>CorreEjemplo@gmail.com</p>
+                    </div>
+                      
+                </div>
+                
+       
+            </div>
+            <div id="text">
+                <p>Siguenos y descubre nuestro <br>contenido de interes</p>
+                <div id="text1">
+                   <a href="#" id="blogColor"><h3>Blog</h3></a>
+                   <a href="#"><img src="/src/assets/img/icons8-instagram-24.png" alt="" id="img2"></a>
+                   <a href="#"><img src="/src/assets/img/icons8-facebook-nuevo-50 (1).png" alt="" id="img2"></a>
+                   <a href="#"><img src="/src/assets/img/icons8-tik-tok-30.png" alt="" id="img2"></a>
+                   <a href="#"><img src="/src/assets/img/icons8-youtube-50.png" alt="" id="img2"></a>
+                   <a href="#" id="blogColor"><h3>APP</h3></a>
+                </div>
+            </div>
+        </div>
+        <div class="subFooter">Vet Connection 2024  ©  Medellín, Antioquia <br>
+            Diseñado y desarrollado por Vet Connection S.A © 2024  </div>
+    </footer>  
+</body>
+</html>

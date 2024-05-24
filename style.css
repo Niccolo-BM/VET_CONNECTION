@@ -73,7 +73,7 @@ input{
     width: 100%;
     color: #017991;
     position: relative;
-    z-index: 9;
+    z-index: 10;
 }
 .menuHidden{
     visibility: hidden;

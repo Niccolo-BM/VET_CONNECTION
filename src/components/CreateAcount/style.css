@@ -53,8 +53,9 @@ a{
      opacity: 1;
 }
 
-/* header information page */
 
+
+/* header information page */
 .header{
     background-color:#bcd8c1;
     display: grid;
@@ -80,7 +81,7 @@ a{
 .viewMenu{
     visibility: initial;
     padding: 20px;
-    display: flex;
+    display: block;
     gap: 10px;
     flex-direction: column;
     position: absolute;
@@ -89,10 +90,9 @@ a{
     transition: .3s;
     margin-top: 2.5%;
     transform: translateX(-65%);
-    transform: translatez(20%);
-
-    
-
+}
+#imgSlider{
+    z-index: -999;
 }
 .material-symbols-outlined{
     display: flex;
@@ -128,13 +128,11 @@ aside:hover{
     background-color: #7af1d0d7;
     border-radius: 10px;
     transition: .3s;
-    margin-top: 10%;
     transform: translateX(-100%);
+    margin-top: 10%;
     border: none;
     border-radius: 200px;
-
 }
-
 
 .viewSearch:focus{
     outline: none;
@@ -182,8 +180,7 @@ input{
     align-items: center;
     text-align: center;
     width: 200px;
-    height: 40px;
-    
+    height: 40px;   
 }
 
 #icons{
@@ -191,74 +188,84 @@ input{
     transform: translateX(-10%);
     gap: 5%;
     align-items: center;
-    padding: 1%;
-    
+    padding: 1%;  
 }
-/* acces main  */
+
+
+/*main */
 .breadCrumb{
     font-size: 10px;
     display: flex;
-    gap: 8px;
+    gap: 10px;
     background-color: #cbe5f7;
-    padding: .5%;
-
-}
-.containerAcces{
-    display: grid;
-    grid-template-columns: 40% 60%;
-    margin-bottom: 40px;
-}
-.imgAcces{
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    color: #429a87;
-    gap: 15px;
-}
-.imgAcces1{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    gap: 5px;
-}
-.imgAcces2{
-display: flex;
-flex-direction: column;
-justify-content: space-between;
-gap: 20px;
-}
-.buttonAcces{
-    color: #000;
-    display: flex;
-    justify-self: center;
-    align-items: center;
-}
-#wellcome1{
-    text-align: center;
-    align-items: center;
-    color: #017991;
     padding: 1%;
-    transform: translateX(-2%);
-}
-#textAcces{
-    color: #017991;
-    padding: 20%;
-    text-align: center;
-}
-#imgAccesIcon{
-    width: 190px;
-    height: 183px;
-    border-radius: 100%;
-    border: solid 2px #017991;
-    align-items: center;
-    
-}
 
+}
 ol{
     list-style-type: none;
 }
 
-/* general information footer */
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: auto;
+    
+}
+
+.container {
+    padding: 15px;
+    border-radius: 20px;
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+    width: 350px;
+    text-align: center;
+    background-color:#CBE5F7;
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: #007b8a;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+label {
+    margin-bottom: 5px;
+    text-align: left;
+    color: #007b8a;
+}
+
+input, select {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 2px solid #007b8a;
+    border-radius: 5px;
+    outline: none;
+}
+
+button {
+    width: 150px;
+    padding: 10px;
+    margin-top: 20px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #017991;
+
+}
+
+button:hover {
+    background-color: #005f6b;
+}
+
+/*footer*/
 footer{
     background-color: #cce6e0;
 }
@@ -283,7 +290,7 @@ footer{
     background-color: #0a3200;
     color: white;
     display: block;
-text-align: center;
+    text-align: center;
 }
 
 #icons2{
