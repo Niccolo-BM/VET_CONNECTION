@@ -1,0 +1,733 @@
+*{
+    margin: 0;padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+input:focus{
+    outline: none;
+}
+
+button{
+    border: none;
+    cursor: pointer;
+
+}
+
+body{
+    background-color:#f1f9ff;
+    overflow-x: hidden;
+    min-height: 110vh;
+}
+
+
+a{
+    text-decoration: none;
+}
+input{
+    text-decoration: none;
+}
+footer{
+    background-color: #cce6e0;
+}
+.header{
+    background-color:#bcd8c1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    color: #017991;
+    position: relative;
+}
+.menuHidden{
+    visibility: hidden;
+    position: absolute;
+}
+.searchHidden{
+    visibility: hidden;
+    position: absolute;
+}
+
+.viewMenu{
+    visibility: initial;
+    padding: 20px;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    position: absolute;
+    background-color: #7af1d0d7;
+    border-radius: 10px;
+    transition: .3s;
+    margin-top: 2.5%;
+    transform: translateX(-90%);
+    
+
+}
+.viewSearch{
+    visibility: initial;
+    padding: 20px;
+    background-color: #7af1d0d7;
+    border-radius: 10px;
+    transition: .3s;
+    margin-top: 3%;
+    transform: translateX(-90%);
+    border: none;
+    border-radius: 200px;
+}
+
+.viewSearch:focus{
+    outline: none;
+}
+.contFooter{
+    display: flex;
+    justify-content: space-around;
+    border: #017991;
+    margin: 3%;
+}
+.contFooter1{
+    display: flex;
+    justify-content: space-around;
+}
+.container1{
+    display: flex;
+    justify-content: space-between;
+
+}
+.subFooter{
+    background-color: #0a3200;
+    color: white;
+    display: block;
+text-align: center;
+}
+.nav{
+    width: 20%;
+    display: flex;
+    gap: 10%;
+    border:solid 2px black;
+}
+
+#icons{
+    display: flex;
+    gap: 5%;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 1%;
+    
+}
+#icons2{
+    display: flex;
+    justify-content: baseline;
+}
+#logo{
+    width:45px;
+    height: 35px;
+    margin: 10px;
+    margin-left: 50%;
+}
+#img1{
+    width: 130px;
+    height: 110px;
+    padding: 10px;
+}
+#img2{
+    width: 20px;
+    height: 20px;
+    margin: 3px;
+    
+}
+#img3{
+    width: 20px;
+    height: 20px;
+    margin: 3px;
+    filter:invert(100%);
+}
+#title{
+    color: #0e3604;
+    text-align: center;
+    transform: translateX(4%);
+    font-size: 35px;
+}
+#btn{
+    background-color: #017991;
+    color: white;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    border: none;
+    align-items: center;
+    text-align: center;
+    width: 200px;
+    height: 40px;
+    
+}
+.lista{
+    display: block;
+    align-items: center;
+    text-decoration: none;
+    color: #017991;
+    padding: 10px;
+}
+
+#text{
+    text-align: center;
+    margin-top: 20px;
+    color: #017991;
+}
+#text1{
+    color: #017991;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.breadCrumb{
+    display: flex;
+    gap: 10px;
+    background-color: #cbe5f7;
+    padding: 1%;
+    margin-bottom: 30px;
+
+}
+
+
+.welcomDoctor{
+    position: absolute;
+    top: 17%;
+    left:42%;
+    font-size: 20px;
+    color: #017991;
+}
+
+/* .container{
+    margin-bottom: 50px;
+    width: 100%;
+    padding:0 40px;
+    height: 8vh;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    background-color: #edf2fb;
+} */
+
+/* .info{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color:  #abc4ff;
+} */
+
+
+
+/* .list1{
+    width: 40%;
+    list-style: none;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #edf2fb;
+    
+    font-size: 20px;
+} */
+
+.containerWelcom{
+    margin: auto;
+    width: 80%;
+    height: 80vh;
+    font-size: 20px;
+    display: flex;
+    gap: 30px;
+    justify-content: space-around;
+    align-items: end;
+    color: #48e;
+    padding: 30px;
+}
+.balance{
+    font-family: sans-serif;
+    font-size: 20px;
+}
+
+
+a{
+    text-decoration: none;
+    color:#48e;
+    cursor: pointer;
+}
+
+.containerPhoto{
+    width: 30%;
+    height: 50vh;
+    position: relative;
+    background-size: cover;
+    background-position: top;
+    border-radius: 50%;
+    border: 4px solid #acd4df;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;  
+    color:#017991;
+    transition: .5s;
+    overflow-x: hidden;
+}
+
+
+
+.containerPhoto:hover{
+    background-color:#01799170;
+    color: #f1f9ff;
+    transition: .5s;
+    border: 4px solid #f1f9ff;
+    cursor: pointer;
+}
+
+
+.containerPhoto input{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+
+}
+
+.show{
+    background-size: cover;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+
+
+
+/*BUTTONS*/
+
+.viewProfiles{
+    width: 7%;
+    height: 15.5%;
+    position: absolute;
+    top: 25%;
+    left:22%;
+    font-size: 30px;
+    z-index: 20;
+    border-radius: 50%;
+    transition: .5s;
+    cursor: pointer;
+    border: 2px solid #acd4df;
+    background-color:  #017991e0;
+    z-index: 20;
+    color: #f1f9ff;
+    font-weight: 700;
+}
+
+.viewProfiles:hover{
+ 
+    transition: .5s;
+    z-index: 10;
+    background-color: #017991;
+}
+
+
+.create{
+    width: 7%;
+    height: 15.5%;
+    position: absolute;
+    left:13.5%;
+    font-size: 13px;
+    top: 50%;
+    border-radius: 50%;
+    transition: .5s;
+    cursor: pointer;
+    border: 2px solid #acd4df;
+    background-color:  #017991e0;
+    z-index: 20;
+    color: #f1f9ff;
+    font-weight: 700;
+}
+
+.create:hover{
+    transition: .5s;
+    background-color: #017991;
+
+}
+
+.exit{
+    width: 7%;
+    height: 15.5%;
+    position: absolute;
+    bottom: 9%;
+    font-size: 15px;
+    left: 22%;
+    border-radius: 50%;
+    transition: .5s;
+    cursor: pointer;
+    border: 2px solid #acd4df;
+    background-color:  #017991e0;
+    z-index: 20;
+    color: #f1f9ff;
+    font-weight: 700;
+
+}
+.exit:hover{
+    background-color: #017991;
+
+}
+
+.containerOptions{
+    visibility: hidden;
+    position: absolute;
+    top: 29%;
+    left: 25.5%;
+    width: 5%;
+    height: 7%;
+    font-size: 0px;
+    transition: .3s;
+    z-index: 1;
+    display: flex;
+    transition: .3s;
+    color: #017991;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color:#d7f6dc;
+    border-radius: 10px;
+    border: 2px solid #017991;
+
+}
+
+.viewOptions{
+    position: absolute;
+    width: 30%;
+    height: 7%;
+    top: 29%;
+    left: 27.5%;
+    visibility: visible;
+    font-size: 10px;
+    display: flex;
+    transition: .3s;
+    z-index: 1;
+    color: #017991;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color:#d7f6dc;
+    border-radius: 10px;
+    border: 2px solid #017991;
+}
+
+.containerOptions span{
+    font-weight: 700;
+    cursor: pointer;
+}
+
+
+.photo{
+    padding: 5px 40px 5px 10px;
+}
+
+.patients{
+    padding: 5px 10px 5px 60px;
+}
+
+/* CONTAINER OF INFORMATION DOCTOR*/
+.container_information{
+    width: 35%;
+    height: 50vh;
+    background-color: #d7f6dc;
+    border-radius: 20px;
+    position: relative;
+}
+
+.innerPart{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.updateData{
+    position: absolute;
+    bottom: -20%;
+    right: 0;
+    background-color: #017991;
+    width: 50%;
+    height: 13%;
+    border-radius: 10px;
+    color: #f1f9ff;
+}
+
+ul{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    list-style: none;
+    font-size:14px ;
+    justify-content:space-between;
+    padding: 20px;
+}
+
+ul input{
+    width: 200%;
+    height: 240%;
+    border: none;
+    font-size: 20px;
+}
+
+li{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    color: black;
+}
+
+strong{
+    color: #128397;
+
+}
+
+input:focus{
+    outline: none;
+}
+
+.signOut{
+    cursor: pointer;
+}
+.viewprofiles{
+    width: 100%;
+    min-height:100vh ;
+}
+
+
+/*Container for create new Profiles*/
+
+.containerCreateProfiles{
+    margin-top: 100px;
+    transition: .6s;
+    
+    width: 60%;
+    transform: translateX(100vw);
+}
+
+.formNewProfile{
+    width: 100%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5%;
+    transition: .6s;
+
+
+}
+
+.viewForm{   /*Clase en css para activar container para create nuevos profiles veterinarios*/
+    position: absolute;
+    top: -10%;
+    right: 10%;
+    transform: translateX(0);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+    gap: 8%;
+    background-color: #edf2fb;
+    transition: .6s;
+    border-radius: 20px;
+    border: 2px solid #48e;
+
+}
+
+.viewForm h1{
+    color: #48e;
+}
+
+
+.formNewProfile input{
+    width: 40%;
+    height: 10%;
+    font-size: 20px;
+    text-align: center;
+}
+
+
+.formNewProfile button{
+    width: 20%;
+    height: 12%;
+    font-size: 20px;
+    border-radius: 10px;
+    background-color: #48e;
+}
+
+.equis{
+    position: absolute;
+    right: 2%;
+    top: 2%;
+    padding:13px 20px;
+    background-color:#abc4ff;
+    font-size: 15px;
+    cursor: pointer;
+    color: aliceblue;
+}
+
+
+/*Container para buscar pacientes*/
+
+.containerSearchPatients{
+    display: block;
+    width: 100%;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    background-color:#d7f6dc;
+    position: absolute;
+    top: 110%;
+    gap: 60%;
+padding: 0 12%;
+    border: 1px solid #017991;
+}
+
+/* .viewContainerSearch{
+    width: 100%;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    background-color:#d7f6dc;
+    position: absolute;
+    top: 110%;
+    gap: 60%;
+padding: 0 12%;
+    border: 1px solid #017991;
+} */
+
+.containerSearchPatients h2{
+    color: #017991;
+}
+
+
+
+.searchPatients{
+    width: 30%;
+    height: 60%;
+    border:2px solid #017991;
+    border-radius: 10px;
+    position: relative;
+}
+
+.searchPatients:focus{
+    outline: none;
+}
+
+.ri-search-line{
+    position: absolute;
+    font-size: 20px;
+    right: 13%;
+    padding: 10px 20px;
+}
+
+
+.containerReload{
+    position: absolute;
+    right: 40%;
+    visibility: hidden;
+}
+
+.ri-restart-line{
+    font-size: 25px;
+    cursor: pointer;
+    transition: .9s;
+}
+
+
+.viewReload{
+    visibility: visible;
+}
+
+/*zona para mostrar los profiles veterinarios*/
+
+.containerPatients{
+    margin-top: -180px;
+    width: 100vw;
+    min-height:70vh;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #f1f9ff;
+    gap: 2%;
+    padding: 20px;
+}
+
+.hideText{
+    position: absolute;
+    bottom: 0;
+    top: 130%;
+}
+
+.viewContainer{
+    width: 100%;
+    margin-top: -20px;
+}
+
+
+.carta{
+    margin: 15px 0;
+    width: 30%;
+    height: 40vh;
+    border: 1px solid rgb(0, 0, 0);
+    font-size: 20px;
+    padding: 20px;
+    background-color:#edf2fb;
+    border-radius: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10%;
+}
+
+
+
+.valor{
+    background-color:#edf2fb;
+    border: none;
+    outline: none;
+    color: black;
+}
+
+
+.sinFace{
+    width: 50%0%;
+    height: 70%;
+    object-fit: contain;
+    object-position:center ;
+    margin: 10px;
+}
+
+.carta2{
+    font-size: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.ocultar{
+    display: none;
+}
+
+
+.textBig{  /*Esta clase se aplica para cuando no hay ningun perfil creado*/
+    font-size: 50px;
+}
+
+
+
+
+.foto{
+    width: 400px;
+    height: 400px;
+}

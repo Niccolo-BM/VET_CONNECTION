@@ -12,7 +12,7 @@
     <script src="/src/components/CreateAcount/script.js" defer></script>
     <title>Document</title>
 </head>
-<body>
+<body class="body">
     <div class="whatsapp-contact">
         <a href="https://wa.me/573502014028/?text=Hola!   
         Necesito mas infomracion para mi Peludito" target="_blank"><img class="whatsapp" src="/src/assets/img/whatsapp_3670051.png" width="60"  title="Contacto Ws"></a>
@@ -58,7 +58,7 @@
             <h2>¡Crear cuenta!</h2>
             <form id="registerForm">
                 <label for="clinicName">Nombre clínica *</label>
-                <input type="text" id="clinicName" name="clinicName" required>
+                <input type="text" id="clinicName" name="clinicName" class="name" required>
     
                 <label for="documentType">Seleccione tipo de documento *</label>
                 <select id="documentType" name="documentType" required>
@@ -70,28 +70,30 @@
                 </select>
     
                 <label for="documentNumber">Numero de Documento *</label>
-                <input type="number" id="documentNumber" name="documentNumber" required>
+                <input type="number" id="documentNumber" name="documentNumber" class="id" required>
     
                 <label for="contactNumber">Número de contacto *</label>
-                <input type="number" id="contactNumber" name="contactNumber" required>
+                <input type="number" id="contactNumber" name="contactNumber" class="phone" required>
     
                 <label for="address">Dirección centro veterinario *</label>
-                <input type="text" id="address" name="address" required>
+                <input type="text" id="address" name="address" class="adress" required>
     
                 <label for="city">Ciudad *</label>
-                <input type="text" id="city" name="city" required>
+                <input type="text" id="city" name="city" class="city" required>
     
                 <label for="email">E-mail *</label>
-                <input type="email" id="email" name="email" required>
+                <input type="email" id="email" name="email" class="email" required>
     
                 <label for="password">Crear contraseña *</label>
-                <input type="password" id="password" name="password" placeholder="Debe ser de 8 a 20 Caracteres" required>
+                <input type="password" id="password" name="password" placeholder="Debe ser de 8 a 20 Caracteres" class="password" required>
     
-                <label for="confirm-password">Confirmar contraseña *</label>
-                <input type="password" id="confirmPassword" name="confirmPassword" required>
+                <label for="confirmPassword">Confirmar contraseña *</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" class="password2" required>
+
+                <div class="mistakes"></div>
                 
                 <div class="register">
-                    <button type="submit">Registrate</button>
+                    <button type="submit" class="send">Registrate</button>
                 </div>
             </form>
         </div>

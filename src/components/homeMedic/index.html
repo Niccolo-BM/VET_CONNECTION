@@ -4,9 +4,110 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="/src/assets/img/Logo_VetConnection.png">
+    <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
+    rel="stylesheet"
+/>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="/src/components/homeMedic/style.css">
     <title>VC Perfil</title>
 </head>
 <body>
+    <header class="header">
+        <a href="/index.html"> <img src="/nuevo prototipo/img/file.png" alt="" id="logo" ></a>
+         <h3 id="title">¡Amamos conectar vidas!</h3>
+         <div id="icons">
+             <div>
+                 <span class="material-symbols-outlined " >
+                 menu
+                 </span>
+                 <nav class="menuHidden">
+                     <a href="/index.html" class="enlace">Inicio</a>
+                     <a href="" class="enlace">Nosotros</a>
+                     <a href="" class="enlace">Servicios</a>
+                     <a href="" class="enlace">Blog</a>
+                     <a href="" class="enlace">Contáctanos</a>
+                 </nav>
+             </div>
+             <div>
+                 <img src="img/search_24dp_FILL0_wght400_GRAD0_opsz24 (1).png" alt="" id="img3" class="material-symbols-outlined1">
+                 <div>
+                     <input class="searchHidden" type="search" name="search" id="search" placeholder="buscar">
+                 </div>
+             </div>
+                        
+         </div>
+     
+     </header>
+     
+     
+     <!-- main Acces -->
+     <main>
+     <!-- breadcrumb -->
+
+    <h1 class="welcomDoctor">PERFIL PROFESIONAL</h1>
+
+    <div class="containerWelcom">
+        <div class="containerPhoto">
+            <input type="file" name="" id="" class="inputPhoto" accept="image/*">
+        </div>
+
+        <button class="viewProfiles"><i class="ri-menu-line"></i></button>
+        <div class="containerOptions">
+            <span class="patients">Ver pacientes</span>
+            <span class="photo">Cambiar foto de perfil</span>
+        </div>
+
+        <button class="create">Registrar Peludito</button>
+        <button class="exit">Salir</button>
+
+        <div class="container_information">
+            <!-- <h1 class="title">Informacion Medico</h1> -->
+            <div class="innerPart"></div>
+            <button class="updateData">Actualizar datos</button>
+        </div>
+    </div>
     
+    <a href="#down" class="goSearch"></a>
+    <div class="containerCreateProfiles">  
+        <h1>Registra un nuevo peludito</h1>
+        <form action="" class="formNewProfile">
+            <span class="equis">X</span>
+            <input type="text"  class="name" placeholder="Nombre del peludito" required>
+            <input type="text" class="ownerName" placeholder="Nombre del Acudiente" required>
+            <input type="text" class="id" placeholder="documento Asociado al peludito" required>
+            <input type="text" class="specie" placeholder="specie" required>
+            <input type="text" class="raza" placeholder="Raza" required>
+            <input type="text" class="telephone" placeholder="Telefono del acudiente" required>
+            <input type="text" class="password" placeholder="password del peludito" required>
+            <div class="mistakes"></div>
+            <button class="createProfile">create Perfil</button>
+        </form>
+    </div>
+    
+
+    <div class="containerFoto2"></div>
+
+    
+
+
+    <div class="containerSearchPatients">
+        <h2> Pacientes</h2>
+        <input type="text" class="searchPatients" placeholder="Introduce la cedula del dueño">
+        <i class="ri-search-line"></i>
+        <div class="containerReload">
+            <i class="ri-restart-line"></i>
+            <span>Ver todos</span>
+        </div>
+    </div>
+    <a href="" id="down"></a>
+    <div class="containerPatients" id="down"></div>
+  
+
+
+
+    <script type="module"  src="/page3-InicioMedico/cuartaPagina2.js"></script>
+    <a class="iniciar" href="/page2/terceraPagina.html"></a>
 </body>
 </html>

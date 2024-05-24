@@ -242,7 +242,7 @@ ol{
 #vetColor{
     color:#369534;
 }
-#input{
+.input{
     padding: 2%;
     border-radius: 10px;
     text-decoration: none;

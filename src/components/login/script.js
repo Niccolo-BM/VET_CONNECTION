@@ -1,3 +1,7 @@
+import{verifyStarVeterinarys,activateDoctor} from "/services/servicesMedic.js"
+
+
+
 // page header and footer script
 let icon=document.querySelector(".material-symbols-outlined");
 let menuHidden=document.querySelector(".menuHidden");
@@ -69,6 +73,12 @@ solicitud.onerror=()=>{
 
 solicitud.onsuccess=()=>{
     baseDatos=solicitud.result;
+
+    verifyStarVeterinarys(baseDatos)
+    .then(()=>{
+        document.querySelector(".CreateAcount").innerHTML=" ";
+    })
+    .catch(()=>{});
     
     
     buttonSendForm.addEventListener("click",(e)=>{
@@ -103,7 +113,12 @@ solicitud.onsuccess=()=>{
             else if(value==2){        //En caso de qe sea para medico
                 validateEmailMedical()
 
-                .then(()=>{window.location.replace("/page3-InicioMedico/cuartaPagina2.html");})
+                .then(()=>{
+                    activateDoctor(baseDatos)
+                    .then(()=>{})
+                    .catch(()=>{})
+                
+                })
 
                 .catch((error)=>{
                     containerMistakes.innerHTML=error.message;
@@ -112,10 +127,13 @@ solicitud.onsuccess=()=>{
                     },3000);
                 })
             }
-            else{                     //En caso de qe sea para usuario
+            else{        
+                          //En caso de qe sea para usuario
                 validateEmailPatient()
 
-                .then(()=>{alert("pagina de dueño mascota")})
+                .then(()=>{
+                    window.location.replace("/src/components/homeUser/index.html");
+                })
 
                 .catch((error)=>{
                     containerMistakes.innerHTML=error.message;
@@ -239,13 +257,11 @@ const validateEmailPatient=()=>{
         let objetStore=transaccion.objectStore("profiles-pets");
 
         let cursor=objetStore.openCursor();
-
         cursor.addEventListener("success",(e)=>{
             let puntero=e.target.result;
             
             if(puntero){
-               
-                if(puntero.value.passwordPet==password && puntero.value.emailPet==email){
+                if(puntero.value.passwordPet==password && puntero.value.idOwnerPet==email){
                     resolve();
                     return;
                 }

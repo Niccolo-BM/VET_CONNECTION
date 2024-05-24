@@ -8,7 +8,7 @@
     <link rel="icon" href="/src/assets/img/LOGO.png">
     <title>LOGIN</title>
 </head>
-<body>  
+<body class="body">  
     <div class="whatsapp-contact">
         <a href="https://wa.me/573502014028/?text=Hola!   
         Necesito mas infomracion para mi Peludito" target="_blank"><img class="whatsapp" src="/src/assets/img/whatsapp_3670051.png" width="60"  title="Contacto Ws"></a>
@@ -47,8 +47,8 @@
     <!-- breadcrumb -->
     <nav aria-label="bredCrumb" >
         <ol class="breadCrumb">
-            <li class="bredCrumb-item"><a href="/index.html">HOME  ></a></li> 
-            <li class="bredCrumb-item"><a href="/src/components/accessPage/index.html">ACCEDER  ></a></li> 
+            <li class="bredCrumb-item returnToHome"><a href="/index.html">HOME  ></a></li> 
+            <li class="bredCrumb-item returnPage" ><a href="/src/components/accessPage/index.html">ACCEDER  ></a></li> 
             <li aria-current="page" class="bredCrumb-item active"> INICIAR SESIÓN</li>
         </ol>
         </nav>
@@ -57,15 +57,16 @@
                 <div class="containerStart1">
                     <h3 id="startColor">Iniciar Sesión </h3>
                     <h5 id="vetColor">Vet Connection</h5>
-                    <input type="text" placeholder="Usuario" id="input">
-                    <input type="text" placeholder="Contraseña" id="input">
+                    <input type="text" placeholder="Usuario"  class="input email">
+                    <input type="text" placeholder="Contraseña"  class="input password">
+                    <div class="containerMistakes"></div>
                     <a href="#">¿Has olvidado tu contraseña?</a>
                     <a href=""><button id="btn1">
                         Iniciar Sesión
                     </button></a>
                 </div>
                </section>
-               <section class="containerStart1">
+               <section class="containerStart1 CreateAcount">
                     <a href="#">
                     <h3 id="vetColor">¿Aún no tienes una cuenta?</h3>
                     <h4 id="startColor"> Crear cuenta</h4>
@@ -118,6 +119,6 @@
 </footer>
 
 
-<script src="/script.js"></script>
+<script type="module" src="/src/components/login/script.js"></script>
 </body>
 </html>
