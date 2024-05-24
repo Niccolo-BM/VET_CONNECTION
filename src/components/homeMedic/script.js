@@ -1,7 +1,7 @@
 import{
     changeValueEntity
 }
-from "/services/services.js"
+from "/services/servicesMedic.js"
 
 
 class duplicateId extends Error{
@@ -100,7 +100,6 @@ let containerReload=document.querySelector(".containerReload");
 let solicitud=indexedDB.open("datos");
 var baseDatos;
 solicitud.onsuccess=function(){
-    
     baseDatos=solicitud.result;
     
     console.log("todo bien");
@@ -121,22 +120,23 @@ solicitud.onsuccess=function(){
     
     validateloginUser()  //Activamos funcion para extraer del medico:nombre,id,correo,Numero nit 
     .then((information)=>{  //information equivale a todo lo antes dichos envuelto en una array
-        
-        extractNameVeterinary(information[3]) //information con esa posicion equivale al nit 
-                
-            containerInformation.innerHTML+=`
-            <ul>
-            <li><strong>Nombre : </strong>${information[0]}</li>
-            <li><strong>Correo asignado:</strong>${information[1]}</li>
-            <li><strong>password Asignada : </strong>${information[2]}</li>
-            </ul>`
+        alert("escrie");
+        containerInformation.innerHTML+=`
+        <ul>
+        <li><strong>Nombre : </strong>${information[0]}</li>
+        <li><strong>Correo asignado:</strong>${information[1]}</li>
+        <li><strong>password Asignada : </strong>${information[2]}</li>
+        </ul>`
         
     })
-    .catch((error)=>{
-        if(error instanceof EmailNotFound){
-            console.log(error.message);
-        }
-    })
+    .catch(()=>{});
+    
+    // extractNameVeterinary(information[3]) //information con esa posicion equivale al nit 
+    // .catch((error)=>{
+    //     if(error instanceof EmailNotFound){
+    //         console.log(error.message);
+    //     }
+    // })
     
 
     //______________________________________________
@@ -299,21 +299,26 @@ inputPhoto.addEventListener("change",(e)=>{
 
         let cursor=objectStore.openCursor();
 
+        transaccionFalse.onerror=()=>{
+            reject(new notFoundId("no se ecnotro el correo"));
+    }
         cursor.addEventListener("success",(e)=>{
             let puntero= e.target.result;
             if(puntero){
                 if(puntero.value.start==true){
+                    transaccionFalse.oncomplete=()=>{
                     resolve([puntero.value.name,puntero.value.email,puntero.value.password,puntero.value.nitVete]);
+                     
+                    }
                 }
                 puntero.continue();
             }
-            else{
-            reject(new notFoundId("no se ecnotro el correo"));
-            }
         });
     });
-}
 
+ 
+
+}
 
 // _________________________________________________________
 
