@@ -45,7 +45,7 @@ a{
     display: inline-block;
     position: fixed;
     bottom: 131px;
-    right: 42px;
+    right: 28px;
     transition: background-color 0.3s;
     opacity: .8;
 }
@@ -205,21 +205,18 @@ ol{
     list-style-type: none;
 }
 
-.main {
+main {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
     height: auto;
-    
+    justify-content: center;   
+    margin: 25px;
 }
 
 .container {
     padding: 15px;
     border-radius: 20px;
     /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
-    width: 350px;
+    width: 400px;
     text-align: center;
     background-color:#CBE5F7;
 }

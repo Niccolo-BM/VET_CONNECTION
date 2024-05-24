@@ -38,7 +38,7 @@ document.getElementById('registerForm').addEventListener('submit', function(even
     } 
     else {
         
-        alert('Enviado con éxito!');
+        alert('Registrado con éxito!');
        }
        
    const registerForm = document.getElementById('registerForm');
