@@ -541,12 +541,12 @@ input:focus{
     background-color: #edf2fb;
     transition: .6s;
     border-radius: 20px;
-    border: 2px solid #48e;
+    border: 2px solid #017991;
 
 }
 
 .viewForm h1{
-    color: #48e;
+    color:#017991;
 }
 
 
@@ -563,7 +563,7 @@ input:focus{
     height: 12%;
     font-size: 20px;
     border-radius: 10px;
-    background-color: #48e;
+    background-color: #017991;
 }
 
 .equis{
@@ -571,7 +571,7 @@ input:focus{
     right: 2%;
     top: 2%;
     padding:13px 20px;
-    background-color:#abc4ff;
+    background-color:#017991;
     font-size: 15px;
     cursor: pointer;
     color: aliceblue;
@@ -666,13 +666,9 @@ padding: 0 12%;
 .hideText{
     position: absolute;
     bottom: 0;
-    top: 130%;
+    top: 150%;
 }
 
-.viewContainer{
-    width: 100%;
-    margin-top: -20px;
-}
 
 
 .carta{
@@ -731,3 +727,7 @@ padding: 0 12%;
     width: 400px;
     height: 400px;
 }
+ 
+.downFooter{
+    margin-top: 50%;
+} 

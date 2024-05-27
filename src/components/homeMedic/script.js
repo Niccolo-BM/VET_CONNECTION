@@ -94,6 +94,8 @@ let containerPhoto=document.querySelector(".containerPhoto");
 let inputPhoto=document.querySelector(".inputPhoto");
 
 let containerReload=document.querySelector(".containerReload");
+
+let footer=document.querySelector(".footer");
 //Eventos y demas cosas que involucren la base de datos
 
 
@@ -848,6 +850,7 @@ const readFile=(image)=>{
 createVet.addEventListener("click",(e)=>{
     containerPatients.classList.toggle("hideText");
     optionsNav.classList.remove("viewOptions");
+    footer.classList.toggle("downFooter");
     containerProfiles.classList.toggle("viewForm"); //al contenedor con display none le damos una nuevo clase
 });
 
