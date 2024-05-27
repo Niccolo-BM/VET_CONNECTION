@@ -52,7 +52,7 @@ function updateVeterinary(){
   let store = transaction.objectStore("Veterinary");
 
   store.put({
-      id: id,
+      id: parseInt(id),
       name: name,
       address: address,
       city: city,
