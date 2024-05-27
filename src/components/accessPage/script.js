@@ -1,3 +1,6 @@
+
+
+
 // page header and footer script
 let icon=document.querySelector(".material-symbols-outlined");
 let menuHidden=document.querySelector(".menuHidden");
@@ -156,6 +159,7 @@ solicitud.onupgradeneeded=()=>{
     storeVeterinary.createIndex("passwordVeterinaryIndex","veterinaryPassword",{unique:false});
     storeVeterinary.createIndex("veterinaryPhoneIndex","veterinaryPhone",{unique:false});
     storeVeterinary.createIndex("veterinaryAdressIndex","veterinaryAdress",{unique:false});
+    storeVeterinary.createIndex("veterinaryCityIndex","veterinaryCity",{unique:false});
     storeVeterinary.createIndex("veterinaryStartIndex","veterinaryStart",{unique:true});
     storeVeterinary.createIndex("urlPhotoVeterinaryIndex","urlPhotoVeterinary",{unique:false})
 

@@ -12,7 +12,7 @@
     <!--Material Symbols Outlined-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <!--JavaScript Link-->
-    <script src="../../components/homeClinic/script.js" defer></script>
+    <script type="module" src="../../components/homeClinic/script.js" defer></script>
     <!--Font Type: Roboto-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -85,6 +85,16 @@
                         </div>
                         <button type="button" class="searchButton">Buscar</button>
                     </div>  
+                    <!-- delete Profile -->
+                    <div class="containerDeleteProfiles">  
+                        <h1>ELIMINAR PERFIL</h1>
+                        <h3>¿Seguro quieres Eliminar este perfil?</h3>
+                        <span class="equis">X</span>
+                        <div class="containerButtons">
+                            <button class="acept">Confirmar</button>
+                            <button class="cancel">Cancelar</button>
+                        </div>
+                    </div>
                     
                     <!--Create Doctor Form-->
                     <div id="createDoctorForm">
@@ -117,7 +127,8 @@
                     </div> 
 
                         <div id="divProfile">
-                            <img src="../../assets/img/logoClinica.png" alt="sinFotoPerfil" id="imgProfile">
+                            <input type="file" name="" id="" class="photoClinic">
+                            <!-- <img src="../../assets/img/logoClinica.png" alt="sinFotoPerfil" id="imgProfile"> -->
                         </div>
                         <!--divMenu-->
                         <div class="divCircles" id="menuIcon">
@@ -127,12 +138,12 @@
                         </div>
                         <!--div SubMenu-->
                         <div id="gridSubMenu">
-                            <div class="subMenuText top left"><b>Añadir</b></div>
-                            <div class="subMenuText top"><b>Eliminar</b></div>
+                            <div class="subMenuText top left1 left"><b>Añadir</b></div>
+                            <div class="subMenuText top delete1"><b>Eliminar</b></div>
                             <div class="subMenuText top"><b>Sitio</b></div>
                             <div class="subMenuText top eventSearchPet"><b>Buscar</b></div>
-                            <div class="subMenuText bottom left"><b>foto de perfil</b></div>
-                            <div class="subMenuText bottom"><b>perfil</b></div>
+                            <div class="subMenuText bottom left2 left"><b>foto de perfil</b></div>
+                            <div class="subMenuText bottom delete2"><b>perfil</b></div>
                             <div class="subMenuText bottom"><b>Web</b></div>
                             <div class="subMenuText bottom eventSearchPet"><b>Mascota</b></div>
                         </div>
@@ -172,11 +183,6 @@
                     <div>
                         <p id="Phone" class="vetFields"></p>
                         <input type="text" id="updatePhone" class="updateFields" />
-                    </div>
-                    <div><b>Servicios:</b></div>
-                    <div>
-                        <p id="Services" class="vetFields"></p>
-                        <input type="text" id="updateServices" class="updateFields" />
                     </div>
                     <div><b>Representante:</b></div>
                     <div>

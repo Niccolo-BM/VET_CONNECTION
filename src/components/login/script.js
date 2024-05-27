@@ -169,8 +169,8 @@ const validateEmailVeterinary=()=>{
         let email=document.querySelector(".email").value;
         let password=document.querySelector(".password").value;
 
-        let transaccion=baseDatos.transaction("veterinarys");
-        let objetStore=transaccion.objectStore("veterinarys");
+        let transaction=baseDatos.transaction("veterinarys");
+        let objetStore=transaction.objectStore("veterinarys");
 
         // let indice=objetStore.index("veterinaryNitIndex");
 
@@ -212,8 +212,8 @@ const validateEmailMedical=()=>{
         let email=document.querySelector(".email").value;
         let password=document.querySelector(".password").value;
 
-        let transaccion=baseDatos.transaction("medical-profiles");
-        let objetStore=transaccion.objectStore("medical-profiles");
+        let transaction=baseDatos.transaction("medical-profiles");
+        let objetStore=transaction.objectStore("medical-profiles");
 
         // let indice=objetStore.index("veterinaryNitIndex");
 
@@ -252,8 +252,8 @@ const validateEmailPatient=()=>{
         let email=document.querySelector(".email").value;
         let password=document.querySelector(".password").value;
 
-        let transaccion=baseDatos.transaction("profiles-pets");
-        let objetStore=transaccion.objectStore("profiles-pets");
+        let transaction=baseDatos.transaction("profiles-pets");
+        let objetStore=transaction.objectStore("profiles-pets");
 
         let cursor=objetStore.openCursor();
         cursor.addEventListener("success",(e)=>{
@@ -349,8 +349,8 @@ const changeValueSesion=()=>{
 const changeLoggedInValue=()=>{
     return new Promise((resolve,reject)=>{
         let email=document.querySelector(".email").value;
-    let transaccion=baseDatos.transaction("veterinarys","readwrite");
-    let objetStore=transaccion.objectStore("veterinarys");
+    let transaction=baseDatos.transaction("veterinarys","readwrite");
+    let objetStore=transaction.objectStore("veterinarys");
 
 
     let indice=objetStore.index("EmailVeterinaryIndex");
@@ -359,19 +359,23 @@ const changeLoggedInValue=()=>{
 
     let cursor=indice.openCursor(rango);
 
+    
+    transaction.oncomplete=()=>{
+        resolve();
+    }
+
     cursor.addEventListener("success",(e)=>{
         let puntero=e.target.result;
         if(puntero){
             let valor=puntero.value;
             if(valor.veterinaryStart==false){
                 valor.veterinaryStart = true; // Modificar la propiedad inicio a true
-                alert("tambiem entramos aca");
                 puntero.update(valor); 
-                resolve();
             }
             }else{
             reject(new EmailNotFound("El email no existe"));
         }   
     });
-    });
+ });
+
 }

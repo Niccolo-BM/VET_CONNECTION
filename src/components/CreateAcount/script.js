@@ -389,6 +389,9 @@ const mountData=()=>{
         let name=document.querySelector(".name").value;
         let email=document.querySelector(".email").value;
         let id=document.querySelector(".id").value;
+        let adress=document.querySelector(".adress").value;
+        let city=document.querySelector(".city").value;
+        let phone=document.querySelector(".phone").value;
         let passwordVeterinary=document.querySelector(".password").value;
         let transaction=baseDatos.transaction("veterinarys","readwrite");
         let openStore=transaction.objectStore("veterinarys");
@@ -401,6 +404,9 @@ const mountData=()=>{
             veterinaryNit:id,
             veterinaryPassword:passwordVeterinary,
             veterinaryStart:false,
+            veterinaryAdress:adress,
+            veterinaryPhone:phone,
+            veterinaryCity:city,
             urlPhotoVeterinary:""
         });
     
@@ -408,6 +414,9 @@ const mountData=()=>{
         let email2=document.querySelector(".email").value="";
         let id2=document.querySelector(".id").value="";
         let password2=document.querySelector(".password").value="";
+        let adress2=document.querySelector(".adress").value="";
+        let city2=document.querySelector(".city").value="";
+        let phone2=document.querySelector(".phone").value="";
 
         transaction.oncomplete=()=>{
             resolve();

@@ -1,7 +1,7 @@
-import{
-    changeValueEntity
-}
-from "/services/servicesMedic.js"
+// import{
+//     changeValueEntity
+// }
+// from "/services/servicesMedic.js"
 
 
 class duplicateId extends Error{
@@ -149,14 +149,7 @@ solicitud.onsuccess=function(){
     exit.addEventListener("click",(e)=>{
         changeStartedSessionValue()
         .then(()=>{
-            changeValueEntity(baseDatos)
-            .then(()=>{
-                window.location.replace("/nuevo prototipo/Acces.html");
-            })
-            .catch(()=>{
-                console.log("NO hay entiedades con valores activos");
-            });
-
+            window.location.replace("/nuevo prototipo/Acces.html");
         }).catch((err)=>{
             alert(err);
         })

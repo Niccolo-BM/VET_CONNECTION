@@ -27,6 +27,12 @@ body::-webkit-scrollbar-thumb {
 a{
     text-decoration: none;
 }
+
+button{
+    cursor: pointer;
+    border: none;
+}
+
 .whatsapp { 
     position: fixed;
     bottom: 150px; 
@@ -302,6 +308,86 @@ input{
     text-align: center;
 }
 
+/*Container delete Profile*/
+.containerDeleteProfiles {
+    margin-top: -100px;
+    transition: .6s;
+    color: black;
+    width: 170%;
+    transform: translateX(200vw);
+    position: absolute;
+}
+
+
+.viewForm{   /*Clase en css para activar container para create nuevos profiles veterinarios*/
+    position: absolute;
+    top: 10%;
+    /* right: 10%; */
+    transform: translateX(25%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 55vh;
+    gap: 8%;
+    background-color: #edf2fb;
+    transition: .6s;
+    border-radius: 20px;
+    border: 2px solid #017991;
+    z-index: 30;
+    
+}
+
+.containerButtons{
+    width: 100%;
+    height: 30%;
+    display: flex;
+    justify-content: space-around;
+    align-items: end;
+}
+
+.containerButtons button{
+    width: 40%;
+    height: 50%;
+    border-radius: 15px;
+    font-size: 15px;
+    background-color:#017991;
+    color: white;
+
+}
+
+.viewForm h1{
+    color: #017991;
+}
+
+
+.formNewProfile input{
+    width: 40%;
+    height: 10%;
+    font-size: 20px;
+    text-align: center;
+}
+
+
+.formNewProfile button{
+    width: 20%;
+    height: 12%;
+    font-size: 20px;
+    border-radius: 10px;
+    background-color: #48e;
+}
+
+.equis{
+    position: absolute;
+    right: 2%;
+    top: 2%;
+    padding:13px 20px;
+    background-color:#017991;
+    font-size: 15px;
+    cursor: pointer;
+    color: aliceblue;
+}
+
 .documentInput {
     border: 1px solid #017991;
     border-radius: 10px;
@@ -359,7 +445,33 @@ input{
     height: 100%;
     overflow: hidden;
     border-radius: 100%;
+    display: flex;
+    justify-content:center ;
+    align-items: center;
 }
+
+#divProfile:hover{
+    background-color:#01799170;
+    color: #f1f9ff;
+    transition: .5s;
+    border: 4px solid #f1f9ff;
+    cursor: pointer;
+}
+
+.photoClinic{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+
+.show{
+    background-size: cover;
+    /* height: 100%; */
+    font-size: 42px;
+}
+
+
 
 /*divCircles*/
 .divCircles{

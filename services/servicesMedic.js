@@ -1,11 +1,13 @@
-class duplicateId extends Error{
+
+export class duplicateId extends Error{
     constructor(message){
         super(message);
     }
 }
 
 
-class EmailNotFound extends Error{
+
+export class EmailNotFound extends Error{
     constructor(message){
         super(message);
     }
@@ -13,70 +15,80 @@ class EmailNotFound extends Error{
 
 
 
-class rangeId extends Error{
+
+export class rangeId extends Error{
     constructor(message){
         super(message);
     }
 }
 
 
-class datesInvalid extends Error{
-    constructor(message){
-        super(message);
-    }
-}
 
-class completeName extends Error{
-    constructor(message){
-        super(message);
-    }
-}
-
-class invalidPhone extends Error{
-    constructor(message){
-        super(message);
-    }
-}
-
-class improvePassword extends Error{
+export class datesInvalid extends Error{
     constructor(message){
         super(message);
     }
 }
 
 
-class badEmailEstructure extends Error{
-    constructor(message){
-        super(message);
-    }
-}
-
-class notFoundId extends Error{
-    constructor(message){
-        super(message);
-    }
-}
-
-class CedulaNotFound extends Error{
-    constructor(message){
-        super(message);
-    }
-}
-
-class cedulaLength extends Error{
-    constructor(message){
-        super(message);
-    }
-}
-
-class onlyNumbers extends Error{
+export class completeName extends Error{
     constructor(message){
         super(message);
     }
 }
 
 
-class inicioNotFound extends Error{
+export class invalidPhone extends Error{
+    constructor(message){
+        super(message);
+    }
+}
+
+
+export class improvePassword extends Error{
+    constructor(message){
+        super(message);
+    }
+}
+
+
+
+export class badEmailEstructure extends Error{
+    constructor(message){
+        super(message);
+    }
+}
+
+
+export class notFoundId extends Error{
+    constructor(message){
+        super(message);
+    }
+}
+
+
+export class CedulaNotFound extends Error{
+    constructor(message){
+        super(message);
+    }
+}
+
+
+export class cedulaLength extends Error{
+    constructor(message){
+        super(message);
+    }
+}
+
+
+export class onlyNumbers extends Error{
+    constructor(message){
+        super(message);
+    }
+}
+
+
+export class inicioNotFound extends Error{
     constructor(message){
         super(message);
     }
@@ -508,31 +520,31 @@ export const activateDoctor=(baseDatos)=>{
 
 
 
-export const changeValueEntity=(baseDatos)=>{
-    return new Promise((resolve,reject)=>{
-        let transaction=baseDatos.transaction("entity","readwrite");
-        let objectStore=transaction.objectStore("entity");
-        let cursor =objectStore.openCursor();
+// export const changeValueEntity=(baseDatos)=>{
+//     return new Promise((resolve,reject)=>{
+//         let transaction=baseDatos.transaction("entity","readwrite");
+//         let objectStore=transaction.objectStore("entity");
+//         let cursor =objectStore.openCursor();
 
-        cursor.onsuccess=(e)=>{
-            let puntero=e.target.result;
-            if(puntero){
-                if(puntero.value.activateVeterinary || puntero.value.activateDoctor || puntero.value.activatePatient){
-                    let value=puntero.value;
-                    value.activateVeterinary=false;
-                    value.activateDoctor=false;
-                    value.activatePatient=false;
-                    puntero.update(value);
-                    resolve();
-                }
-                puntero.continue();
-            }
-            else{
-                reject();
-            }
-        }
-    });
-}
+//         cursor.onsuccess=(e)=>{
+//             let puntero=e.target.result;
+//             if(puntero){
+//                 if(puntero.value.activateVeterinary || puntero.value.activateDoctor || puntero.value.activatePatient){
+//                     let value=puntero.value;
+//                     value.activateVeterinary=false;
+//                     value.activateDoctor=false;
+//                     value.activatePatient=false;
+//                     puntero.update(value);
+//                     resolve();
+//                 }
+//                 puntero.continue();
+//             }
+//             else{
+//                 reject();
+//             }
+//         }
+//     });
+// }
 
 // __________________________________________
 
