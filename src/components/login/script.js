@@ -93,8 +93,7 @@ solicitud.onsuccess=()=>{
 
                     changeLoggedInValue()
                     .then(()=>{
-                        alert("resolvimos");
-                        window.location.replace("/page3/cuartaPagina.html");
+                        window.location.replace("/src/components/homeClinic/index.html");
 
                     })
 
