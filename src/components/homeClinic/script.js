@@ -153,6 +153,9 @@ let exit=document.querySelector("#exit");
 let buttonForDelete=document.querySelector(".acept");
 let buttonForReturnDelete=document.querySelector(".cancel");
 
+let buttonCreator=document.querySelector("#BtnCreateDoctor");
+
+
 
 // start db
 var db;
@@ -230,10 +233,35 @@ inputPhoto.addEventListener("change",(e)=>{
 
 // ________________________________________________
 
+obtainIdVet()
+.then((nit)=>{
+  let containerDoctors=document.querySelector(".slider-wrapper");
+  showMedics(nit)
+  .then((data)=>{
+    containerDoctors.innerHTML="";
+    containerDoctors.innerHTML=data;
+  })
+  .catch(()=>{
+    containerDoctors.innerHTML=`<h1>No hay medicos registrados</h1>`;
+  });
+})
+.catch();
 
 
+obtainIdVet()
+.then((nit)=>{
+  buttonCreator.addEventListener("click",(e)=>{
+    createProfileMedic(nit)
+    .then(()=>{
+      location.reload();
+    })
+    .catch(()=>{
+      console.log("SALIO  MAL");
+    });
+  });
 
-
+})
+.catch();
 
 
 
@@ -280,16 +308,6 @@ const validateHomeUser=()=>{
                   document.querySelector("#City").innerHTML = puntero.value.veterinaryCity;
                   document.querySelector("#Nit").innerHTML = puntero.value.veterinaryNit;
                   document.querySelector("#Phone").innerHTML = puntero.value.veterinaryPhone;
-                  // document.querySelector("#Services").innerHTML = puntero.value.services;
-                  // document.querySelector("#Representative").innerHTML = puntero.value.representative;
-                  // document.querySelector("#updateName").value = puntero.value.name;
-                  // document.querySelector("#updateAddress").value = puntero.value.address;
-                  // document.querySelector("#updateCity").value = puntero.value.city;
-                  // document.querySelector("#updateNit").value = puntero.value.nit;
-                  // document.querySelector("#updatePhone").value = puntero.value.phone;
-                  // document.querySelector("#updateServices").value = puntero.value.services;
-                  // document.querySelector("#updateRepresentative").value = puntero.value.representative;
-
                   // transaction.oncomplete=()=>{
                   //   resolve([value.veterinaryName , value.veterinaryAdress , value.veterinaryCity,value.veterinaryNit,value.veterinaryPhone]);
                   // }
@@ -474,7 +492,128 @@ const updateData=()=>{
   });
 }
 
+// ________________________________________________
 
+
+const createProfileMedic=(NitVeterinary)=>{
+  return new Promise((resolve,reject)=>{
+    let name=document.querySelector("#NameDoctor").value;
+    let specialty=document.querySelector("#SpecDoctor").value;
+    let cityDoctor=document.querySelector("#CityDoctor").value;
+    let emailDoctor=document.querySelector("#emailDoctor").value;
+    let idDoctor=document.querySelector("#idDoctor").value;
+
+    let transaction=db.transaction(["medical-profiles"],"readwrite");
+    let objectStore=transaction.objectStore("medical-profiles");
+
+
+    objectStore.add({
+      name:name,
+      specialtyDoctor:specialty,
+      city:cityDoctor,
+      id:idDoctor,
+      start:false,
+      email:emailDoctor,
+      nitVete:NitVeterinary,
+      urlPhotoDoctor:""
+    });
+
+
+    let name2=document.querySelector("#NameDoctor").value="";
+    let specialty2=document.querySelector("#SpecDoctor").value="";
+    let cityDoctor2=document.querySelector("#CityDoctor").value="";
+    let clinic2=document.querySelector("#ClinicDoctor").value="";
+    let emailDoctor2=document.querySelector("#emailDoctor").value="";
+    let idDoctor2=document.querySelector("#idDoctor").value="";
+    
+    transaction.oncomplete=()=>{
+      resolve();
+    }
+    transaction.onerror=()=>{
+      reject();
+    }
+
+  });
+}
+
+// ________________________________________________
+
+
+const result=[];
+const showMedics=(nit)=>{
+  return new Promise((resolve,reject)=>{
+    let transaction=db.transaction("medical-profiles");
+    let objectStore=transaction.objectStore("medical-profiles");
+
+    let cursor=objectStore.openCursor();
+    let count=0;
+
+    cursor.onsuccess=(e)=>{
+      let puntero=e.target.result;
+      if(puntero){
+        if(puntero.value.nitVete==nit){
+          const resultHTML=`
+          <div class="doctorCard">
+
+          <section class="doctorSection doctorSection-top">
+              <i class="fa fa-bars doctorMenu"></i>
+              <p>${puntero.value.name}</p>
+          </section>
+
+          <section class="doctorSection">
+              <img src="${puntero.value.urlPhotoDoctor}" alt="Sin foto" class="show2">
+          </section>
+
+          <section class="doctorSection doctorSection-bottom">
+              ${puntero.value.specialtyDoctor}
+          </section>
+
+        </div>
+          `;
+          count++;
+            result.push(resultHTML);
+        }
+        puntero.continue();
+      }
+      else if(count==0){
+        reject();
+      }
+      else{
+        resolve(result);
+      }
+
+    }
+  })
+}
+
+
+
+// ________________________________________________
+
+
+
+const obtainIdVet=()=>{
+  return new Promise((resolve,reject)=>{
+    let transaction=db.transaction("veterinarys");
+    let objectStore=transaction.objectStore("veterinarys");
+
+    let cursor=objectStore.openCursor();
+    
+    cursor.onsuccess=(e)=>{
+      let puntero=e.target.result;
+      
+      if(puntero){
+        if(puntero.value.veterinaryStart==true){
+          resolve(puntero.value.veterinaryNit);
+        }
+        puntero.continue();
+      }
+      else{
+        reject("Error");
+      }
+    }
+  })
+}
 
 
 
@@ -632,24 +771,24 @@ saveVetButton.addEventListener("click", (e) => {
   updateVeterinary();
 });
 
-let BtnCreateDoctor = document.querySelector("#BtnCreateDoctor");
-BtnCreateDoctor.addEventListener("click", (e) => {
-  saveDoctor();
-});
+// let BtnCreateDoctor = document.querySelector("#BtnCreateDoctor");
+// BtnCreateDoctor.addEventListener("click", (e) => {
+//   // saveDoctor();
+// });
 
-const slidesContainer = document.getElementById("slides-container");
-const slide = document.querySelector(".slide");
-const prevButton = document.getElementById("slide-arrow-prev");
-const nextButton = document.getElementById("slide-arrow-next");
+// const slidesContainer = document.getElementById("slides-container");
+// const slide = document.querySelector(".slide");
+// const prevButton = document.getElementById("slide-arrow-prev");
+// const nextButton = document.getElementById("slide-arrow-next");
 
-nextButton.addEventListener("click", () => {
-  const slideWidth = slide.clientWidth;
-  slidesContainer.scrollLeft += slideWidth;
-});
+// nextButton.addEventListener("click", () => {
+//   const slideWidth = slide.clientWidth;
+//   slidesContainer.scrollLeft += slideWidth;
+// });
 
-prevButton.addEventListener("click", () => {
-  const slideWidth = slide.clientWidth;
-  slidesContainer.scrollLeft -= slideWidth;
-});
+// prevButton.addEventListener("click", () => {
+//   const slideWidth = slide.clientWidth;
+//   slidesContainer.scrollLeft -= slideWidth;
+// });
 
-// window.addEventListener("load", initDB);
+// // window.addEventListener("load", initDB);

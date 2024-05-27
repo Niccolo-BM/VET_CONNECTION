@@ -418,11 +418,11 @@ input{
     background-color: #cce5f8;
     border-radius:20px;
     width:115%;
-    height: 430px;
+    height: 550px;
     position:absolute;
     z-index:20;
-    top: 55px;
-    left: 180px;
+    top: -60px;
+    left: 0px;
     display: none;
 }
 
@@ -469,7 +469,9 @@ input{
     background-size: cover;
     /* height: 100%; */
     font-size: 42px;
+    border-radius: 15px;
 }
+
 
 
 
@@ -688,10 +690,21 @@ input{
 
 /* Slider */
 .slider-wrapper {
-    margin: 1rem;
+    margin: 2rem;
     position: relative;
     overflow: hidden;
+    min-height:200px ;
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
   }
+
+  .slider-wrapper h1{
+    font-size: 40px;
+  }
+
   
   .slides-container {
     height: calc(50vh - 2rem);
@@ -759,15 +772,29 @@ input{
   }
 
   .doctorCard {
-    display: grid;
-    grid-template-rows: 10% 80% 10%;
-    border: 1px solid #cce5f8;
-    border-radius: 20px;
-    height: 90%;
-    width: 20%;
+    /* display: grid;
+    grid-template-rows: 10% 80% 10%;*/
+    border: 1px solid #017991;
+
+     border-radius: 0px; 
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 490px;
+    width: 15%;
     box-shadow: 0px 4px #c1c1c1;
+    overflow: hidden;
+    border-radius: 20px;
   }
 
+  .show2{
+    height: 100%;
+    border-radius: 15px;
+    object-fit: cover;
+    object-position: center;
+    font-size: 60px;
+  }
   .doctorMenu {
     position: absolute;
     left: 15px;
@@ -785,24 +812,31 @@ input{
   }
 
   .doctorSection-top {
-    position: relative;
-    border-radius: 20px 20px 0px 0px;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 300;
+    border-radius: 10px 10px 0px 0px;
     background-color: #cce5f8;
     color: #017991;
     font-weight: bold !important;
     font-size: 20px !important;
     text-align: center;
-    padding-top: 3px;
+    padding: 12px;
   }
 
   .doctorSection-bottom {
-    border-radius: 0px 0px 20px 20px;
+    width: 100%;
+    border-radius: 0px 0px 10px 10px;
     background-color: #cce5f8;
     color: #017991;
     font-weight: bold !important;
     font-size: 20px !important;
     text-align: center;
-    padding-top: 3px;
+    position: absolute;
+    bottom: 0;
+    z-index: 300;
+    padding: 12px;
   }
 /*FOOTER*/
 footer{

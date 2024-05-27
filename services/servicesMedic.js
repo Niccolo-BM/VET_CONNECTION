@@ -503,7 +503,7 @@ export const activateDoctor=(baseDatos)=>{
             let puntero=e.target.result;
             if(puntero && !cursorStopped){
                 let value=puntero.value;
-                if(value.email==valueId && value.password == password && value.start==false){
+                if(value.email==valueId && value.id == password && value.start==false){
                     value.start=true;
                     puntero.update(value);
                     cursorStopped=true;
