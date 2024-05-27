@@ -81,40 +81,40 @@
                             </select>
                         </div>
                         <div class="divSelectDocument">
-                            <input type="text" placeholder="Escriba el documento del acudiente" id="documentInput">
+                            <input type="text" placeholder="Escriba el documento del acudiente" class="documentInput">
                         </div>
-                        <button type="button" id="searchButton">Buscar</button>
+                        <button type="button" class="searchButton">Buscar</button>
                     </div>  
                     
                     <!--Create Doctor Form-->
-                    <!-- <div id="createDoctorForm">
-                        <h3>Crear médico</h3>
+                    <div id="createDoctorForm">
+                        <h3>Crear médico</h3><div id="closeCreateDoctor"><b>x</b></div>
                         <div class="divSelectDocument">
-                            <input type="text" placeholder="Nombre:" id="documentInput">
+                            <input type="text" id="NameDoctor" placeholder="Nombre:" class="documentInput">
                         </div>
                         <div class="divSelectDocument">
-                            <input type="text" placeholder="Cargo:" id="documentInput">
-                        </div> -->
+                            <input type="text" id="PositionDoctor" placeholder="Cargo:" class="documentInput">
+                        </div> 
                         <!--Especialidades-->
-                        <!-- <div class="divSelectDocument">
-                            <select name="chooseId" class="chooseWriteId">
-                                <option value="especialidad">Especialidad</option>
-                                <option value="cirugia">Cirugía</option>
-                                <option value="dermatologia">Dermatología</option>
-                                <option value="oftalmologia">Oftalmología</option>
-                                <option value="odontologia">Odontología</option>
-                                <option value="emergencias">Emergencias y cuidados intensivos</option>
-                                <option value="nutricion">Nutrición</option>
+                        <div class="divSelectDocument">
+                            <select id="SpecDoctor" name="chooseId" class="chooseWriteId">
+                                <option id="SpecOption" value="especialidad">Especialidad</option>
+                                <option id="SurgeryOption" value="cirugia">Cirugía</option>
+                                <option id="DermatologyOption" value="dermatologia">Dermatología</option>
+                                <option id="OphthalmologyOption" value="oftalmologia">Oftalmología</option>
+                                <option id="OdontologyOption" value="odontologia">Odontología</option>
+                                <option id="EmergenciesOption" value="emergencias">Emergencias y cuidados intensivos</option>
+                                <option id="NutritionOption" value="nutricion">Nutrición</option>
                             </select>
                         </div>
                         <div class="divSelectDocument">
-                            <input type="text" placeholder="Ciudad:" id="documentInput">
+                            <input type="text" id="CityDoctor" placeholder="Ciudad:" class="documentInput">
                         </div>
                         <div class="divSelectDocument">
-                            <input type="text" placeholder="Clínica:" id="documentInput">
+                            <input type="text" id="ClinicDoctor" placeholder="Clínica:" class="documentInput">
                         </div>
-                        <button type="button" id="searchButton">Crear</button>
-                    </div> -->
+                        <button type="button" id="BtnCreateDoctor" class="searchButton">Crear</button>
+                    </div> 
 
                         <div id="divProfile">
                             <img src="../../assets/img/logoClinica.png" alt="sinFotoPerfil" id="imgProfile">
@@ -141,21 +141,50 @@
                             <p>Crear Médico</p>
                         </div>
                         <!--Exit-->
-                        <div class="divCircles" id="exit">
+                        <div class="divCircles exitCircle" id="exit">
                             <p>Salir</p>
                         </div>
                     </div>
                 </div>
                 <!--divClinicData-->
                 <div id="gridClinicData">
-                    <div><b>Nombre:</b></div>
+                    <div ><b>Nombre:</b></div>
+                    <div>
+                        <p id="Name" class="vetFields"></p>
+                        <input type="text" id="updateName" class="updateFields" />
+                    </div>
                     <div><b>Dirección:</b></div>
+                    <div>
+                        <p id="Address" class="vetFields"></p>
+                        <input type="text" id="updateAddress" class="updateFields" />
+                    </div>
                     <div><b>Ciudad:</b></div>
+                    <div>
+                        <p id="City" class="vetFields"></p>
+                        <input type="text" id="updateCity" class="updateFields" />
+                    </div>
                     <div><b>NIT:</b></div>
+                    <div>
+                        <p id="Nit" class="vetFields"></p>
+                        <input type="text" id="updateNit" class="updateFields" />
+                    </div>
                     <div><b>Celular:</b></div>
+                    <div>
+                        <p id="Phone" class="vetFields"></p>
+                        <input type="text" id="updatePhone" class="updateFields" />
+                    </div>
                     <div><b>Servicios:</b></div>
+                    <div>
+                        <p id="Services" class="vetFields"></p>
+                        <input type="text" id="updateServices" class="updateFields" />
+                    </div>
                     <div><b>Representante:</b></div>
+                    <div>
+                        <p id="Representative" class="vetFields"></p>
+                        <input type="text" id="updateRepresentative" class="updateFields" />
+                    </div>
                     <button type="button" id="updateButton"><b>Actualizar Datos</b></button>
+                    <button type="button" id="saveVetButton"><b>Guardar Datos</b></button>
                 </div>
             </div>
         </div>
@@ -163,15 +192,78 @@
 
     <!--Section 2-->
     <section id=section2>
-        <h1><b>VETERINARIOS ASOCIADOS</b></h1>
-        <div id="divInputSearch">
-            <input type="text" placeholder="Buscar" id="inputSearch">
-            <i class="fa fa-search" id="searchIcon"></i>
+        <div id="TopSection2">
+            <h1><b>VETERINARIOS ASOCIADOS</b></h1>
+            <div id="divInputSearch">
+                <input type="text" placeholder="Buscar" id="inputSearch">
+                <i class="fa fa-search" id="searchIcon"></i>
+            </div>
         </div>
+        
+
+        <section class="slider-wrapper">
+            <button class="slide-arrow" id="slide-arrow-prev">
+              &#8249;
+            </button>
+            <button class="slide-arrow" id="slide-arrow-next">
+              &#8250;
+            </button>
+            <ul class="slides-container" id="slides-container">
+              <li class="slide">
+                <div class="doctorCard">
+                    <section class="doctorSection doctorSection-top">
+                        <i class="fa fa-bars doctorMenu"></i>
+                        <p>Roberto Osorio</p>
+                    </section>
+                    <section class="doctorSection">
+                        <img src="/src/assets/img/doctor1.jpg" alt="">
+                    </section>
+                    <section class="doctorSection doctorSection-bottom">
+                        Nutrición
+                    </section>
+                </div>
+                <div class="doctorCard">
+                    <section class="doctorSection doctorSection-top">
+                        <i class="fa fa-bars doctorMenu"></i>
+                        <p>Rosa Jimenez</p>
+                    </section>
+                    <section class="doctorSection">
+                        <img src="/src/assets/img/doctor2.jpeg" alt="">
+                    </section>
+                    <section class="doctorSection doctorSection-bottom">
+                        Dermatólogo
+                    </section>
+                </div>
+                <div class="doctorCard">
+                    <section class="doctorSection doctorSection-top">
+                        <i class="fa fa-bars doctorMenu"></i>
+                        <p>Alex Martinez</p>
+                    </section>
+                    <section class="doctorSection">
+                        <img src="/src/assets/img/doctor3.jpeg" alt="">
+                    </section>
+                    <section class="doctorSection doctorSection-bottom">
+                        Oftalmólogo
+                    </section>
+                </div>
+              </li>
+              <li class="slide">
+                <div class="doctorCard">
+                    <section class="doctorSection doctorSection-top">
+                        <i class="fa fa-bars doctorMenu"></i>
+                        <p>Zack Riwi</p>
+                    </section>
+                    <section class="doctorSection">
+                        <img src="/src/assets/img/doctor4.jpeg" alt="">
+                    </section>
+                    <section class="doctorSection doctorSection-bottom">
+                        Cirujano
+                    </section>
+                </div>
+              </li>
+            </ul>
+          </section>
     </section>
-
-
-
 
 <!--Footer-->
 <footer>
