@@ -155,7 +155,7 @@ let buttonForReturnDelete=document.querySelector(".cancel");
 
 let buttonCreator=document.querySelector("#BtnCreateDoctor");
 
-
+let iconSearch=document.querySelector("#searchIcon");
 
 // start db
 var db;
@@ -263,7 +263,21 @@ obtainIdVet()
 })
 .catch();
 
+// ________________________________________________
 
+
+iconSearch.addEventListener("click",()=>{
+  let containerDoctors=document.querySelector(".slider-wrapper");
+  obtainIdVet()
+  .then((nit)=>{
+    searchProfiles(nit)
+    .then()
+    .catch(()=>{
+      containerDoctors.innerHTML=`<h1>EL medico no esta registrado</h1> `
+    });
+  })
+  .catch();
+});
 
 
 
@@ -555,6 +569,11 @@ const showMedics=(nit)=>{
           const resultHTML=`
           <div class="doctorCard">
 
+          <div class="containerOptionsProfiles">
+          <p>Eliminar Perfil</p>
+          <p>Actualizar Perfil</p>
+          </div>
+
           <section class="doctorSection doctorSection-top">
               <i class="fa fa-bars doctorMenu"></i>
               <p>${puntero.value.name}</p>
@@ -563,6 +582,8 @@ const showMedics=(nit)=>{
           <section class="doctorSection">
               <img src="${puntero.value.urlPhotoDoctor}" alt="Sin foto" class="show2">
           </section>
+
+       
 
           <section class="doctorSection doctorSection-bottom">
               ${puntero.value.specialtyDoctor}
@@ -579,7 +600,7 @@ const showMedics=(nit)=>{
         reject();
       }
       else{
-        resolve(result);
+        resolve(result.reverse());
       }
 
     }
@@ -614,6 +635,64 @@ const obtainIdVet=()=>{
     }
   })
 }
+// ________________________________________________
+
+
+
+const searchProfiles=(nitVete)=>{
+  return new Promise((resolve,reject)=>{
+    let inputSearch=document.querySelector("#inputSearch").value;
+    let transaction=db.transaction("medical-profiles");
+    let objectStore=transaction.objectStore("medical-profiles");
+    let cursor=objectStore.openCursor();
+
+    
+
+    cursor.onsuccess=(e)=>{ 
+      let puntero=e.target.result;
+      let containerDoctors=document.querySelector(".slider-wrapper");
+      if(puntero){
+        if(puntero.value.nitVete===nitVete && puntero.value.id==inputSearch){
+          containerDoctors.innerHTML=`
+          <div class='doctorCard ${puntero.value.id}'>
+
+          <div class="containerOptionsProfiles">
+          <p class="deleteMedic">Eliminar Perfil</p>
+          <p class="updateMedic">Actualizar Perfil</p>
+          </div>
+
+          <section class="doctorSection doctorSection-top">
+              <i class="fa fa-bars doctorMenu"></i>
+              <p>${puntero.value.name}</p>
+          </section>
+
+          <section class="doctorSection">
+              <img src="${puntero.value.urlPhotoDoctor}" alt="Sin foto" class="show2">
+          </section>
+
+          <section class="doctorSection doctorSection-bottom">
+              ${puntero.value.specialtyDoctor}
+          </section>
+
+        </div>
+          `
+          resolve();
+        }
+        puntero.continue();
+
+      }
+      else{
+        reject();
+      }
+    }
+  });
+}
+// ________________________________________________
+
+
+
+
+
 
 
 
@@ -645,6 +724,43 @@ delete1.addEventListener("click",()=>{
 delete2.addEventListener("click",()=>{
   document.querySelector(".containerDeleteProfiles").classList.toggle("viewForm");
 });
+
+
+let containerDoctors=document.querySelector(".slider-wrapper");
+
+containerDoctors.addEventListener("click",(e)=>{
+
+  let viewOptionsProfile=document.querySelector(".containerOptionsProfiles");
+  let event=e.target;
+  let parent=event.parentElement;
+  let parent2=parent.previousElementSibling;
+ 
+  if(event.className.includes("fa-bars")){
+    parent2.classList.toggle("viewOptionsProfile");
+  }
+
+});
+
+
+// let body2=document.querySelector(".body");
+
+// body2.addEventListener("click",(e)=>{
+//   alert(e.clientX + " Y EL VERTICAL ES " + e.clientY) ;
+// });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //Header y footer
 
@@ -771,24 +887,3 @@ saveVetButton.addEventListener("click", (e) => {
   updateVeterinary();
 });
 
-// let BtnCreateDoctor = document.querySelector("#BtnCreateDoctor");
-// BtnCreateDoctor.addEventListener("click", (e) => {
-//   // saveDoctor();
-// });
-
-// const slidesContainer = document.getElementById("slides-container");
-// const slide = document.querySelector(".slide");
-// const prevButton = document.getElementById("slide-arrow-prev");
-// const nextButton = document.getElementById("slide-arrow-next");
-
-// nextButton.addEventListener("click", () => {
-//   const slideWidth = slide.clientWidth;
-//   slidesContainer.scrollLeft += slideWidth;
-// });
-
-// prevButton.addEventListener("click", () => {
-//   const slideWidth = slide.clientWidth;
-//   slidesContainer.scrollLeft -= slideWidth;
-// });
-
-// // window.addEventListener("load", initDB);
