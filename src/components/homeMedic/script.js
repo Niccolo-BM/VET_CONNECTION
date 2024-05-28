@@ -193,7 +193,7 @@ containerPatients.addEventListener("click",(e)=>{
         let classElement =getSelectedLetterData(e);
         activateProfileToViewClinicalHistory(classElement) //mandamos como parametro el primero element del array que se supone que es la id del dueño
         .then(()=>{
-            window.location.replace("/page4/quintaPagina.html"); //Redirijimos a otro pagina con la clase window para que no pueda darle la flecha de regresar si no que tenga que darle a otra opcion de la pagina para volview a esta pagina
+            window.location.replace("/src/components/"); //Redirijimos a otro pagina con la clase window para que no pueda darle la flecha de regresar si no que tenga que darle a otra opcion de la pagina para volview a esta pagina
         })
         .catch((err)=>{
             console.log(err);
