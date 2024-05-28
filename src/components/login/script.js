@@ -222,6 +222,7 @@ const validateEmailMedical=()=>{
         cursor.addEventListener("success",(e)=>{
             let puntero=e.target.result;
             
+            alert("entro");
             if(puntero){
                
                 if(puntero.value.id==password && puntero.value.email==email){

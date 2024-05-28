@@ -252,14 +252,14 @@ const validateId=()=>{
     }
 
     if(id.length<=8 || id.length>9 || containNumber){
-        reject(new rangeid("En el nit pon la cantidad de numeros correctamnete y ninguna letra"));
+        reject(new rangeid("En el nit pon la cantidad de numeros correctamente y ninguna letra"));
     }
     else{
         cursor.addEventListener("success",(e)=>{
             let puntero=e.target.result;
             if(puntero){
                 if(puntero.value.veterinaryNit==id){
-                   reject(new duplicateid("la id ya esta en el sistema"))
+                   reject(new duplicateid("El Nit ya esta en el sistema"))
                    return;
                 }
                 puntero.continue();
