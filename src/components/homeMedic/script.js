@@ -56,7 +56,6 @@ class improvePassword extends Error{
 }
 
 
-
 let containerInformation=document.querySelector(".innerPart");
 
 let exit=document.querySelector(".exit"); // elemetno que dice exit sesion
@@ -126,7 +125,10 @@ solicitud.onsuccess=function(){
         <ul>
         <li><strong>Nombre : </strong>${information[0]}</li>
         <li><strong>Correo asignado:</strong>${information[1]}</li>
-        <li><strong>password Asignada : </strong>${information[2]}</li>
+        <li><strong>Numero Documento : </strong>${information[2]}</li>
+        <li><strong>Especialidad : </strong>${information[3]}</li>
+        <li><strong>Ciudad : </strong>${information[4]}</li>
+        <li><strong>perteneciente a sede : </strong>${information[5]}</li>
         </ul>`
         
     })
@@ -236,13 +238,28 @@ inputPhoto.addEventListener("change",(e)=>{
          e.preventDefault();
          validateId()
          .then(()=>{ 
-            let idDoctor=validateOtherData(medicalId);
-            addPetsInDateBase(idDoctor)
+            let password=validateOtherData(medicalId);
+            validatePassword(password)
             .then(()=>{
-                location.reload();
+
+                addPetsInDateBase(medicalId)
+
+                .then(()=>{
+                    location.reload();
+                })
+
+                .catch(()=>{
+                    alert("errr");
+                });
             })
-            .catch(()=>{
-                alert("errr");
+
+
+            .catch((e)=>{
+                containerMistakes.innerHTML=e.message;
+            setTimeout(()=>{
+                containerMistakes.innerHTML="";
+            },4000)
+
             });
         })
         .catch((e)=>{
@@ -301,7 +318,14 @@ inputPhoto.addEventListener("change",(e)=>{
                 if(puntero.value.start==true){
                     let value2=puntero.value;
                     transaccionFalse.oncomplete=()=>{
-                    resolve([value2.name,value2.email,value2.password,value2.nitVete]);
+                    resolve([value2.name,
+                        value2.email,
+                        value2.id,
+                        value2.specialtyDoctor,
+                        value2.city,
+                        value2.medicalCenter
+
+                    ]);
                     }
                 }
                 puntero.continue();
@@ -412,6 +436,9 @@ const obtainMedicalId=()=>{
     let password=document.querySelector(".password").value;
     let specie=document.querySelector(".specie").value;
     let raza=document.querySelector(".raza").value;
+    let agePet=document.querySelector(".age").value;
+    let address=document.querySelector(".address").value;
+    let phone=document.querySelector(".telephone").value;
 
     //Incio de la transaccionFalse para agregar datos al almacen de medical-profiles
     let transaccionFalse=baseDatos.transaction("profiles-pets","readwrite");
@@ -426,13 +453,15 @@ const obtainMedicalId=()=>{
     }
 
     objectStore.add({
-        fecha:new Date().toISOString(),
         name:name,
         ownerName:name2,
         idOwnerPet:id,
                                               //Agregamos todos los datos ingresados en el formulario de create nuevo doctor
         specie:specie,
+        age:agePet,
+        directionHouse:address,
         passwordPet:password,
+        ownerPhone:phone,
         raza:raza,
         medicalIdInCharge:medicalIdInCharge,
         startProfile:false,
@@ -639,7 +668,7 @@ const validateId=()=>{
 
 
 
-const validateOtherData=(idDoctor)=>{
+const validateOtherData=()=>{
     let namePet=document.querySelector(".name").value;
     let nameOwner=document.querySelector(".ownerName").value;
     let phone=document.querySelector(".telephone").value;
@@ -666,14 +695,7 @@ const validateOtherData=(idDoctor)=>{
                 }
 
                 else{
-                    let valueValidate=validatePassword(passwordPet);
-
-                    if(valueValidate==false){
-                        throw new improvePassword("La contraseña debe tener minimo una mayuscula y 3 numeros");
-                    }
-                    else{
-                        return idDoctor;
-                    }
+                    return passwordPet;
                 }
                             
             }
@@ -692,7 +714,8 @@ const validateOtherData=(idDoctor)=>{
 
 
 const validatePassword=(password)=>{
-    
+    return new Promise((resolve,reject)=>{
+
     let quantityNumbers=0;
     let mayusculas=0;
     for(let x of password){
@@ -706,11 +729,12 @@ const validatePassword=(password)=>{
     }
 
     if(mayusculas >= 1 && quantityNumbers >2){
-        return true;
+        resolve();
     }
     else{
-        return false;
+        reject(new improvePassword("La contraseña debe contener una mayuscula y minimo 3 numeros"));
     }
+    });
 }
 
 

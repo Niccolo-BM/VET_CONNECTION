@@ -120,6 +120,8 @@ let containerOverlay=document.querySelector(".containerOverlay");
 
 let createProfileAnimal=document.querySelector(".instanceProfile");
 
+let updateData=document.querySelector(".updateData");
+
 // let title=document.querySelector(".quitar");
 
 
@@ -186,13 +188,13 @@ buttonForReturnDelete.addEventListener("click",()=>{
       
     validateloginUser(baseDatos)  //Activamos funcion para extraer del medico:nombre,id,correo,Numero nit 
     .then((information)=>{  //information equivale a todo lo antes dichos envuelto en una array
-   
-            containerInformation.innerHTML+=`
-            <ul>
-            <li><strong>Nombre : </strong>${information[0]}</li>
-            <li><strong>telefono Acudiente:</strong>${information[1]}</li>
-            <li><strong>nombre del acudiente : </strong>${information[2]}</li>
-            </ul>`
+            document.querySelector(".namePet").value=information[0];
+            document.querySelector(".nameOwner").value=information[2];
+            document.querySelector(".phoneOwner").value=information[3];
+            document.querySelector(".agePet").value=information[4];
+            document.querySelector(".addressPet").value=information[5];
+            document.querySelector(".idOwner").value=information[1];
+            document.querySelector(".raza").value=information[6];
     
     })
     .catch((error)=>{//Manejando posibles errores que puedan suceder
@@ -358,6 +360,36 @@ deletePatientNow.addEventListener("click",(e)=>{
 });
 
 
+let boolean=false;
+updateData.addEventListener("click",()=>{
+   if(!boolean){
+    boolean=true;
+    document.querySelector(".namePet").removeAttribute("disabled");
+    document.querySelector(".nameOwner").removeAttribute("disabled");
+    document.querySelector(".phoneOwner").removeAttribute("disabled");
+    document.querySelector(".agePet").removeAttribute("disabled");
+    document.querySelector(".addressPet").removeAttribute("disabled");
+    document.querySelector(".idOwner").removeAttribute("disabled");
+    document.querySelector(".raza").removeAttribute("disabled");
+    
+    updateData.innerHTML=`Guardar Datos`;
+   }
+
+   else{
+    boolean=false;
+    document.querySelector(".namePet").setAttribute("disabled");
+    document.querySelector(".nameOwner").setAttribute("disabled");
+    document.querySelector(".phoneOwner").setAttribute("disabled");
+    document.querySelector(".agePet").setAttribute("disabled");
+    document.querySelector(".addressPet").setAttribute("disabled");
+    document.querySelector(".idOwner").setAttribute("disabled");
+    document.querySelector(".raza").setAttribute("disabled");
+
+    updateData.innerHTML=`Actulizar Datos`;
+
+   }
+});
+
 
 // _________________________________________________________________________________________________________________
 
@@ -421,31 +453,48 @@ const changeTitleHistory=()=>{//Funcion unicamente para hacer un titulado person
 
 // _________________________________________________
 
-const seeActivePet=()=>{
+// const seeActivePet=()=>{
     
-    let transactionValue=baseDatos.transaction("profiles-pets");
-    let objectStore=transactionValue.objectStore("profiles-pets");
-    let cursor =objectStore.openCursor();
+//     let transactionValue=baseDatos.transaction("profiles-pets");
+//     let objectStore=transactionValue.objectStore("profiles-pets");
+//     let cursor =objectStore.openCursor();
 
-    cursor.addEventListener("success",(e)=>{
-        let puntero=e.target.result;
-        if(puntero){
-            if(puntero.value.startProfile==true){
+//     cursor.addEventListener("success",(e)=>{
+//         let puntero=e.target.result;
+//         if(puntero){
+//             if(puntero.value.startProfile==true){
 
-                let idOwnerPet=puntero.value.idOwnerPet;
-                let age=puntero.value.age;
-                let namePet=puntero.value.name;
-                showClinicalHistoryInScreen(idOwnerPet,age,namePet);
-            }
-            puntero.continue();
-        }
-    });
-}
+//                 let idOwnerPet=puntero.value.idOwnerPet;
+//                 let age=puntero.value.age;
+//                 let namePet=puntero.value.name;
+//                 showClinicalHistoryInScreen(idOwnerPet,age,namePet);
+//             }
+//             puntero.continue();
+//         }
+//     });
+// }
 
 
 
 // _________________________________________________
 
+
+const update=(namePet,idOwner)=>{
+    return new Promise((resolve,reject)=>{
+        let transaction=baseDatos.transaction("profiles-pets","readwrite");
+        let objectStore=transaction.objectStore("profiles-pets");
+        let cursor=objectStore.openCursor();
+
+        cursor.onsuccess=(e)=>{
+            let puntero=e.target.result;
+            if(puntero){
+                if(puntero.value.name==namePet && puntero.value.idOwner==idOwner){
+                    
+                }
+            }
+        }
+    });
+}
 
 
 

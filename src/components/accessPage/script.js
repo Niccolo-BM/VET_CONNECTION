@@ -187,6 +187,7 @@ solicitud.onupgradeneeded=()=>{
     storeMedicalProfiles.createIndex("nameIndex","name",{unique:false});
     storeMedicalProfiles.createIndex("specialtyDoctorIndex","specialtyDoctor",{autoIncrement:true});
     storeMedicalProfiles.createIndex("cityIndex","city",{autoIncrement:true});
+    storeMedicalProfiles.createIndex("medicalCenterIndex","medicalCenter",{autoIncrement:true});
     storeMedicalProfiles.createIndex("nitAssociateVeterinarianIndex","nitVete",{unique:false});
     storeMedicalProfiles.createIndex("validateStartIndex","start",{unique:false});
     storeMedicalProfiles.createIndex("urlPhotoDoctorIndex","urlPhotoDoctor",{unique:false});

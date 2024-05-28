@@ -459,7 +459,14 @@ a{
     height: 100%;
     display: flex;
     flex-direction: column;
+}
 
+.innerPart input{
+    width: 50%;
+    height: 100%;
+    color: black;
+    font-size: 14px;
+    text-align: end;
 }
 
 .updateData{
@@ -482,7 +489,7 @@ ul{
     list-style: none;
     font-size:14px ;
     justify-content:space-between;
-    padding: 20px;
+    padding: 10px;
 }
 
 ul input{
@@ -631,8 +638,7 @@ input:focus{
 .containerHistory{
     width: 60%;
     min-height: 100%;
-    font-size: 14px;
-    border-bottom: 3px solid #79b7a9;
+    font-size: 10px;
     display: flex;
     flex-direction: column;
    
@@ -641,8 +647,8 @@ input:focus{
 
 
 .containerHistory h2{
-    font-size: 40px;
-    border-bottom: 2px solid black;
+    font-size: 30px;
+    border-bottom: 2px solid #79b7a9;
     width: 100%;
     padding: 10px;
     color: #017991;
@@ -663,11 +669,11 @@ input:focus{
 p{
     max-width: 100%;
     max-height: 100%;
-    font-size: 20px;
+    font-size: 15px;
 }
 
 .containerText strong{
-    font-size: 30px;
+    font-size: 20px;
 }
 
 .containerComments{
@@ -683,8 +689,8 @@ p{
 }
 
 .containerComments h2{
-    font-size: 40px;
-    border-bottom: 2px solid black;
+    font-size: 30px;
+    border-bottom: 2px solid #79b7a9;
     width: 100%;
     padding: 10px;
     color: #017991;

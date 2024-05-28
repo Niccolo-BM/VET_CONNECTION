@@ -274,7 +274,16 @@ export const validateloginUser=(baseDatos)=>{
             let puntero= e.target.result;
             if(puntero){
                 if(puntero.value.startProfile==true){
-                    resolve([puntero.value.name,puntero.value.idOwnerPet,puntero.value.ownerName,puntero.value.ownerPhone]);
+                    let value2=puntero.value;
+                    resolve([
+                        value2.name,
+                        value2.idOwnerPet,
+                        value2.ownerName,
+                        value2.ownerPhone,
+                        value2.age,
+                        value2.directionHouse,
+                        value2.raza,
+                    ]);
                 }
                 puntero.continue();
             }

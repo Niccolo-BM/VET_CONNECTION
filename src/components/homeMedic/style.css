@@ -508,10 +508,10 @@ input:focus{
 /*Container for create new Profiles*/
 
 .containerCreateProfiles{
-    margin-top: 100px;
+    margin-top: 70px;
     transition: .6s;
     
-    width: 60%;
+    width: 50%;
     transform: translateX(100vw);
 }
 
@@ -529,9 +529,10 @@ input:focus{
 
 .viewForm{   /*Clase en css para activar container para create nuevos profiles veterinarios*/
     position: absolute;
+    z-index: 300;
     top: -10%;
     right: 10%;
-    transform: translateX(0);
+    transform: translateX(-20%);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -545,24 +546,27 @@ input:focus{
 
 }
 
-.viewForm h1{
+.viewForm h3{
     color:#017991;
 }
 
 
 .formNewProfile input{
-    width: 40%;
-    height: 10%;
-    font-size: 20px;
+    width: 35%;
+    height: 13%;
+    font-size: 15px;
     text-align: center;
+    border-radius: 7px;
+    border: 1px solid rgb(184, 184, 184);
 }
 
 
 .formNewProfile button{
     width: 20%;
-    height: 12%;
-    font-size: 20px;
+    height: 8%;
+    font-size: 17px;
     border-radius: 10px;
+    color: white;
     background-color: #017991;
 }
 
@@ -606,6 +610,10 @@ padding: 0 12%;
 padding: 0 12%;
     border: 1px solid #017991;
 } */
+
+.viewContainer{
+    margin-top: 250px;
+}
 
 .containerSearchPatients h2{
     color: #017991;
@@ -653,10 +661,12 @@ padding: 0 12%;
 /*zona para mostrar los profiles veterinarios*/
 
 .containerPatients{
-    margin-top: -180px;
+    margin-top: -140px;
     width: 100vw;
     min-height:70vh;
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
     background-color: #f1f9ff;
     gap: 2%;
@@ -709,6 +719,10 @@ padding: 0 12%;
     font-size: 15px;
     display: flex;
     flex-direction: column;
+}
+
+.carta2 strong{
+    color: #017991;
 }
 
 .ocultar{
