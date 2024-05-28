@@ -194,7 +194,7 @@ input{
     padding: 1%;
     
 }
-/* acces main  */
+
 .breadCrumb{
     font-size: 10px;
     display: flex;
@@ -203,6 +203,8 @@ input{
     padding: .5%;
 
 }
+
+/* acces main  */
 .containerAcces{
     display: grid;
     grid-template-columns: 40% 60%;
