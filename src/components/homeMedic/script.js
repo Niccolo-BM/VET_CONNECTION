@@ -122,7 +122,6 @@ solicitud.onsuccess=function(){
     
     validateloginUser()  //Activamos funcion para extraer del medico:nombre,id,correo,Numero nit 
     .then((information)=>{  //information equivale a todo lo antes dichos envuelto en una array
-        alert("escrie");
         containerInformation.innerHTML+=`
         <ul>
         <li><strong>Nombre : </strong>${information[0]}</li>
@@ -183,7 +182,6 @@ containerPatients.addEventListener("click",(e)=>{
         let claveNumerica=parseInt(clave);
         deletePatient(claveNumerica)
         .then(()=>{
-            alert("resolvimos");
             location.reload();
         })
         .catch()
@@ -193,7 +191,7 @@ containerPatients.addEventListener("click",(e)=>{
         let classElement =getSelectedLetterData(e);
         activateProfileToViewClinicalHistory(classElement) //mandamos como parametro el primero element del array que se supone que es la id del dueño
         .then(()=>{
-            window.location.replace("/src/components/"); //Redirijimos a otro pagina con la clase window para que no pueda darle la flecha de regresar si no que tenga que darle a otra opcion de la pagina para volview a esta pagina
+            window.location.replace("/src/components/viewPetDoctor/index.html"); //Redirijimos a otro pagina con la clase window para que no pueda darle la flecha de regresar si no que tenga que darle a otra opcion de la pagina para volview a esta pagina
         })
         .catch((err)=>{
             console.log(err);
@@ -527,7 +525,9 @@ const deletePatient=(id)=>{ //Recibimos id para elejir elemento a eliminar
         let transaction=baseDatos.transaction("profiles-pets","readwrite");
         let objectStore=transaction.objectStore("profiles-pets");
         objectStore.delete(id);
-        resolve();
+        transaction.oncomplete=()=>{
+            resolve();
+        }
     });
 }
 
@@ -547,7 +547,7 @@ const showPatients=(idvet)=>{ //Esta funcion se encarga de mostrar los medicos a
             if(puntero.value.medicalIdInCharge===idvet){
                     containerPatients.innerHTML+= `<div class="carta">
                 
-                    <img src="/img/png-clipart-dog-paw-silhouette-dog-animals-paw.png" class="sinFace">
+                    <img src='${puntero.value.urlPhotoPets}' alt="Sin foto" class="sinFace">
 
                     <div class='${puntero.value.idOwnerPet}  carta2'>
                     <p><strong>Nombre:</strong>
@@ -792,13 +792,13 @@ const showSearch=()=>{
             // containerPatients.classList.toggle("viewContainer");
             containerPatients.innerHTML= `<div class="carta">
                 
-                    <img src="/img/png-clipart-dog-paw-silhouette-dog-animals-paw.png" class="sinFace">
+                    <img src="${puntero.value.urlPhotoPets}" class="sinFace">
 
                     <div class='${puntero.value.idOwnerPet}  carta2'>
                     <p><strong>Nombre:</strong>
                     <input value='${puntero.value.name}' class="valor" disabled></p><br>
 
-                    <p><strong>Documento:</strong>
+                    <p><strong>Documento Asociado :</strong>
                     <input value='${puntero.value.idOwnerPet}' class="valor" disabled></p><br>
 
                     <p><strong>Nombre del acudiente:</strong>
