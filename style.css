@@ -75,6 +75,15 @@ input{
     position: relative;
     z-index: 10;
 }
+
+#icons{
+    background-color: red;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
 .menuHidden{
     visibility: hidden;
     position: absolute;
@@ -131,6 +140,17 @@ aside:hover{
     gap: 10%;
     border:solid 2px black;
 }
+
+
+.containerIcons{
+    background-color:red;
+    width: 150%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+
 .material-symbols-outlined{
     display: flex;
     justify-content: center;
@@ -180,8 +200,9 @@ aside:hover{
     border: none;
     align-items: center;
     text-align: center;
-    width: 140px;
+    width: 240px;
     height: 40px;
+    font-size: 15px;
     
 }
 
@@ -227,7 +248,7 @@ aside:hover{
 
 .text {
     position: absolute;
-    bottom: 130px;
+    bottom: 20vh;
     left: 20px;
     right: 20px;
     padding: 10px;
@@ -356,10 +377,11 @@ text-align: center;
     
 }
 #img3{
-    width: 20px;
-    height: 20px;
+    width: 40px;
+    height: 40px;
     margin: 3px;
     filter:invert(100%);
+    background-color: red;
 }
 #imgSlider{
     z-index: -999;

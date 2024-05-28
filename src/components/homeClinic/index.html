@@ -22,7 +22,7 @@
     <!--Title-->
     <title>Veterinary Clinic Profile</title>
 </head>
-<body>
+<body class="body">
     <div class="whatsapp-contact">
         <a href="https://wa.me/573502014028/?text=Hola!   
         Necesito más información para mi Peludito" target="_blank"><img class="whatsapp" src="/src/assets/img/whatsapp_3670051.png" width="60"  title="Contacto Ws"></a>
@@ -95,6 +95,8 @@
                             <button class="cancel">Cancelar</button>
                         </div>
                     </div>
+
+
                     
                     <!--Create Doctor Form-->
                     <div id="createDoctorForm">
@@ -123,8 +125,17 @@
                         <div class="divSelectDocument">
                             <input type="text" id="ClinicDoctor" placeholder="Clínica:" class="documentInput">
                         </div>
+                        <div class="divSelectDocument">
+                            <input type="text" id="emailDoctor" placeholder="Correo Asignado" class="documentInput">
+                        </div>
+                        <div class="divSelectDocument">
+                            <input type="text" id="idDoctor" placeholder="Numero Documento" class="documentInput">
+                        </div>
                         <button type="button" id="BtnCreateDoctor" class="searchButton">Crear</button>
                     </div> 
+
+
+
 
                         <div id="divProfile">
                             <input type="file" name="" id="" class="photoClinic">
@@ -205,70 +216,10 @@
                 <i class="fa fa-search" id="searchIcon"></i>
             </div>
         </div>
-        
+       
 
-        <section class="slider-wrapper">
-            <button class="slide-arrow" id="slide-arrow-prev">
-              &#8249;
-            </button>
-            <button class="slide-arrow" id="slide-arrow-next">
-              &#8250;
-            </button>
-            <ul class="slides-container" id="slides-container">
-              <li class="slide">
-                <div class="doctorCard">
-                    <section class="doctorSection doctorSection-top">
-                        <i class="fa fa-bars doctorMenu"></i>
-                        <p>Roberto Osorio</p>
-                    </section>
-                    <section class="doctorSection">
-                        <img src="/src/assets/img/doctor1.jpg" alt="">
-                    </section>
-                    <section class="doctorSection doctorSection-bottom">
-                        Nutrición
-                    </section>
-                </div>
-                <div class="doctorCard">
-                    <section class="doctorSection doctorSection-top">
-                        <i class="fa fa-bars doctorMenu"></i>
-                        <p>Rosa Jimenez</p>
-                    </section>
-                    <section class="doctorSection">
-                        <img src="/src/assets/img/doctor2.jpeg" alt="">
-                    </section>
-                    <section class="doctorSection doctorSection-bottom">
-                        Dermatólogo
-                    </section>
-                </div>
-                <div class="doctorCard">
-                    <section class="doctorSection doctorSection-top">
-                        <i class="fa fa-bars doctorMenu"></i>
-                        <p>Alex Martinez</p>
-                    </section>
-                    <section class="doctorSection">
-                        <img src="/src/assets/img/doctor3.jpeg" alt="">
-                    </section>
-                    <section class="doctorSection doctorSection-bottom">
-                        Oftalmólogo
-                    </section>
-                </div>
-              </li>
-              <li class="slide">
-                <div class="doctorCard">
-                    <section class="doctorSection doctorSection-top">
-                        <i class="fa fa-bars doctorMenu"></i>
-                        <p>Zack Riwi</p>
-                    </section>
-                    <section class="doctorSection">
-                        <img src="/src/assets/img/doctor4.jpeg" alt="">
-                    </section>
-                    <section class="doctorSection doctorSection-bottom">
-                        Cirujano
-                    </section>
-                </div>
-              </li>
-            </ul>
-          </section>
+        <section class="slider-wrapper"></section>
+
     </section>
 
 <!--Footer-->

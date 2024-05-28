@@ -149,7 +149,7 @@ solicitud.onsuccess=function(){
     exit.addEventListener("click",(e)=>{
         changeStartedSessionValue()
         .then(()=>{
-            window.location.replace("/nuevo prototipo/Acces.html");
+            window.location.replace("/src/components/accessPage/index.html");
         }).catch((err)=>{
             alert(err);
         })
@@ -301,9 +301,9 @@ inputPhoto.addEventListener("change",(e)=>{
             let puntero= e.target.result;
             if(puntero){
                 if(puntero.value.start==true){
+                    let value2=puntero.value;
                     transaccionFalse.oncomplete=()=>{
-                    resolve([puntero.value.name,puntero.value.email,puntero.value.password,puntero.value.nitVete]);
-                     
+                    resolve([value2.name,value2.email,value2.password,value2.nitVete]);
                     }
                 }
                 puntero.continue();
@@ -804,7 +804,7 @@ const showSearch=()=>{
                     <p><strong>Nombre del acudiente:</strong>
                     <input value='${puntero.value.ownerName}' class="valor" disabled></p><br>
 
-                    <input type="button" onclick="this.addEventListenes("click",()=>{alert("hola)})" value="borrar"></div>
+                    <input type="button" onclick="" value="borrar"></div>
                     </div>     
          `;
         }

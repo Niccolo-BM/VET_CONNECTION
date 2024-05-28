@@ -226,7 +226,7 @@ const validateEmailMedical=()=>{
             
             if(puntero){
                
-                if(puntero.value.password==password && puntero.value.email==email){
+                if(puntero.value.id==password && puntero.value.email==email){
                     resolve();
                     return;
                 }

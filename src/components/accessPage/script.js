@@ -147,7 +147,7 @@ solicitud.onupgradeneeded=()=>{
     baseDatos=solicitud.result;
     let storeVeterinary=baseDatos.createObjectStore("veterinarys",{keyPath:"id"});
     let storeMedicalHistory=baseDatos.createObjectStore("medical-history",{autoIncrement:true});
-    let storeMedicalProfiles=baseDatos.createObjectStore("medical-profiles",{keyPath:"clave"});
+    let storeMedicalProfiles=baseDatos.createObjectStore("medical-profiles",{autoIncrement:true});
     let storeProfilePets=baseDatos.createObjectStore("profiles-pets",{autoIncrement:true});
     let storeActive=baseDatos.createObjectStore("entity",{autoIncrement:true});
 
