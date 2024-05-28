@@ -11,19 +11,21 @@ icon.addEventListener("click",(e)=>{
 
 let search=document.querySelector(".material-symbols-outlined1");
 
-search.addEventListener("click",(e)=>{
+let imgSearch=document.querySelector("#img3");
+
+imgSearch.addEventListener("click",(e)=>{
+    alert("entra");
     menuHidden.classList.remove("viewMenu");
     searchHidden.classList.toggle("viewSearch");
 });
 
-body.addEventListener("click",(e)=>{
-    let evento=e.target;
-    if(!evento.className.includes("material-symbols-outlined") && !evento.className.includes("material-symbols-outlined1") ){
-        menuHidden.classList.remove("viewMenu");
-        searchHidden.classList.remove("viewSearch");
-    }
-
-})
+// body.addEventListener("click",(e)=>{
+//     let evento=e.target;
+//     if(!evento.className.includes("material-symbols-outlined")  !evento.className.includes("material-symbols-outlined1") ){
+//         menuHidden.classList.remove("viewMenu");
+//         searchHidden.classList.remove("viewSearch");
+//     }
+// })
 
 
 //MAIN

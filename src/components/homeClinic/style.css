@@ -827,6 +827,13 @@ input{
     justify-content: space-around;
     transition: .1s;
     border-radius: 10px;
+  }
+
+  .deleteMedic{
+    padding: 10px;
+  }
+  .updateMedic{
+    padding: 10px;
 
   }
 

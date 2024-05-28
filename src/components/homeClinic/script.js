@@ -279,9 +279,27 @@ iconSearch.addEventListener("click",()=>{
   .catch();
 });
 
+// ________________________________________________
 
 
+let containerDoctors=document.querySelector(".slider-wrapper");
 
+containerDoctors.addEventListener("click",(e)=>{
+
+  let event=e.target;
+  let parent=event.parentElement;
+  let parent2=parent.previousElementSibling;
+ 
+  if(event.className.includes("fa-bars")){
+    parent2.classList.toggle("viewOptionsProfile");
+  }
+  else if(event.className.includes("deleteMedic")){
+    let parent3=event.parentElement;
+    let finallyParent=parent3.parentElement
+    let listOfClass=finallyParent.className.split(" ");
+    console.log(listOfClass[1]);
+  }
+});
 
 
 
@@ -567,11 +585,11 @@ const showMedics=(nit)=>{
       if(puntero){
         if(puntero.value.nitVete==nit){
           const resultHTML=`
-          <div class="doctorCard">
+          <div class="doctorCard ${puntero.value.id}">
 
           <div class="containerOptionsProfiles">
-          <p>Eliminar Perfil</p>
-          <p>Actualizar Perfil</p>
+          <p class="deleteMedic">Eliminar Perfil</p>
+          <p class="updateMedic">Actualizar Perfil</p>
           </div>
 
           <section class="doctorSection doctorSection-top">
@@ -654,7 +672,7 @@ const searchProfiles=(nitVete)=>{
       if(puntero){
         if(puntero.value.nitVete===nitVete && puntero.value.id==inputSearch){
           containerDoctors.innerHTML=`
-          <div class='doctorCard ${puntero.value.id}'>
+          <div class='doctorCard '>
 
           <div class="containerOptionsProfiles">
           <p class="deleteMedic">Eliminar Perfil</p>
@@ -691,7 +709,24 @@ const searchProfiles=(nitVete)=>{
 
 
 
+const deleteMedic=(id)=>{
+  return new Promise((resolve,reject)=>{
+    let transaction=db.transaction("medical-profiles","readwrite");
+    let objectStore=transaction.objectStore("medical-profiles");
 
+    let cursor=objectStore.openCursor();
+
+    cursor.onsuccess=(e)=>{
+      let puntero=e.target.result;
+      if(puntero){
+        if(puntero.value.id==id){
+
+        }
+        puntero.continue();
+      }
+    }
+  });
+}
 
 
 
@@ -726,20 +761,8 @@ delete2.addEventListener("click",()=>{
 });
 
 
-let containerDoctors=document.querySelector(".slider-wrapper");
 
-containerDoctors.addEventListener("click",(e)=>{
 
-  let viewOptionsProfile=document.querySelector(".containerOptionsProfiles");
-  let event=e.target;
-  let parent=event.parentElement;
-  let parent2=parent.previousElementSibling;
- 
-  if(event.className.includes("fa-bars")){
-    parent2.classList.toggle("viewOptionsProfile");
-  }
-
-});
 
 
 // let body2=document.querySelector(".body");
