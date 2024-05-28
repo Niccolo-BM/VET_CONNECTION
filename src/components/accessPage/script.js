@@ -145,7 +145,7 @@ solicitud.onsuccess=()=>{
 
 solicitud.onupgradeneeded=()=>{
     baseDatos=solicitud.result;
-    let storeVeterinary=baseDatos.createObjectStore("veterinarys",{keyPath:"id"});
+    let storeVeterinary=baseDatos.createObjectStore("veterinarys",{autoIncrement:true});
     let storeMedicalHistory=baseDatos.createObjectStore("medical-history",{autoIncrement:true});
     let storeMedicalProfiles=baseDatos.createObjectStore("medical-profiles",{autoIncrement:true});
     let storeProfilePets=baseDatos.createObjectStore("profiles-pets",{autoIncrement:true});
@@ -172,8 +172,8 @@ solicitud.onupgradeneeded=()=>{
     storeMedicalHistory.createIndex("treatmentPetIndex","treatmentPet",{unique:false});
     storeMedicalHistory.createIndex("medicalMotoringPetIndex","medicalMotoringPet",{unique:false});
     storeMedicalHistory.createIndex("commentsPetIndex","commentsPet",{unique:false});
-    storeMedicalHistory.createIndex("idOwnerPetIndex","idOwnerPet",{unique:false});
     storeMedicalHistory.createIndex("idDoctorPetIndex","idDoctorPet",{unique:false});
+    storeMedicalHistory.createIndex("idOwnerPetIndex","idOwnerPet",{unique:false});
     storeMedicalHistory.createIndex("namePetIndex","namePet",{unique:false});
     storeMedicalHistory.createIndex("DateIndex","infoDates",{unique:false});
 

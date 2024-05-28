@@ -1,8 +1,6 @@
 import{
   readFile,
-  notFoundId,
-  EmailNotFound,
-
+  getUrlParams
 }
 
 from "/services/servicesMedic.js"
@@ -309,13 +307,8 @@ containerDoctors.addEventListener("click",(e)=>{
 
     //Evento para cuando cierren sesion desactivar el perfil
     
-    exit.addEventListener("click",(e)=>{
-      changeStartedSessionValue()
-      .then(()=>{
-          window.location.replace("/src/components/accessPage/index.html");
-      }).catch((err)=>{
-          alert(err);
-      })
+    exit.addEventListener("click",(e)=>{      
+     window.location.replace("/src/components/accessPage/index.html");
   });
 
 
@@ -326,6 +319,8 @@ containerDoctors.addEventListener("click",(e)=>{
 
 const validateHomeUser=()=>{
   return new Promise((resolve,reject)=>{
+    getUrlParams()
+    .then((id)=>{
       let transaction=db.transaction("veterinarys");
       let objectStore=transaction.objectStore("veterinarys");
       let cursor=objectStore.openCursor();
@@ -333,7 +328,7 @@ const validateHomeUser=()=>{
       cursor.onsuccess=(e)=>{
           let puntero=e.target.result;
           if(puntero){
-              if(puntero.value.veterinaryStart==true){
+              if(puntero.key==id){
                   let value=puntero.value;
                   document.querySelector("#Name").innerHTML = puntero.value.veterinaryName;
                   document.querySelector("#Address").innerHTML = puntero.value.veterinaryAdress;
@@ -352,6 +347,9 @@ const validateHomeUser=()=>{
               reject("No se pudo encontrar la informacion");
           }
       }
+    })
+
+    .catch();
   });
 }
 
@@ -360,22 +358,26 @@ const validateHomeUser=()=>{
 
 const showPhotoInContainer=()=>{
   return new Promise((resolve,reject)=>{
-      let transaction=db.transaction("veterinarys");
-      let objectStore=transaction.objectStore("veterinarys");
-      let cursor=objectStore.openCursor();
+      getUrlParams()
+      .then((id)=>{
+        let transaction=db.transaction("veterinarys");
+        let objectStore=transaction.objectStore("veterinarys");
+        let cursor=objectStore.openCursor();
 
-      cursor.onsuccess=(e)=>{
-          let puntero=e.target.result;
-          if(puntero){
-              if(puntero.value.veterinaryStart==true){
-                  resolve(puntero.value.urlPhotoVeterinary);
-              }                                                   //EXPORTAR
-              puntero.continue();
-          }
-          else{
-              reject("no hay ninguna url");
-          }
-      }
+        cursor.onsuccess=(e)=>{
+            let puntero=e.target.result;
+            if(puntero){
+                if(puntero.key==id){
+                    resolve(puntero.value.urlPhotoVeterinary);
+                }                                                   //EXPORTAR
+                puntero.continue();
+            }
+            else{
+                reject("no hay ninguna url");
+            }
+        }
+      })
+      .catch()
   });
 }
 
@@ -414,43 +416,21 @@ const changeUrlPhoto=(url)=>{
 
 
 
-const changeStartedSessionValue=()=>{
-  return new Promise((resolve,reject)=>{
-  let transaccionFalse=db.transaction("veterinarys","readwrite");
-  let objetStore=transaccionFalse.objectStore("veterinarys");
+// const changeStartedSessionValue=()=>{
+//   return new Promise((resolve,reject)=>{
+//   let transaccionFalse=db.transaction("veterinarys","readwrite");
+//   let objetStore=transaccionFalse.objectStore("veterinarys");
 
-
-  transaccionFalse.oncomplete=()=>{
-    resolve();
-  }
-
-  transaccionFalse.onerror=()=>{
-    reject("No se encontro");
-  }
-
-  let cursor=objetStore.openCursor();
-
-  let cursorStopped=false;
-
-  cursor.addEventListener("success",(e)=>{
-      let puntero=e.target.result;
-      if(puntero && !cursorStopped){
-          let valor=puntero.value;
-          if(valor.veterinaryStart==true){
-              valor.veterinaryStart = false; // Modificar la propiedad inicio a true
-              puntero.update(valor); 
-              cursorStopped=true;
-          }
-          puntero.continue();
-     }    
-  });
-  });
-}
+//   });
+// }
 
 // ________________________________________________
 
 const idVet=()=>{
   return new Promise((resolve,reject)=>{
+      getUrlParams()
+      .then((id)=>{
+        
       let transaction=db.transaction("veterinarys");
       let objectStore=transaction.objectStore("veterinarys");
       let cursor=objectStore.openCursor();
@@ -458,12 +438,21 @@ const idVet=()=>{
       cursor.onsuccess=(e)=>{
           let puntero=e.target.result;
           if(puntero){
-              if(puntero.value.veterinaryStart==true){
+              if(puntero.key==id){
                   resolve(puntero.key);
               }
               puntero.continue();
           }
       }
+
+      })
+      .catch(()=>{
+
+        reject("no se enocntro nada");
+
+      });
+
+
   });
 }
 
@@ -492,11 +481,14 @@ const deleteVet=(id)=>{
 
 const updateData=()=>{
   return new Promise((resolve,reject)=>{
-    let name=document.querySelector(".updateName");
-    let address=document.querySelector(".updateAddress");
-    let city=document.querySelector(".updateCity");
-    let Nit=document.querySelector(".updateNit");
-    let phone=document.querySelector(".updatePhone");
+    getUrlParams()
+    .then((id)=>{
+      let name=document.querySelector(".updateName").value;
+    let address=document.querySelector(".updateAddress").value;
+    let city=document.querySelector(".updateCity").value;
+    let Nit=document.querySelector(".updateNit").value;
+    let phone=document.querySelector(".updatePhone").value;
+
     let transaction=db.transaction("veterinarys","readwrite");
     let openStore=transaction.objectStore("veterinarys");
 
@@ -505,7 +497,7 @@ const updateData=()=>{
     cursor.addEventListener("click",(e)=>{
       let puntero=e.target.result;
       if(puntero){
-        if(puntero.value.veterinaryStart==true){
+        if(puntero.key==id){
           let value2=puntero.value;
           value2.veterinaryName=name;
           value2.veterinaryAdress=address;
@@ -518,9 +510,20 @@ const updateData=()=>{
             resolve();
           }
         }
+
+        puntero.continue();
+      }
+      else{
+        reject("No se puedo hacer nada");
       }
 
     })
+
+    })
+    .catch(()=>{
+      throw new Error("No se pudo identificar ninguna id activa");
+    });
+
   });
 }
 
@@ -633,6 +636,8 @@ const showMedics=(nit)=>{
 
 const obtainIdVet=()=>{
   return new Promise((resolve,reject)=>{
+   getUrlParams()
+   .then((id)=>{
     let transaction=db.transaction("veterinarys");
     let objectStore=transaction.objectStore("veterinarys");
 
@@ -642,7 +647,7 @@ const obtainIdVet=()=>{
       let puntero=e.target.result;
       
       if(puntero){
-        if(puntero.value.veterinaryStart==true){
+        if(puntero.key==id){
           resolve(puntero.value.veterinaryNit);
         }
         puntero.continue();
@@ -651,7 +656,10 @@ const obtainIdVet=()=>{
         reject("Error");
       }
     }
-  })
+   })
+
+   .catch();
+  });
 }
 // ________________________________________________
 
@@ -909,4 +917,9 @@ saveVetButton.addEventListener("click", (e) => {
 
   updateVeterinary();
 });
+
+
+
+
+
 

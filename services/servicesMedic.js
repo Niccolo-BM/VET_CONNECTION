@@ -1,3 +1,8 @@
+import{
+    getUrlParams2,
+    getIdDoctorUrl
+}
+from"/services/servicesUser.js"
 
 export class duplicateId extends Error{
     constructor(message){
@@ -100,6 +105,8 @@ export class inicioNotFound extends Error{
 
 export const showPhotoInContainer=(baseDatos)=>{
     return new Promise((resolve,reject)=>{
+       getUrlParams2()
+       .then((id)=>{
         let transaction=baseDatos.transaction("profiles-pets");
         let objectStore=transaction.objectStore("profiles-pets");
         let cursor=objectStore.openCursor();
@@ -107,7 +114,7 @@ export const showPhotoInContainer=(baseDatos)=>{
         cursor.onsuccess=(e)=>{
             let puntero=e.target.result;
             if(puntero){
-                if(puntero.value.startProfile==true){
+                if(puntero.key==id){
                     resolve(puntero.value.urlPhotoPets);
                 }                                                   //EXPORTAR
                 puntero.continue();
@@ -116,6 +123,8 @@ export const showPhotoInContainer=(baseDatos)=>{
                 reject("no hay ninguna url");
             }
         }
+       })
+       .catch()
     });
 }
 
@@ -127,24 +136,28 @@ export const showPhotoInContainer=(baseDatos)=>{
 
 export const returnActivePet=(baseDatos)=>{
     return new Promise((resolve,reject)=>{
-     let transaction=baseDatos.transaction("profiles-pets");
-     let objectStore=transaction.objectStore("profiles-pets");
-     let cursor=objectStore.openCursor();
-     cursor.onsuccess=(e)=>{
-         let puntero=e.target.result;
-         if(puntero){
-             let value=puntero.value;
-             if(value.startProfile==true){
-                 resolve([value.idOwnerPet,value.name])
-                 return;
-             }
-             puntero.continue();
-         }
-     }
- 
-     cursor.onerror=()=>{
-         reject("No hay nada activo");
-     }
+        getUrlParams2()
+        .then((id)=>{
+            let transaction=baseDatos.transaction("profiles-pets");
+            let objectStore=transaction.objectStore("profiles-pets");
+            let cursor=objectStore.openCursor();
+            cursor.onsuccess=(e)=>{
+                let puntero=e.target.result;
+                if(puntero){
+                    let value=puntero.value;
+                    if(puntero.key==id){
+                        resolve([value.idOwnerPet,value.name,value.medicalIdInCharge])
+                        return;
+                    }
+                    puntero.continue();
+                }
+            }
+        
+            cursor.onerror=()=>{
+                reject("No hay nada activo");
+            }
+        })
+        .catch();
     });
  }
  
@@ -153,7 +166,7 @@ export const returnActivePet=(baseDatos)=>{
 
 
 const resultados=[];
-export const viewMedicalHistory=(baseDatos,idOwner,namePet)=>{
+export const viewMedicalHistory=(baseDatos,idOwner,namePet,idDoctor)=>{
     return new Promise((resolve,reject)=>{
         let history=0;
         let transaction=baseDatos.transaction("medical-history");
@@ -163,7 +176,7 @@ export const viewMedicalHistory=(baseDatos,idOwner,namePet)=>{
             let puntero=e.target.result;
             if(puntero){
                 let value=puntero.value;
-                if(value.idOwnerPet==idOwner && value.namePet==namePet){
+                if(value.idDoctorPet==idDoctor && value.idOwnerPet==idOwner && value.namePet==namePet){
                     const resultsHTML=
                     `<div class="grid">
                 <div class="containerHistory">
@@ -233,6 +246,8 @@ export const readFile=(image)=>{
 
 export const changeUrlPhoto=(baseDatos,url)=>{
     return new Promise((resolve,reject)=>{
+       getUrlParams2()
+       .then((id)=>{
         let transaction=baseDatos.transaction("profiles-pets","readwrite");
         let objectStore=transaction.objectStore("profiles-pets");
         let cursor=objectStore.openCursor();
@@ -240,7 +255,7 @@ export const changeUrlPhoto=(baseDatos,url)=>{
         cursor.onsuccess=(e)=>{
             let puntero=e.target.result;
             if(puntero){
-                if(puntero.value.startProfile==true){              //EXPORTAR
+                if(puntero.key==id){              //EXPORTAR
                     let valueChange=puntero.value;
                     valueChange.urlPhotoPets=url;
                     puntero.update(valueChange);
@@ -254,6 +269,9 @@ export const changeUrlPhoto=(baseDatos,url)=>{
         cursor.onerror=()=>{
             reject("No se pudo cambiar la foto de perfil");
         }
+       })
+
+       .catch();
     });
 }
 
@@ -265,6 +283,8 @@ export const changeUrlPhoto=(baseDatos,url)=>{
 
 export const validateloginUser=(baseDatos)=>{
     return new Promise((resolve,reject)=>{
+       getUrlParams2()
+       .then((id)=>{
         let transaccionFalse=baseDatos.transaction("profiles-pets");
         let objectStore=transaccionFalse.objectStore("profiles-pets");
         
@@ -273,7 +293,7 @@ export const validateloginUser=(baseDatos)=>{
         cursor.addEventListener("success",(e)=>{
             let puntero= e.target.result;
             if(puntero){
-                if(puntero.value.startProfile==true){
+                if(puntero.key==id){
                     let value2=puntero.value;
                     resolve([
                         value2.name,
@@ -292,14 +312,19 @@ export const validateloginUser=(baseDatos)=>{
 
             }
         });
+       })
+
+       .catch();
     });
 }
 
 //_______________________________________
 
 
-export const obtainDoctorID=(baseDatos)=>{  //Funcion encargada de conseguir ceduldel dueño y cedula del animal y hacer otra funcion
+export const obtainDatesPets=(baseDatos)=>{  //Funcion encargada de conseguir ceduldel dueño y cedula del animal y hacer otra funcion
     return new Promise((resolve,reject)=>{
+       getIdDoctorUrl()
+       .then((id)=>{
         let transactionValue=baseDatos.transaction("profiles-pets");
         let objectStore=transactionValue.objectStore("profiles-pets");
         let cursor=objectStore.openCursor();
@@ -307,8 +332,8 @@ export const obtainDoctorID=(baseDatos)=>{  //Funcion encargada de conseguir ced
         cursor.addEventListener("success",(e)=>{
             let puntero=e.target.result;
             if(puntero){
-                if(puntero.value.startProfile==true){
-                   resolve([puntero.value.idOwnerPet,puntero.value.name]);
+                if(puntero.key==id){
+                   resolve([puntero.value.medicalIdInCharge,puntero.value.name,puntero.value.idOwnerPet]);
                 }
                 puntero.continue();
             }
@@ -318,13 +343,16 @@ export const obtainDoctorID=(baseDatos)=>{  //Funcion encargada de conseguir ced
             }
         });
     
+       })
+
+       .catch();
     });
 }
 
 //_______________________________________
 
 
-export const uploaData=(baseDatos,idOwnerPet,namePets)=>{   
+export const uploaData=(baseDatos,idDoctorPet,namePets,idOwner)=>{   
     return new Promise((resolve,reject)=>{
 
         //Funcion encargada de subir los datos
@@ -353,7 +381,8 @@ export const uploaData=(baseDatos,idOwnerPet,namePets)=>{
         treatmentPet:treatment,
         medicalMotoringPet:medicalMotoring,
         commentsPet:comments,
-        idOwnerPet:idOwnerPet,
+        idDoctorPet:idDoctorPet,
+        idOwnerPet:idOwner,
         namePet:namePets,
         infoDates:infoDate
     });
@@ -449,42 +478,42 @@ export const deletePet=(baseDatos,id)=>{
 
 
 
-export const activatePatient=(baseDatos)=>{
-    return new Promise((resolve,reject)=>{
-        let valueId=document.querySelector(".email").value;
-        let password=document.querySelector(".password").value;
-        let transaction=baseDatos.transaction("profiles-pets","readwrite");
-        let objectStore=transaction.objectStore("profiles-pets");
+// export const activatePatient=(baseDatos)=>{
+//     return new Promise((resolve,reject)=>{
+//         let valueId=document.querySelector(".email").value;
+//         let password=document.querySelector(".password").value;
+//         let transaction=baseDatos.transaction("profiles-pets","readwrite");
+//         let objectStore=transaction.objectStore("profiles-pets");
 
-        let cursor=objectStore.openCursor();
+//         let cursor=objectStore.openCursor();
 
-        transaction.oncomplete=()=>{
-            window.location.replace("/page5-USER/sextaPagina.html");
-            resolve();
-        }
-        transaction.onerror=()=>{
-            reject("No se pudo cambiar la foto de perfil");
-        }
+//         transaction.oncomplete=()=>{
+//             window.location.replace("/page5-USER/sextaPagina.html");
+//             resolve();
+//         }
+//         transaction.onerror=()=>{
+//             reject("No se pudo cambiar la foto de perfil");
+//         }
 
-        let cursorStopped=false;
+//         let cursorStopped=false;
 
-        cursor.onsuccess=(e)=>{
-            let puntero=e.target.result;
-            if(puntero && !cursorStopped){
-                let value=puntero.value;
-                if(value.idOwnerPet==valueId && value.passwordPet == password && value.startProfile==false){
-                    value.startProfile=true;
-                    puntero.update(value);
-                    cursorStopped=true;
-                }
-                puntero.continue();
-            }
-            else{
-                reject("no se pudo");
-            }
-        }
-    });
-}
+//         cursor.onsuccess=(e)=>{
+//             let puntero=e.target.result;
+//             if(puntero && !cursorStopped){
+//                 let value=puntero.value;
+//                 if(value.idOwnerPet==valueId && value.passwordPet == password && value.startProfile==false){
+//                     value.startProfile=true;
+//                     puntero.update(value);
+//                     cursorStopped=true;
+//                 }
+//                 puntero.continue();
+//             }
+//             else{
+//                 reject("no se pudo");
+//             }
+//         }
+//     });
+// }
 
 
 export const activateDoctor=(baseDatos)=>{
@@ -497,10 +526,7 @@ export const activateDoctor=(baseDatos)=>{
         let cursor=objectStore.openCursor();
 
         
-        transaction.oncomplete=()=>{
-            window.location.replace("/src/components/homeMedic/index.html");
-            resolve();
-        }
+        
         transaction.onerror=()=>{
             reject("No se pudo cambiar la foto de perfil");
         }
@@ -512,10 +538,8 @@ export const activateDoctor=(baseDatos)=>{
             let puntero=e.target.result;
             if(puntero && !cursorStopped){
                 let value=puntero.value;
-                if(value.email==valueId && value.id == password && value.start==false){
-                    value.start=true;
-                    puntero.update(value);
-                    cursorStopped=true;
+                if(value.email==valueId && value.id == password){
+                    resolve(puntero.key);
                 }
                 puntero.continue();
             }
@@ -529,31 +553,31 @@ export const activateDoctor=(baseDatos)=>{
 
 
 
-// export const changeValueEntity=(baseDatos)=>{
-//     return new Promise((resolve,reject)=>{
-//         let transaction=baseDatos.transaction("entity","readwrite");
-//         let objectStore=transaction.objectStore("entity");
-//         let cursor =objectStore.openCursor();
+export const changeValueEntity=(baseDatos)=>{
+    return new Promise((resolve,reject)=>{
+        let transaction=baseDatos.transaction("entity","readwrite");
+        let objectStore=transaction.objectStore("entity");
+        let cursor =objectStore.openCursor();
 
-//         cursor.onsuccess=(e)=>{
-//             let puntero=e.target.result;
-//             if(puntero){
-//                 if(puntero.value.activateVeterinary || puntero.value.activateDoctor || puntero.value.activatePatient){
-//                     let value=puntero.value;
-//                     value.activateVeterinary=false;
-//                     value.activateDoctor=false;
-//                     value.activatePatient=false;
-//                     puntero.update(value);
-//                     resolve();
-//                 }
-//                 puntero.continue();
-//             }
-//             else{
-//                 reject();
-//             }
-//         }
-//     });
-// }
+        cursor.onsuccess=(e)=>{
+            let puntero=e.target.result;
+            if(puntero){
+                if(puntero.value.activateVeterinary || puntero.value.activateDoctor || puntero.value.activatePatient){
+                    let value=puntero.value;
+                    value.activateVeterinary=false;
+                    value.activateDoctor=false;
+                    value.activatePatient=false;
+                    puntero.update(value);
+                    resolve();
+                }
+                puntero.continue();
+            }
+            else{
+                reject();
+            }
+        }
+    });
+}
 
 // __________________________________________
 
@@ -577,4 +601,20 @@ export const verifyStarVeterinarys=(baseDatos)=>{
             }
         }
 });
+}
+
+
+export const getUrlParams=()=>{
+    return new Promise((resolve,reject)=>{
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const id = urlParams.get('id');
+
+      if (id) {
+          // Haces lo que necesites con el ID obtenido
+          resolve(id);
+      } else {
+          reject('No se encontró el parámetro ID en la URL.');
+      }
+    });
 }

@@ -2,13 +2,18 @@ import { showPhotoInContainer,
     validateloginUser,
     returnActivePet,
     viewMedicalHistory,
-    obtainDoctorID,
+    obtainDatesPets,
     uploaData,
     readFile,
     changeUrlPhoto,
-    idPet,deletePet
+    idPet,deletePet,
  } from "/services/servicesMedic.js";
 
+
+ import{
+    getIdDoctorUrl
+ }
+from"/services/servicesUser.js"
 //creation of custom errors
 
 class EmailNotFound extends Error{
@@ -210,10 +215,10 @@ buttonForReturnDelete.addEventListener("click",()=>{
 
 
 returnActivePet(baseDatos)
-.then((dates)=>{
+.then((data)=>{
    let container=document.querySelector(".containerFeed");
     
-   viewMedicalHistory(baseDatos,dates[0],dates[1])
+   viewMedicalHistory(baseDatos,data[0],data[1])
    .then((data)=>{          
         container.classList.add("viewClinicalHistory");
         container.innerHTML=data
@@ -231,20 +236,10 @@ returnActivePet(baseDatos)
 
 //_________________________________________
 
-    
-
-
-    validateloginUser(baseDatos)  //Volvemos a llamar a la funcion que identifica el perfil activo para sacar la cedula asociada
-    .then((information)=>{
-        identifyOtherPets(information[1]);
-    })
-    .catch((e)=>{})
-
-
     send.addEventListener("click", (e) => {  //evento para cuando se cree una historia clinica regresar una ventana modal
         e.preventDefault();
         
-      obtainDoctorID(baseDatos)
+      obtainDatesPets(baseDatos)
 
       .then((dates)=>{        
                 containerSecurity.classList.toggle("returnModal");
@@ -277,11 +272,11 @@ returnActivePet(baseDatos)
 
     //evento para cuando den cerrar sesion
     exit.addEventListener("click",()=>{
-        changeLoggedValue()
-        .then(()=>{
-            window.location.replace("/src/components/homeMedic/index.html");
+        getIdDoctorUrl()
+        .then((idDoctor)=>{
+            window.location.replace("/src/components/homeMedic/index.html?id="+idDoctor);
         })
-        .catch((e)=>{alert(e)});
+        .catch();
     });
 
 // EVENTOS DE CAMBIO DE FOTO
@@ -398,39 +393,6 @@ updateData.addEventListener("click",()=>{
 
 // Evento para cerrar sesion
 
-
-const changeLoggedValue=()=>{  //Funcion para desactivar el pérfil que se esta viendo
-    return new Promise((resolve,reject)=>{
-        let transactionValue=baseDatos.transaction("profiles-pets","readwrite");
-        let objetStore=transactionValue.objectStore("profiles-pets");
-        let cursor=objetStore.openCursor();
-
-
-        transactionValue.oncomplete=()=>{
-            resolve();
-        }
-
-        transactionValue.onerror=()=>{
-            reject("eso esta mal");
-        }
-
-        let cursorStopped=false;
-    
-        cursor.addEventListener("success",(e)=>{
-            let puntero=e.target.result;
-            if(puntero && !cursorStopped){
-                let value2=puntero.value;
-                if(value2.startProfile==true){
-                    value2.startProfile = false; // Modificar la propiedad inicio a true
-                    puntero.update(value2);
-                    cursorStopped=true;
-                }
-                puntero.continue();
-            }
-        });
-    });
-}
-
 // _________________________________________________
 
 const changeTitleHistory=()=>{//Funcion unicamente para hacer un titulado personalizado del animal
@@ -449,31 +411,6 @@ const changeTitleHistory=()=>{//Funcion unicamente para hacer un titulado person
         }
     });
 }
-
-
-// _________________________________________________
-
-// const seeActivePet=()=>{
-    
-//     let transactionValue=baseDatos.transaction("profiles-pets");
-//     let objectStore=transactionValue.objectStore("profiles-pets");
-//     let cursor =objectStore.openCursor();
-
-//     cursor.addEventListener("success",(e)=>{
-//         let puntero=e.target.result;
-//         if(puntero){
-//             if(puntero.value.startProfile==true){
-
-//                 let idOwnerPet=puntero.value.idOwnerPet;
-//                 let age=puntero.value.age;
-//                 let namePet=puntero.value.name;
-//                 showClinicalHistoryInScreen(idOwnerPet,age,namePet);
-//             }
-//             puntero.continue();
-//         }
-//     });
-// }
-
 
 
 // _________________________________________________
@@ -502,47 +439,47 @@ const update=(namePet,idOwner)=>{
 // _________________________________________________
 
 
-// const pets=[];
-// const identifyOtherPets=(idOwner)=>{
-//    return new Promise((resolve,reject)=>{
-//     let containerOtherPets=document.querySelector(".petsSameOwnerChild");
-//     let transactionFalse=baseDatos.transaction("profiles-pets");
-//     let objectStore=transactionFalse.objectStore("profiles-pets");
-//     let cursor=objectStore.openCursor();
-//     let mostrado=0;
-//     cursor.addEventListener("success",(e)=>{
-//         let puntero=e.target.result;
-//         if(puntero){
-//             if(puntero.value.idOwnerPet==idOwner){
-//                 const resultHTML= `<div class="carta">
+// // // // // // const pets=[];
+// // // // // // const identifyOtherPets=(idOwner)=>{
+// // // // // //    return new Promise((resolve,reject)=>{
+// // // // // //     let containerOtherPets=document.querySelector(".petsSameOwnerChild");
+// // // // // //     let transactionFalse=baseDatos.transaction("profiles-pets");
+// // // // // //     let objectStore=transactionFalse.objectStore("profiles-pets");
+// // // // // //     let cursor=objectStore.openCursor();
+// // // // // //     let mostrado=0;
+// // // // // //     cursor.addEventListener("success",(e)=>{
+// // // // // //         let puntero=e.target.result;
+// // // // // //         if(puntero){
+// // // // // //             if(puntero.value.idOwnerPet==idOwner){
+// // // // // //                 const resultHTML= `<div class="carta">
                 
-//                 <img src="/img/png-clipart-dog-paw-silhouette-dog-animals-paw.png" class="sinFace">
+// // // // // //                 <img src="/img/png-clipart-dog-paw-silhouette-dog-animals-paw.png" class="sinFace">
 
-//                 <div class='${puntero.value.idOwnerPet}  carta2'>
-//                 <p><strong>Nombre:</strong>
-//                 <input value='${puntero.value.name}' class="valor" disabled></p><br>
+// // // // // //                 <div class='${puntero.value.idOwnerPet}  carta2'>
+// // // // // //                 <p><strong>Nombre:</strong>
+// // // // // //                 <input value='${puntero.value.name}' class="valor" disabled></p><br>
 
-//                 <p><strong>Documento:</strong>
-//                 <input value='${puntero.value.idOwnerPet}' class="valor" disabled></p><br>
+// // // // // //                 <p><strong>Documento:</strong>
+// // // // // //                 <input value='${puntero.value.idOwnerPet}' class="valor" disabled></p><br>
 
-//                 <p><strong>Nombre del acudiente:</strong>
-//                 <input value='${puntero.value.ownerName}' class="valor" disabled></p><br>
-//                 `;
-//                 mostrado++;
+// // // // // //                 <p><strong>Nombre del acudiente:</strong>
+// // // // // //                 <input value='${puntero.value.ownerName}' class="valor" disabled></p><br>
+// // // // // //                 `;
+// // // // // //                 mostrado++;
 
-//                 pets.push(resultHTML);
-//             }
-//             puntero.continue();
-//         }
-//         else if(mostrado==0){
-//             reject();
-//         }
-//         else{
-//             resolve(pets.reverse());
-//         }
+// // // // // //                 pets.push(resultHTML);
+// // // // // //             }
+// // // // // //             puntero.continue();
+// // // // // //         }
+// // // // // //         else if(mostrado==0){
+// // // // // //             reject();
+// // // // // //         }
+// // // // // //         else{
+// // // // // //             resolve(pets.reverse());
+// // // // // //         }
     
-//     });
+// // // // // //     });
 
-//    });
+// // // // // //    });
 
-// }
+// // // // // // }

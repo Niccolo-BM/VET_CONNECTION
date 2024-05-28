@@ -1,7 +1,7 @@
-// import{
-//     changeValueEntity
-// }
-// from "/services/servicesMedic.js"
+import{
+    getUrlParams
+}
+from "/services/servicesMedic.js"
 
 
 class duplicateId extends Error{
@@ -133,14 +133,6 @@ solicitud.onsuccess=function(){
         
     })
     .catch(()=>{});
-    
-    // extractNameVeterinary(information[3]) //information con esa posicion equivale al nit 
-    // .catch((error)=>{
-    //     if(error instanceof EmailNotFound){
-    //         console.log(error.message);
-    //     }
-    // })
-    
 
     //______________________________________________
 
@@ -148,12 +140,7 @@ solicitud.onsuccess=function(){
     //Evento para cuando cierren sesion desactivar el perfil
     
     exit.addEventListener("click",(e)=>{
-        changeStartedSessionValue()
-        .then(()=>{
-            window.location.replace("/src/components/accessPage/index.html");
-        }).catch((err)=>{
-            alert(err);
-        })
+        window.location.replace("/src/components/accessPage/index.html");
     });
     
    
@@ -192,8 +179,8 @@ containerPatients.addEventListener("click",(e)=>{
     else{
         let classElement =getSelectedLetterData(e);
         activateProfileToViewClinicalHistory(classElement) //mandamos como parametro el primero element del array que se supone que es la id del dueño
-        .then(()=>{
-            window.location.replace("/src/components/viewPetDoctor/index.html"); //Redirijimos a otro pagina con la clase window para que no pueda darle la flecha de regresar si no que tenga que darle a otra opcion de la pagina para volview a esta pagina
+        .then((data)=>{
+            window.location.replace("/src/components/viewPetDoctor/index.html?medic="+data[1]+"&Pet="+data[0]); //Redirijimos a otro pagina con la clase window para que no pueda darle la flecha de regresar si no que tenga que darle a otra opcion de la pagina para volview a esta pagina
         })
         .catch((err)=>{
             console.log(err);
@@ -236,6 +223,7 @@ inputPhoto.addEventListener("change",(e)=>{
  .then((medicalId)=>{     
      buttonOfCreateProfiles.addEventListener("click",(e)=>{
          e.preventDefault();
+
          validateId()
          .then(()=>{ 
             let password=validateOtherData(medicalId);
@@ -304,6 +292,10 @@ inputPhoto.addEventListener("change",(e)=>{
 
  const validateloginUser=()=>{
     return new Promise((resolve,reject)=>{
+
+       getUrlParams()
+
+       .then((id)=>{
         let transaccionFalse=baseDatos.transaction("medical-profiles");
         let objectStore=transaccionFalse.objectStore("medical-profiles");
 
@@ -315,7 +307,7 @@ inputPhoto.addEventListener("change",(e)=>{
         cursor.addEventListener("success",(e)=>{
             let puntero= e.target.result;
             if(puntero){
-                if(puntero.value.start==true){
+                if(puntero.key==id){
                     let value2=puntero.value;
                     transaccionFalse.oncomplete=()=>{
                     resolve([value2.name,
@@ -331,6 +323,9 @@ inputPhoto.addEventListener("change",(e)=>{
                 puntero.continue();
             }
         });
+       })
+
+       .catch();
     });
 
  
@@ -340,87 +335,31 @@ inputPhoto.addEventListener("change",(e)=>{
 // _________________________________________________________
 
 
-
-const extractNameVeterinary=(nit)=>{
+const obtainMedicalId=()=>{
     return new Promise((resolve,reject)=>{
-        let transaccionFalse=baseDatos.transaction("veterinarys");
-        let objectStore=transaccionFalse.objectStore("veterinarys");
+    getUrlParams()
+
+    .then((id)=>{
+        let transaccionFalse=baseDatos.transaction("medical-profiles");
+        let objectStore=transaccionFalse.objectStore("medical-profiles");
         let cursor=objectStore.openCursor();
-
         cursor.addEventListener("success",(e)=>{
-
             let puntero=e.target.result;
             if(puntero){
-
-                if(puntero.value.veterinaryNit==nit){
-                    resolve(puntero.value.veterinaryName);
+                if(puntero.key==id){
+                    resolve(puntero.value.id);
                 }
                 puntero.continue();
             }
             else{
-                reject("no se encontro ninguna veterinaria con ese NIT")
+                reject(new notFoundId("no hay ninguna id activa"));
             }
-        });
     });
-}
 
 
-// _________________________________________________________
-
-
-
-const changeStartedSessionValue=()=>{
-    return new Promise((resolve,reject)=>{
-    let transaccionFalse=baseDatos.transaction("medical-profiles","readwrite");
-    let objetStore=transaccionFalse.objectStore("medical-profiles");
-
-
-    let cursor=objetStore.openCursor();
-
-    cursor.addEventListener("success",(e)=>{
-        let puntero=e.target.result;
-        if(puntero){
-            let valor=puntero.value;
-            if(valor.start==true){
-                valor.start = false; // Modificar la propiedad inicio a true
-                puntero.update(valor); 
-                resolve();
-            }
-            puntero.continue();
-            }
-            else{
-            reject(new notFoundId("El correo no existe"));
-        }
-        
-    });
-    });
-}
-
-
-// _________________________________________________________
-
-
-
-
-const obtainMedicalId=()=>{
-    return new Promise((resolve,reject)=>{
-    let transaccionFalse=baseDatos.transaction("medical-profiles");
-    let objectStore=transaccionFalse.objectStore("medical-profiles");
-    let cursor=objectStore.openCursor();
-    cursor.addEventListener("success",(e)=>{
-        let puntero=e.target.result;
-        if(puntero){
-            if(puntero.value.start==true){
-                resolve(puntero.value.id);
-            }
-            puntero.continue();
-        }
-        else{
-            reject(new notFoundId("no hay ninguna id activa"));
-        }
-    });
     })
-    
+    .catch();
+  });
 }
 
 
@@ -507,43 +446,32 @@ const obtainMedicalId=()=>{
 
 const activateProfileToViewClinicalHistory = (idOwner) => {
     return new Promise((resolve, reject) => {
-        let transaccionFalse = baseDatos.transaction("profiles-pets", "readwrite");
-        let objectStore = transaccionFalse.objectStore("profiles-pets");
-        let cursor = objectStore.openCursor();
+        getUrlParams()
+        .then((id)=>{
+            let transaccionFalse = baseDatos.transaction("profiles-pets",);
+            let objectStore = transaccionFalse.objectStore("profiles-pets");
+            let cursor = objectStore.openCursor();
 
-        transaccionFalse.oncomplete = () => {
-            // La transacción se completó, resolvemos la promesa
-            resolve();
-        };
 
-        transaccionFalse.onerror = (event) => {
-            // Si ocurre un error en la transacción, rechazamos la promesa
-            reject(event.target.error);
-        };
-
-        let cursorStopped=false;
-
-        cursor.addEventListener("success", (e) => {
-            let puntero = e.target.result;
-            if (puntero && !cursorStopped) {
-                let value = puntero.value;
-                if (puntero.value.idOwnerPet == idOwner && puntero.value.startProfile == false) {
-
-                    value.startProfile = true; // Cambiamos el valor de inicio a true para que la página a la que va a ser redirigido el usuario capture este valor diferente y sepa a cuál perfil seleccionaron
-
-                    // Actualizamos el objeto en el almacén de objetos
-                    puntero.update(value);
-                    cursorStopped=true;
-                }
-                else{
+            cursor.addEventListener("success", (e) => {
+                let puntero = e.target.result;
+                if (puntero) {
+                    let value = puntero.value;
+                    if (value.idOwnerPet==idOwner) { 
+                        // La transacción se completó, resolvemos la promesa
+                        resolve([puntero.key,id]);
+                        // devolvemos en la promesa el id unico del animal y el valor unico del medico
+                    } 
                     puntero.continue();
+                } 
+                else {
+                    // Cuando no hay más datos en el cursor, la transacción se completará automáticamente
                 }
+            });
 
-            } else {
-                // Cuando no hay más datos en el cursor, la transacción se completará automáticamente
-            }
-        });
-    });
+        })
+        .catch();
+      });
 }
 
 // _____________________________________________________
@@ -741,31 +669,36 @@ const validatePassword=(password)=>{
 
 const changeUrlPhoto=(url)=>{
     return new Promise((resolve,reject)=>{
-        let transaction=baseDatos.transaction("medical-profiles","readwrite");
-        let objectStore=transaction.objectStore("medical-profiles");
-        let cursor=objectStore.openCursor();
+        getUrlParams()
+        .then((id)=>{
+            let transaction=baseDatos.transaction("medical-profiles","readwrite");
+            let objectStore=transaction.objectStore("medical-profiles");
+            let cursor=objectStore.openCursor();
 
-        transaction.oncomplete=()=>{
-            resolve();
-        }
-        transaction.onerror=()=>{
-            reject("No se pudo cambiar la foto de perfil");
-        }
-
-        let cursorStopped=false;
-
-        cursor.onsuccess=(e)=>{
-            let puntero=e.target.result;
-            if(puntero && !cursorStopped){
-                if(puntero.value.start==true){
-                    let valueChange=puntero.value;
-                    valueChange.urlPhotoDoctor=url;
-                    puntero.update(valueChange);
-                    cursorStopped=true;
-                }
-                puntero.continue();
+            transaction.oncomplete=()=>{
+                resolve();
             }
-        }
+            transaction.onerror=()=>{
+                reject("No se pudo cambiar la foto de perfil");
+            }
+
+            let cursorStopped=false;
+
+            cursor.onsuccess=(e)=>{
+                let puntero=e.target.result;
+                if(puntero && !cursorStopped){
+                    if(puntero.key==id){
+                        let valueChange=puntero.value;
+
+                        valueChange.urlPhotoDoctor=url;
+                        puntero.update(valueChange);
+                        cursorStopped=true;
+                    }
+                    puntero.continue();
+                }
+            }
+        })
+        .catch();
     });
 }
 
@@ -776,18 +709,17 @@ const changeUrlPhoto=(url)=>{
 
 const showPhotoInContainer=()=>{
     return new Promise((resolve,reject)=>{
+       getUrlParams()
+       .then((id)=>{
         let transaction=baseDatos.transaction("medical-profiles");
         let objectStore=transaction.objectStore("medical-profiles");
         let cursor=objectStore.openCursor();
 
-       
-
-
         cursor.onsuccess=(e)=>{
             let puntero=e.target.result;
             if(puntero){
-                if(puntero.value.start==true){
-                 resolve(puntero.value.urlPhotoDoctor);
+                if(puntero.key==id){
+                    resolve(puntero.value.urlPhotoDoctor);
                 }
                 puntero.continue();
             }
@@ -795,6 +727,9 @@ const showPhotoInContainer=()=>{
                 reject("no hay ninguna url");
             }
         }
+       })
+
+       .catch();
     });
 }
 
@@ -902,21 +837,3 @@ containerPhoto.addEventListener("click",(e)=>{
 //__________________________________________________
 
 
-
-
-// const dataDoctor=()=>{
-//     let transaccion=baseDatos.transaction("medical-profiles","readwrite");
-//     let objectStore=transaccion.objectStore("medical-profiles");
-//     objectStore.add({
-//         clave : new Date().toISOString(),
-//             name : "jhoatan",
-//             id : "1020222769",
-//             nitVete:"123456789",
-//             email : "jhona@gmail.com",
-//             password : "1020222769",
-//             specialtyDoctor : "general",
-//             city :"medellin",
-//             start:true,
-//             urlPhotoDoctor:''
-//     });
-// }

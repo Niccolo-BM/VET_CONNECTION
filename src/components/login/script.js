@@ -78,7 +78,8 @@ solicitud.onsuccess=()=>{
     .then(()=>{
         document.querySelector(".CreateAcount").innerHTML=" ";
     })
-    .catch(()=>{});
+    .catch(()=>{
+    });
     
     
     buttonSendForm.addEventListener("click",(e)=>{
@@ -89,11 +90,11 @@ solicitud.onsuccess=()=>{
             if(value==1){           //En caso de qe sea para veterinaria
                 validateEmailVeterinary()
 
-                .then(()=>{
-
+                .then((clave)=>{
+                    alert(clave);
                     changeLoggedInValue()
                     .then(()=>{
-                        window.location.replace("/src/components/homeClinic/index.html");
+                        window.location.replace("/src/components/homeClinic/index.html?id="+clave);
 
                     })
 
@@ -112,11 +113,8 @@ solicitud.onsuccess=()=>{
             else if(value==2){        //En caso de qe sea para medico
                 validateEmailMedical()
 
-                .then(()=>{
-                    activateDoctor(baseDatos)
-                    .then(()=>{})
-                    .catch(()=>{})
-                
+                .then((id)=>{
+                    window.location.replace("/src/components/homeMedic/index.html?id="+id);                
                 })
 
                 .catch((error)=>{
@@ -130,8 +128,8 @@ solicitud.onsuccess=()=>{
                           //En caso de qe sea para usuario
                 validateEmailPatient()
 
-                .then(()=>{
-                    window.location.replace("/src/components/homeUser/index.html");
+                .then((id)=>{
+                    window.location.replace("/src/components/homeUser/index.html?id="+id);
                 })
 
                 .catch((error)=>{
@@ -184,7 +182,7 @@ const validateEmailVeterinary=()=>{
             if(puntero){
                
                 if(puntero.value.veterinaryPassword==password && puntero.value.veterinaryEmail==email){
-                    resolve();
+                    resolve(puntero.key);
                     return;
                 }
                 puntero.continue();
@@ -227,7 +225,7 @@ const validateEmailMedical=()=>{
             if(puntero){
                
                 if(puntero.value.id==password && puntero.value.email==email){
-                    resolve();
+                    resolve(puntero.key);
                     return;
                 }
                 puntero.continue();
@@ -261,7 +259,7 @@ const validateEmailPatient=()=>{
             
             if(puntero){
                 if(puntero.value.passwordPet==password && puntero.value.idOwnerPet==email){
-                    resolve();
+                    resolve(puntero.key);
                     return;
                 }
                 puntero.continue();
