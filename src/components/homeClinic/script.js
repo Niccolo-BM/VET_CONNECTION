@@ -107,7 +107,7 @@ solicitud.onsuccess = () => {
         searchProfiles(nit)
           .then()
           .catch(() => {
-            containerDoctors.innerHTML = `<h1>EL medico no esta registrado</h1> `;
+            containerDoctors.innerHTML = `<h1>El médico no está registrado</h1> `;
           });
       })
       .catch();
@@ -386,7 +386,7 @@ const showMedics = (nit) => {
 
                 <section class="doctorSection doctorSection-top">
                   <i class="fa fa-bars doctorMenu"></i>
-                  <p>${puntero.value.name}</p>
+                  <p>${puntero.value.name.toUpperCase()}</p>
                 </section>
                 <section class="doctorSection doctorSection-middle">
                   <img src="${puntero.value.urlPhotoDoctor}" alt="Sin foto" class="show2">
@@ -399,7 +399,6 @@ const showMedics = (nit) => {
           prevSlide = slideCount;
           newSlide = true;
         } else {
-          alert("Se entro al segundo");
           slide = document.querySelector(`#slide${prevSlide}`);
           slide.innerHTML += `         
               <div class="doctorCard" id="${puntero.value.id}">
@@ -410,7 +409,7 @@ const showMedics = (nit) => {
                 </div>
                 <section class="doctorSection doctorSection-top">
                   <i class="fa fa-bars doctorMenu"></i>
-                  <p>${puntero.value.name}</p>
+                  <p>${puntero.value.name.toUpperCase()}</p>
                 </section>
                 <section class="doctorSection doctorSection-middle">
                   <img src="${puntero.value.urlPhotoDoctor}" alt="Sin foto" class="show2">
@@ -438,7 +437,7 @@ const showMedics = (nit) => {
     } else {      
       if (count == 0){
         let containerDoctors=document.querySelector(".slider-wrapper");
-        containerDoctors.innerHTML=`<h1>No hay medicos registrados</h1>`;
+        containerDoctors.innerHTML=`<h1>No hay médicos registrados</h1>`;
       }
       sliderFunction();
     }
@@ -487,7 +486,7 @@ const searchProfiles = (nitVete) => {
       let puntero = e.target.result;
       let containerDoctors = document.querySelector("#slides-container");
       if (puntero) {
-        if (puntero.value.nitVete === nitVete && puntero.value.id == inputSearch) {
+        if (puntero.value.nitVete === nitVete && puntero.value.name.toLowerCase().includes(inputSearch)) {
           containerDoctors.innerHTML = `
             <li class="slide" id="slide1">            
               <div class="doctorCard" id="${puntero.value.id}">
@@ -498,7 +497,7 @@ const searchProfiles = (nitVete) => {
                 </div>
                 <section class="doctorSection doctorSection-top">
                   <i class="fa fa-bars doctorMenu"></i>
-                  <p>${puntero.value.name}</p>
+                  <p>${puntero.value.name.toUpperCase()}</p>
                 </section>
                 <section class="doctorSection doctorSection-middle">
                   <img src="${puntero.value.urlPhotoDoctor}" alt="Sin foto" class="show2">
