@@ -122,8 +122,10 @@ let inputPhoto=document.querySelector(".inputPhoto");
 let containerReload=document.querySelector(".containerReload");
 
 let footer=document.querySelector(".footer");
-//Eventos y demas cosas que involucren la base de datos
 
+//__________________________________________________
+
+//Eventos y demas cosas que involucren la base de datos
 
 let solicitud=indexedDB.open("datos");
 var baseDatos;
@@ -132,7 +134,6 @@ solicitud.onsuccess=function(){
     
     console.log("todo bien");
 
-    // dataDoctor();
 
 //_________________________________________
 
@@ -148,16 +149,7 @@ solicitud.onsuccess=function(){
     
     validateloginUser()  //Activamos funcion para extraer del medico:nombre,id,correo,Numero nit 
     .then((information)=>{  //information equivale a todo lo antes dichos envuelto en una array
-        containerInformation.innerHTML+=`
-        <ul>
-        <li><strong>Nombre : </strong>${information[0]}</li>
-        <li><strong>Correo asignado:</strong>${information[1]}</li>
-        <li><strong>Numero Documento : </strong>${information[2]}</li>
-        <li><strong>Especialidad : </strong>${information[3]}</li>
-        <li><strong>Ciudad : </strong>${information[4]}</li>
-        <li><strong>perteneciente a sede : </strong>${information[5]}</li>
-        </ul>`
-        
+  
     })
     .catch(()=>{});
 
@@ -289,6 +281,7 @@ inputPhoto.addEventListener("change",(e)=>{
     console.log(e);
     //  alert(e);
  })
+//__________________________________________________
 
 
  iconSearch.addEventListener("click",(e)=>{
@@ -298,6 +291,32 @@ inputPhoto.addEventListener("change",(e)=>{
         location.reload();
     });
  });
+
+
+//  _________________________________________
+
+let saveVetButton = document.querySelector("#saveVetButton");
+
+saveVetButton.addEventListener("click", (e) => {
+  let vetFields = document.querySelectorAll(".vetFields");
+  vetFields.forEach(function (element) {
+    element.style.display = "block";
+  });
+
+  let updateFields = document.querySelectorAll(".updateFields");
+  updateFields.forEach(function (element) {
+    element.style.display = "none";
+  });
+
+  updateButton.style.display = "block";
+  saveVetButton.style.display = "none";
+
+  updateData()
+    .then(() => {
+        location.reload();
+    })
+    .catch((err) => alert(err));
+});
  
 
 }
@@ -318,45 +337,40 @@ inputPhoto.addEventListener("change",(e)=>{
 
  const validateloginUser=()=>{
     return new Promise((resolve,reject)=>{
+            getUrlParams()
+              .then((id) => {
+                let transaction = baseDatos.transaction("medical-profiles");
+                let objectStore = transaction.objectStore("medical-profiles");
+                let cursor = objectStore.openCursor();
+        
+                cursor.onsuccess = (e) => {
+                  let puntero = e.target.result;
+                  if (puntero) {
+                    if (puntero.key == id) {
+                      let value = puntero.value;
+                      document.querySelector("#Name").innerHTML = puntero.value.name;
+                      document.querySelector("#Specialty").innerHTML = puntero.value.specialtyDoctor;
+                      document.querySelector("#city").innerHTML = puntero.value.city;
+                      document.querySelector("#email").innerHTML = puntero.value.email;
+                      document.querySelector("#medicalCenter").innerHTML = puntero.value.medicalCenter;
 
-       getUrlParams()
-
-       .then((id)=>{
-        let transaccionFalse=baseDatos.transaction("medical-profiles");
-        let objectStore=transaccionFalse.objectStore("medical-profiles");
-
-        let cursor=objectStore.openCursor();
-
-        transaccionFalse.onerror=()=>{
-            reject(new notFoundId("no se ecnotro el correo"));
-    }
-        cursor.addEventListener("success",(e)=>{
-            let puntero= e.target.result;
-            if(puntero){
-                if(puntero.key==id){
-                    let value2=puntero.value;
-                    transaccionFalse.oncomplete=()=>{
-                    resolve([value2.name,
-                        value2.email,
-                        value2.id,
-                        value2.specialtyDoctor,
-                        value2.city,
-                        value2.medicalCenter
-
-                    ]);
+                      document.querySelector("#updateName").value = puntero.value.name;
+                      document.querySelector("#updateSpecialty").value = puntero.value.specialtyDoctor;
+                      document.querySelector("#updateCity").value = puntero.value.city;
+                      document.querySelector("#updateEmail").value = puntero.value.email;
+                      document.querySelector("#updateMedicalCenter").value = puntero.value.medicalCenter;
+                    
+                      resolve();
                     }
-                }
-                puntero.continue();
-            }
-        });
-       })
+                    puntero.continue();
+                  } 
+                }   
+            })
 
-       .catch();
+            .catch();
     });
-
- 
-
 }
+
 
 // _________________________________________________________
 
@@ -444,11 +458,6 @@ const obtainMedicalId=()=>{
 }
 
 // _________________________________________________________
-
-
-
-
-
 
 
 
@@ -803,6 +812,66 @@ const showSearch=()=>{
 
 
 
+const updateData = () => {
+    return new Promise((resolve, reject) => {
+        getUrlParams()
+        .then((id) => {
+          let name = document.querySelector("#updateName").value;
+          let specialty = document.querySelector("#updateSpecialty").value;
+          let city = document.querySelector("#updateCity").value;
+          let email = document.querySelector("#updateEmail").value;
+          let clinic = document.querySelector("#updateMedicalCenter").value;
+  
+          let transaction = baseDatos.transaction("medical-profiles", "readwrite");
+          let openStore = transaction.objectStore("medical-profiles");
+  
+          let cursor = openStore.openCursor();
+
+          
+
+          transaction.onerror=()=>{
+            reject("ERROR");
+          }
+
+          let cursorStopped=false;
+  
+          cursor.addEventListener("success", (e) => {
+            let puntero = e.target.result;
+            if (puntero && !cursorStopped) {
+              if (puntero.key == id) {
+
+                let value2 = puntero.value;
+                value2.name = name;
+                value2.specialtyDoctor = specialty;
+                value2.city = city;
+                value2.email = email;
+                value2.medicalCenter = clinic;
+                
+                puntero.update(value2);
+                transaction.oncomplete = () => {
+                    resolve();
+                  };
+
+
+                cursorStopped=true;
+               
+              }
+  
+              puntero.continue();
+            } 
+          });
+        })
+
+        .catch((err) => {
+
+          throw new Error("No se pudo identificar ninguna id activa");
+        });
+
+    });
+  };
+
+
+//__________________________________________________
 
 
 const readFile=(image)=>{
@@ -861,4 +930,23 @@ containerPhoto.addEventListener("click",(e)=>{
 
 
 //__________________________________________________
+
+
+let updateButton = document.querySelector("#updateButton");
+updateButton.addEventListener("click", (e) => {
+  let vetFields = document.querySelectorAll(".vetFields");
+  vetFields.forEach(function (element) {
+    element.style.display = "none";
+  });
+
+  let updateFields = document.querySelectorAll(".updateFields");
+  updateFields.forEach(function (element) {
+    element.style.display = "block";
+  });
+
+  updateButton.style.display = "none";
+
+  let saveVetButton = document.querySelector("#saveVetButton");
+  saveVetButton.style.display = "block";
+});
 

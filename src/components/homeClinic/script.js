@@ -324,6 +324,8 @@ const createProfileMedic = (NitVeterinary) => {
     let cityDoctor = document.querySelector("#CityDoctor").value;
     let emailDoctor = document.querySelector("#emailDoctor").value;
     let idDoctor = document.querySelector("#idDoctor").value;
+    let clinic = document.querySelector("#ClinicDoctor").value;
+
 
     let transaction = db.transaction(["medical-profiles"], "readwrite");
     let objectStore = transaction.objectStore("medical-profiles");
@@ -335,6 +337,7 @@ const createProfileMedic = (NitVeterinary) => {
       id: idDoctor,
       start: false,
       email: emailDoctor,
+      medicalCenter:clinic,
       nitVete: NitVeterinary,
       urlPhotoDoctor: "",
     });
@@ -721,6 +724,8 @@ updateButton.addEventListener("click", (e) => {
   let saveVetButton = document.querySelector("#saveVetButton");
   saveVetButton.style.display = "block";
 });
+
+
 
 let saveVetButton = document.querySelector("#saveVetButton");
 saveVetButton.addEventListener("click", (e) => {

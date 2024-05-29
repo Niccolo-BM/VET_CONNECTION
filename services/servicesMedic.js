@@ -614,6 +614,7 @@ export const getUrlParams=()=>{
       const id = urlParams.get('id');
 
       if (id) {
+
           // Haces lo que necesites con el ID obtenido
           resolve(id);
       } else {
@@ -632,7 +633,7 @@ export const getIdUserUrl=()=>{
       if (id) {
           // Haces lo que necesites con el ID obtenido
           resolve(id);
-      } else {
+        } else {
           reject('No se encontró el parámetro id en la URL.');
       }
     });
