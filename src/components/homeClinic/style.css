@@ -860,6 +860,10 @@ input{
     padding: 12px;
   }
 
+  .doctorSection-top > p {
+    font-size: 17px;
+  }
+
   .doctorSection-middle {
     height: 100%;
   }
