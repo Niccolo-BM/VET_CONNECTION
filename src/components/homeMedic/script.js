@@ -864,3 +864,12 @@ containerPhoto.addEventListener("click",(e)=>{
 //__________________________________________________
 
 
+
+let link=document.querySelector(".link");
+link.innerHTML=`<h1>TODOS SOMOS SDSSDSDSD</h1>`;
+link.href = "";
+link.download = 'nombre_documento.pdf';
+
+// Simular clic en el enlace de descarga
+
+link.click();

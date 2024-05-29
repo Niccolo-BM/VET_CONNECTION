@@ -1,6 +1,6 @@
 import{
     getUrlParams2,
-    getIdDoctorUrl
+    getIdDoctorUrl,
 }
 from"/services/servicesUser.js"
 
@@ -281,8 +281,6 @@ export const changeUrlPhoto=(baseDatos,url)=>{
 
 
 //_______________________________________
-
-
 
 
 export const validateloginUser=(baseDatos)=>{
@@ -620,6 +618,22 @@ export const getUrlParams=()=>{
           resolve(id);
       } else {
           reject('No se encontró el parámetro ID en la URL.');
+      }
+    });
+}
+
+
+export const getIdUserUrl=()=>{
+    return new Promise((resolve,reject)=>{
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const id = urlParams.get('id');
+
+      if (id) {
+          // Haces lo que necesites con el ID obtenido
+          resolve(id);
+      } else {
+          reject('No se encontró el parámetro id en la URL.');
       }
     });
 }

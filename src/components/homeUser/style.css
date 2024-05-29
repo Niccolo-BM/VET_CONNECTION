@@ -53,6 +53,23 @@ a{
      opacity: 1;
 }
 
+
+
+.ri-arrow-up-double-fill{
+    font-size: 80px;
+    position: sticky;
+    bottom: 3%;
+    left: 2%;
+}
+
+.ri-arrow-down-double-line{
+    font-size: 80px;
+    position: sticky;
+    bottom: 3%;
+    left: 93%;
+}
+
+
 /* header information page */
 
 .header{
@@ -497,10 +514,11 @@ ul{
 }
 
 ul input{
-    width: 200%;
-    height: 240%;
+    width: 50%;
+    height: 100%;
     border: none;
     font-size: 20px;
+    color: black;
 }
 
 li{
