@@ -486,7 +486,7 @@ const searchProfiles = (nitVete) => {
       let puntero = e.target.result;
       let containerDoctors = document.querySelector("#slides-container");
       if (puntero) {
-        if (puntero.value.nitVete === nitVete && puntero.value.name.toLowerCase().includes(inputSearch)) {
+        if (puntero.value.nitVete === nitVete && puntero.value.name.toLowerCase().includes(inputSearch.toLowerCase())) {
           containerDoctors.innerHTML = `
             <li class="slide" id="slide1">            
               <div class="doctorCard" id="${puntero.value.id}">
