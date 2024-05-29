@@ -245,21 +245,24 @@ inputPhoto.addEventListener("change",(e)=>{
          validateId()
          .then(()=>{ 
             let password=validateOtherData(medicalId);
-            validatePassword(password)
-            .then(()=>{
+            if(password==null){
+            
+            }
+            else{
+                validatePassword(password)
+                .then(()=>{
 
                 addPetsInDateBase(medicalId)
 
                 .then(()=>{
                     location.reload();
                 })
-
                 .catch(()=>{
                     alert("errr");
                 });
+
+                
             })
-
-
             .catch((e)=>{
                 containerMistakes.innerHTML=e.message;
             setTimeout(()=>{
@@ -267,6 +270,7 @@ inputPhoto.addEventListener("change",(e)=>{
             },4000)
 
             });
+            }
         })
         .catch((e)=>{
             containerMistakes.innerHTML=e.message;
@@ -643,9 +647,11 @@ const validateOtherData=()=>{
         }
         else{
             if(nameOwner<2){
+
                 throw new completeName("Pon nombre del acudinte corrrectamente");
             }
             else{          
+
                 let containNumber=false;
                 for(let p of phone){
                     if(isNaN(p)){
@@ -665,7 +671,6 @@ const validateOtherData=()=>{
         }
     }
     catch(error){
-        console.log(error.message);
         containerMistakes.innerHTML=error.message;
         setTimeout(()=>{
             containerMistakes.innerHTML="";

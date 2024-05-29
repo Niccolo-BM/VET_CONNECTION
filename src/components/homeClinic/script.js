@@ -89,13 +89,42 @@ solicitud.onsuccess = () => {
   obtainIdVet()
     .then((nit) => {
       buttonCreator.addEventListener("click", (e) => {
-        createProfileMedic(nit)
-          .then(() => {
-            location.reload();
+
+        
+        verifyOtherData()
+          .then(()=>{
+
+            verifyId()
+            .then(()=>{
+
+              createProfileMedic(nit)
+            .then(() => {
+              
+              location.reload();
+            })
+
+            .catch(() => {
+              console.log("SALIO  MAL");
+            });   
+            })
+            .catch((e)=>{
+              let mistakes=document.querySelector(".mistakes");
+              mistakes.innerHTML=e;
+              setTimeout(()=>{
+                mistakes.innerHTML="";
+              },3000);
+            });
+            
           })
-          .catch(() => {
-            console.log("SALIO  MAL");
-          });
+
+          .catch((e)=>{
+            let mistakes=document.querySelector(".mistakes");
+          mistakes.innerHTML=e;
+          setTimeout(()=>{
+            mistakes.innerHTML="";
+          },3000);
+          })
+
       });
     })
     .catch();
@@ -126,7 +155,6 @@ solicitud.onsuccess = () => {
       let parent3 = event.parentElement;
       let finallyParent = parent3.parentElement;
       let listOfClass = finallyParent.className.split(" ");
-      console.log(listOfClass[1]);
     }
   });
 
@@ -430,8 +458,9 @@ const showMedics = (nit) => {
 
         count++;
         slideCount++;
-        document.querySelector(`#delete${puntero.value.id}`).addEventListener("click", ()=> {deleteMedicFunction(puntero.value.id)});
-        document.querySelector(`#update${puntero.value.id}`).addEventListener("click", ()=> {photoMedicFunction(puntero.value.id)});
+        let value=puntero.value;
+        document.querySelector(`#delete${puntero.value.id}`).addEventListener("click", ()=> {deleteMedicFunction(value.id)});
+        document.querySelector(`#update${puntero.value.id}`).addEventListener("click", ()=> {photoMedicFunction(value.id)});
       }
       puntero.continue();
     } else {      
@@ -508,8 +537,9 @@ const searchProfiles = (nitVete) => {
               </div>
             </li>  
           `;
-          document.querySelector(`#delete${puntero.value.id}`).addEventListener("click", ()=> {deleteMedicFunction(puntero.value.id)});
-          document.querySelector(`#update${puntero.value.id}`).addEventListener("click", ()=> {photoMedicFunction(puntero.value.id)});
+          let value=puntero.value;
+          document.querySelector(`#delete${puntero.value.id}`).addEventListener("click", ()=> {deleteMedicFunction(value.id)});
+          document.querySelector(`#update${puntero.value.id}`).addEventListener("click", ()=> {photoMedicFunction(value.id)});
           resolve();          
         }
         puntero.continue();
@@ -767,7 +797,9 @@ function sliderFunction() {
 
 const updateVeterinary = () => {
   return new Promise((resolve, reject) => {
-    let name = document.querySelector("#updateName").value;
+    getUrlParams()
+    .then((id)=>{
+      let name = document.querySelector("#updateName").value;
     let address = document.querySelector("#updateAddress").value;
     let city = document.querySelector("#updateCity").value;
     let nit = document.querySelector("#updateNit").value;
@@ -781,7 +813,7 @@ const updateVeterinary = () => {
     cursor.onsuccess = (e) => {
       let puntero = e.target.result;
       if (puntero) {
-        if (puntero.value.veterinaryStart == true) {
+        if (puntero.key==id) {
           let veterynary = puntero.value;
           veterynary.veterinaryName = name;
           veterynary.veterinaryAdress = address;
@@ -804,7 +836,7 @@ const updateVeterinary = () => {
           document.querySelector("#updateRepresentative").value = representative;
           setTimeout(() => {
             resolve();
-            showVeterinaryData();
+            showVeterinaryData(e);
           }, 2000);
         }
         puntero.continue();
@@ -813,6 +845,10 @@ const updateVeterinary = () => {
     cursor.onerror = () => {
       reject("no se pudo actualizar perfil");
     };
+
+    })
+    .catch();
+    
   });
 };
 
@@ -838,4 +874,106 @@ function showVeterinaryData(e) {
     }
     cursor.continue();
   }
+}
+
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+const verifyId=()=>{
+  return new Promise((resolve,reject)=>{
+    let id=document.querySelector("#idDoctor").value;
+    for(let x of id){
+      let convert=parseInt(x);
+      if(isNaN(convert)){
+        reject("En cedula no ingreses ninguna letra");
+      }
+    }
+
+    if(id.length==10){
+      let transaction = db.transaction("medical-profiles");
+      let openStore=transaction.objectStore("medical-profiles");
+      let cursor=openStore.openCursor();
+  
+      cursor.onsuccess=(e)=>{
+        let puntero=e.target.result;
+        if(puntero){
+          if(puntero.value.id==id){
+            reject("El documento ya esta en uso");
+          }
+          puntero.continue()
+        }
+        else{
+          resolve();
+        }
+      }
+    }
+    else{
+      reject("Pon la cantidad de numeros correcta");
+    }
+  });
+}
+
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+const verifyOtherData=()=>{
+  return new Promise((resolve,reject)=>{
+    let estructure=["@gmail.com","@yahoo.com","@hotmail.com"]
+    let name=document.querySelector("#NameDoctor").value;
+    let charge=document.querySelector("#PositionDoctor").value;
+    let city=document.querySelector("#CityDoctor").value;
+    let clinic=document.querySelector("#ClinicDoctor").value;
+    let email=document.querySelector("#emailDoctor").value;
+    
+    try{
+      if(name.length<2){
+          reject("Pon un nombre con mas caracteres");
+      }
+      else{
+          if(charge.length<2){
+              reject("Completa el cargo");
+          }
+          else{   
+            if(city.length<3){
+              reject("Completa la ciudad");
+            }                      
+            else{
+              if(clinic.length<3){
+                reject("Completa la clinica");
+              }
+
+              else{
+                if(email.length<=12){
+                  reject("completa el correo");
+                }
+                else{
+                  if(email.includes("@")){
+                    let index=email.indexOf("@");
+                    let estructureEmails=email.substring(index,200);
+
+                    if(!estructure.includes(estructureEmails)){
+                      reject("El correo ingresado no tiene la estructura correcta");
+                    }
+                    else{
+                        resolve();
+                    }
+                  } 
+
+                  else{
+                    reject("El correo ingresado no tiene la estructura correcta");
+                  }
+                }
+              }
+            } 
+          }
+      }
+  }
+  catch(error){
+      containerMistakes.innerHTML=error.message;
+      setTimeout(()=>{
+          containerMistakes.innerHTML="";
+      },3000);
+  }
+
+
+  });
 }

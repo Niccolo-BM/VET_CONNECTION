@@ -424,6 +424,15 @@ input{
     top: -60px;
     left: 0px;
     display: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.mistakes{
+    position: absolute;
+    left: 15%;
+    bottom: 8%;
+    font-size: 13px;
 }
 
 #createDoctorForm > h3{
