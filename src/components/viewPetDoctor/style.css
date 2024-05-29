@@ -21,6 +21,20 @@ body{
 }
 
 
+.ri-arrow-up-double-fill{
+    font-size: 80px;
+    position: sticky;
+    bottom: 3%;
+    left: 2%;
+}
+
+.ri-arrow-down-double-line{
+    font-size: 80px;
+    position: sticky;
+    bottom: 3%;
+    left: 93%;
+}
+
 a{
     text-decoration: none;
 }

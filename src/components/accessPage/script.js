@@ -161,6 +161,7 @@ solicitud.onupgradeneeded=()=>{
     storeVeterinary.createIndex("veterinaryAdressIndex","veterinaryAdress",{unique:false});
     storeVeterinary.createIndex("veterinaryCityIndex","veterinaryCity",{unique:false});
     storeVeterinary.createIndex("veterinaryStartIndex","veterinaryStart",{unique:true});
+    storeVeterinary.createIndex("veterinaryRepresentativeIndex","veterinaryRepresentative",{unique:false});
     storeVeterinary.createIndex("urlPhotoVeterinaryIndex","urlPhotoVeterinary",{unique:false})
 
 

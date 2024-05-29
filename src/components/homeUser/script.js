@@ -2,7 +2,7 @@
 let icon=document.querySelector(".material-symbols-outlined");
 let menuHidden=document.querySelector(".menuHidden");
 let searchHidden=document.querySelector(".searchHidden");
-let body=document.querySelector(".body");
+// let body=document.querySelector(".body");
 
 icon.addEventListener("click",(e)=>{
     menuHidden.classList.toggle("viewMenu");
@@ -16,27 +16,26 @@ search.addEventListener("click",(e)=>{
     searchHidden.classList.toggle("viewSearch");
 });
 
-body.addEventListener("click",(e)=>{
-    let evento=e.target;
-    if(!evento.className.includes("material-symbols-outlined") && !evento.className.includes("material-symbols-outlined1") ){
-        menuHidden.classList.remove("viewMenu");
-        searchHidden.classList.remove("viewSearch");
-    }
+// body.addEventListener("click",(e)=>{
+//     let evento=e.target;
+//     if(!evento.className.includes("material-symbols-outlined") && !evento.className.includes("material-symbols-outlined1") ){
+//         menuHidden.classList.remove("viewMenu");
+//         searchHidden.classList.remove("viewSearch");
+//     }
 
-});
+// });
 
 
 //main
 import { 
-    showPhotoInContainer ,
     readFile ,
     changeUrlPhoto ,
-    validateloginUser ,
     changeStartedSessionValue ,
-    idPet ,returnActivePet, 
+    idPet , 
     deletePet,
     viewMedicalHistory,
-    changeValueEntity
+    changeValueEntity,
+    getIdUserUrl
 } from "/services/servicesMedic.js";
 
 
@@ -181,16 +180,13 @@ buttonForReturnDelete.addEventListener("click",()=>{
     validateloginUser(baseDatos)  //Activamos funcion para extraer del medico:nombre,id,correo,Numero nit 
     .then((information)=>{  //information equivale a todo lo antes dichos envuelto en una array
       
-        
-        containerInformation.innerHTML+=`
-        <ul>
-        <li><strong>Nombre : </strong>${information[0]}</li>
-        <li><strong>Cargo : </strong>${information[0]}</li>
-        <li><strong>Correo asignado:</strong>${information[1]}</li>
-        <li><strong>password Asignada : </strong>${information[2]}</li>
-        <li><strong>password Asignada : </strong>asdas</li>
-        <li><strong>password Asignada : </strong>sadas</li>
-        </ul>`
+        document.querySelector(".namePet").value=information[0];
+        document.querySelector(".nameOwner").value=information[2];
+        document.querySelector(".phoneOwner").value=information[3];
+        document.querySelector(".agePet").value=information[4];
+        document.querySelector(".addressPet").value=information[5];
+        document.querySelector(".idOwner").value=information[1];
+        document.querySelector(".raza").value=information[6];
        
     })
     .catch((error)=>{
@@ -206,18 +202,7 @@ buttonForReturnDelete.addEventListener("click",()=>{
     //Evento para cuando cierren sesion desactivar el perfil
     
     exit.addEventListener("click",(e)=>{
-        changeStartedSessionValue(baseDatos)
-        .then(()=>{
-
-            changeValueEntity(baseDatos)
-            .then(()=>{
-                window.location.replace("/nuevo prototipo/Acces.html");
-            })
-            .catch()
-
-        }).catch((err)=>{
-            console.log(err);
-        })
+        window.location.replace("/src/components/accessPage/index.html");
     });
     
    
@@ -248,7 +233,7 @@ returnActivePet(baseDatos)
 .then((dates)=>{
    let container=document.querySelector(".containerFeed");
 
-   viewMedicalHistory(baseDatos,dates[0],dates[1])
+   viewMedicalHistory(baseDatos,dates[0],dates[1],dates[2])
    .then((data)=>{          
         container.classList.add("viewClinicalHistory");
         container.innerHTML=data;
@@ -366,3 +351,98 @@ const dataVete=()=>{
         urlPhotoVeterinary:""
     });
 }
+
+
+const showPhotoInContainer=(baseDatos)=>{
+    return new Promise((resolve,reject)=>{
+       getIdUserUrl()
+       .then((id)=>{
+        let transaction=baseDatos.transaction("profiles-pets");
+        let objectStore=transaction.objectStore("profiles-pets");
+        let cursor=objectStore.openCursor();
+
+        cursor.onsuccess=(e)=>{
+            let puntero=e.target.result;
+            if(puntero){
+                if(puntero.key==id){
+                    resolve(puntero.value.urlPhotoPets);
+                }                                                   //EXPORTAR
+                puntero.continue();
+            }
+            else{
+                reject("no hay ninguna url");
+            }
+        }
+       })
+       .catch()
+    });
+}
+
+
+const validateloginUser=(baseDatos)=>{
+    return new Promise((resolve,reject)=>{
+       getIdUserUrl()
+       .then((id)=>{
+        let transaccionFalse=baseDatos.transaction("profiles-pets");
+        let objectStore=transaccionFalse.objectStore("profiles-pets");
+        
+        let cursor=objectStore.openCursor();
+        
+        cursor.addEventListener("success",(e)=>{
+            let puntero= e.target.result;
+            if(puntero){
+                if(puntero.key==id){
+                    let value2=puntero.value;
+                    resolve([
+                        value2.name,
+                        value2.idOwnerPet,
+                        value2.ownerName,
+                        value2.ownerPhone,
+                        value2.age,
+                        value2.directionHouse,
+                        value2.raza,
+                    ]);
+                }
+                puntero.continue();
+            }
+            else{
+            reject(new notFoundId("no se ecnotro el correo"));
+
+            }
+        });
+       })
+
+       .catch();
+    });
+}
+
+
+const returnActivePet=(baseDatos)=>{
+    return new Promise((resolve,reject)=>{
+        getIdUserUrl()
+        .then((id)=>{
+            let transaction=baseDatos.transaction("profiles-pets");
+            let objectStore=transaction.objectStore("profiles-pets");
+            let cursor=objectStore.openCursor();
+            cursor.onsuccess=(e)=>{
+                let puntero=e.target.result;
+                if(puntero){
+                    let value=puntero.value;
+                    if(puntero.key==id){
+                        resolve([value.idOwnerPet,
+                            value.name,
+                            value.medicalIdInCharge])
+                        return;
+                    }
+                    puntero.continue();
+                }
+            }
+        
+            cursor.onerror=()=>{
+                reject("No hay nada activo");
+            }
+        })
+        .catch();
+    });
+ }
+ 

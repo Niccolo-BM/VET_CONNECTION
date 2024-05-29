@@ -8,6 +8,8 @@
 }
 body{
     overflow-x: hidden;
+    background-color: #f1f9ff;
+
 }
 body::-webkit-scrollbar {
     width: 12px;               /* width of the entire scrollbar */
@@ -281,7 +283,7 @@ a{
     cursor: pointer;  
     color:#017991;
     transition: .5s;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 
@@ -305,7 +307,7 @@ a{
 }
 
 .show{
-    background-size: cover;
+    background-size: contain;
     height: 100%;
     display: flex;
     align-items: center;
@@ -320,7 +322,7 @@ a{
     width: 7%;
     height: 15.5%;
     position: absolute;
-    top: 25%;
+    top: 33%;
     left:22%;
     font-size: 30px;
     z-index: 20;
@@ -346,9 +348,9 @@ a{
     width: 7%;
     height: 15.5%;
     position: absolute;
-    left:13.5%;
+    left:14.5%;
     font-size: 13px;
-    top: 50%;
+    top: 55%;
     border-radius: 50%;
     transition: .5s;
     cursor: pointer;
@@ -369,7 +371,7 @@ a{
     width: 7%;
     height: 15.5%;
     position: absolute;
-    bottom: 9%;
+    bottom: 6%;
     font-size: 15px;
     left: 22%;
     border-radius: 50%;
@@ -390,7 +392,7 @@ a{
 .containerOptions{
     visibility: hidden;
     position: absolute;
-    top: 29%;
+    top: 38%;
     left: 25.5%;
     width: 5%;
     height: 7%;
@@ -413,7 +415,7 @@ a{
     position: absolute;
     width: 30%;
     height: 7%;
-    top: 29%;
+    top: 38%;
     left: 27.5%;
     visibility: visible;
     font-size: 10px;
@@ -444,96 +446,130 @@ a{
     padding: 5px 10px 5px 60px;
 }
 
-/* CONTAINER OF INFORMATION DOCTOR*/
-.container_information{
-    width: 35%;
-    height: 50vh;
+/*div Clinic Data*/
+#gridClinicData{
+    display:grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto auto auto auto auto auto;
+    border: 4px solid #c3dfc8;
+    width: 350px;
+    height: 300px;
+    padding-top: 20px;
+    padding-left: 20px;
+    margin-top:40px;
+    border-radius: 10%;
     background-color: #d7f6dc;
-    border-radius: 20px;
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    color: #017991;
+    font-size: 15px;
     position: relative;
-}
-
-.innerPart{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-
-}
-
-.updateData{
-    position: absolute;
-    bottom: -20%;
-    right: 0;
-    background-color: #017991;
-    width: 50%;
-    height: 13%;
-    border-radius: 10px;
-    color: #f1f9ff;
-}
-
-ul{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    list-style: none;
-    font-size:14px ;
-    justify-content:space-between;
-    padding: 20px;
-}
-
-ul input{
-    width: 200%;
-    height: 240%;
-    border: none;
-    font-size: 20px;
-}
-
-li{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    color: black;
-}
-
-strong{
-    color: #128397;
-
-}
-
-input:focus{
-    outline: none;
-}
-
-.signOut{
-    cursor: pointer;
-}
-.viewprofiles{
-    width: 100%;
-    min-height:100vh ;
-}
+  }
+  
+  .vetFields {
+      display: block;
+  }
+  
+  .updateFields {
+      display: none;
+      border: 1px solid #017991;
+      border-radius: 10px;
+      height: 29px;
+      font-family: "Roboto", sans-serif;
+      font-style: normal;
+      padding-left: 10px;
+  }
+  
+  /*Update Button*/
+  #updateButton{
+      display:block;
+      font-family: "Roboto", sans-serif;
+      font-style: normal;
+      font-size: 15px;
+      color:#ffffff;
+      background-color: #017991;
+      border: none;
+      border-radius:20px;
+      height: 40px;
+      margin-right: 10%;
+      position: absolute;
+      right: -40px;
+      bottom: -60px;
+      width: 40%;
+  }
+  
+  /*Save vet Button*/
+  #saveVetButton{
+      display: none;
+      font-family: "Roboto", sans-serif;
+      font-style: normal;
+      font-size: 15px;
+      color:#ffffff;
+      background-color: #017991;
+      border: none;
+      border-radius:20px;
+      height: 40px;
+      margin-right: 10%;
+      position: absolute;
+      right: -40px;
+      bottom: -60px;
+      width: 40%;
+  }
+  
+  /*subMenu*/
+  #gridSubMenu{
+      font-size: 16px;
+      display: none;
+      grid-template-columns: auto auto auto auto;
+      grid-template-rows: auto auto;
+      border: 2px solid #017991;
+      background-color: #d7f6dc;
+      position: absolute;
+      top: -30px;
+      left: 180px;
+      width: 1%;
+      height: 70px;
+      border-radius: 10px;
+      text-align: center;
+      overflow: hidden;
+      white-space: nowrap;
+      transition: width 2s;
+      font-family: "Roboto", sans-serif;
+      font-style: normal;
+      color:#017991;
+  }
+  
+  .top{
+      padding-top:12px;
+  }
+  
+  .left{
+      padding-left: 8px;
+  }
+  
+  .bottom{
+      padding-bottom:12px;
+  }
 
 
 /*Container for create new Profiles*/
 
 .containerCreateProfiles{
-    margin-top: 70px;
+    margin-top: 340px;
     transition: .6s;
-    
-    width: 50%;
+    width: 30%;
     transform: translateX(100vw);
 }
 
 .formNewProfile{
     width: 100%;
-    height: 80%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 5%;
     transition: .6s;
+    padding: 10px;
 
 
 }
@@ -541,7 +577,7 @@ input:focus{
 .viewForm{   /*Clase en css para activar container para create nuevos profiles veterinarios*/
     position: absolute;
     z-index: 300;
-    top: -10%;
+    top: -50%;
     right: 10%;
     transform: translateX(-20%);
     display: flex;
@@ -549,7 +585,7 @@ input:focus{
     align-items: center;
     justify-content: center;
     height: 90vh;
-    gap: 8%;
+    gap: 2%;
     background-color: #edf2fb;
     transition: .6s;
     border-radius: 20px;
@@ -563,8 +599,8 @@ input:focus{
 
 
 .formNewProfile input{
-    width: 35%;
-    height: 13%;
+    width: 85%;
+    height: 5%;
     font-size: 15px;
     text-align: center;
     border-radius: 7px;
@@ -573,19 +609,25 @@ input:focus{
 
 
 .formNewProfile button{
-    width: 20%;
-    height: 8%;
-    font-size: 17px;
+    width: 50%;
+    height: 6%;
+    font-size: 14px;
     border-radius: 10px;
     color: white;
     background-color: #017991;
+    border: none;
+}
+
+.mistakes{
+    font-size: 12px;
+    font-weight: bold;
 }
 
 .equis{
     position: absolute;
     right: 2%;
     top: 2%;
-    padding:13px 20px;
+    padding:3px 11px;
     background-color:#017991;
     font-size: 15px;
     cursor: pointer;
@@ -623,7 +665,7 @@ padding: 0 12%;
 } */
 
 .viewContainer{
-    margin-top: 250px;
+    margin-top: -290px;
 }
 
 .containerSearchPatients h2{
@@ -672,9 +714,9 @@ padding: 0 12%;
 /*zona para mostrar los profiles veterinarios*/
 
 .containerPatients{
-    margin-top: -140px;
+    margin-top: -370px;
     width: 100vw;
-    min-height:70vh;
+    min-height:20vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -687,7 +729,7 @@ padding: 0 12%;
 .hideText{
     position: absolute;
     bottom: 0;
-    top: 150%;
+    top: 185%;
 }
 
 
@@ -719,7 +761,7 @@ padding: 0 12%;
 
 
 .sinFace{
-    width: 50%0%;
+    width: 30%;
     height: 70%;
     object-fit: contain;
     object-position:center ;
@@ -740,6 +782,18 @@ padding: 0 12%;
     display: none;
 }
 
+
+#deleteButton{
+    border: 1px solid black;
+    border-radius: 8px;
+    height: 30px;
+    font-family: sans-serif;
+    font-size: 15px;
+}
+
+#deleteButton:hover{
+    background-color: rgba(128, 128, 128, 0.247);
+}
 
 .textBig{  /*Esta clase se aplica para cuando no hay ningun perfil creado*/
     font-size: 50px;

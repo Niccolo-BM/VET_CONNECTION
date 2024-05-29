@@ -218,7 +218,7 @@ returnActivePet(baseDatos)
 .then((data)=>{
    let container=document.querySelector(".containerFeed");
     
-   viewMedicalHistory(baseDatos,data[0],data[1])
+   viewMedicalHistory(baseDatos,data[0],data[1],data[2])
    .then((data)=>{          
         container.classList.add("viewClinicalHistory");
         container.innerHTML=data
@@ -248,7 +248,7 @@ returnActivePet(baseDatos)
                 containerSecurity.addEventListener("click",(e)=>{
                     let evento=e.target;
                     if(evento.className=="aceptar"){
-                        uploaData(baseDatos,dates[0],dates[1])
+                        uploaData(baseDatos,dates[0],dates[1],dates[2])
                         .then(()=>{
                             location.reload();        
                         })
@@ -483,3 +483,5 @@ const update=(namePet,idOwner)=>{
 // // // // // //    });
 
 // // // // // // }
+
+

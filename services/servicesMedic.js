@@ -1,6 +1,6 @@
 import{
     getUrlParams2,
-    getIdDoctorUrl
+    getIdDoctorUrl,
 }
 from"/services/servicesUser.js"
 
@@ -146,7 +146,9 @@ export const returnActivePet=(baseDatos)=>{
                 if(puntero){
                     let value=puntero.value;
                     if(puntero.key==id){
-                        resolve([value.idOwnerPet,value.name,value.medicalIdInCharge])
+                        resolve([value.idOwnerPet,
+                            value.name,
+                            value.medicalIdInCharge])
                         return;
                     }
                     puntero.continue();
@@ -176,6 +178,8 @@ export const viewMedicalHistory=(baseDatos,idOwner,namePet,idDoctor)=>{
             let puntero=e.target.result;
             if(puntero){
                 let value=puntero.value;
+
+                console.log(value.idDoctorPet, value.idOwnerPet , value.namePet);
                 if(value.idDoctorPet==idDoctor && value.idOwnerPet==idOwner && value.namePet==namePet){
                     const resultsHTML=
                     `<div class="grid">
@@ -279,8 +283,6 @@ export const changeUrlPhoto=(baseDatos,url)=>{
 //_______________________________________
 
 
-
-
 export const validateloginUser=(baseDatos)=>{
     return new Promise((resolve,reject)=>{
        getUrlParams2()
@@ -323,7 +325,7 @@ export const validateloginUser=(baseDatos)=>{
 
 export const obtainDatesPets=(baseDatos)=>{  //Funcion encargada de conseguir ceduldel dueño y cedula del animal y hacer otra funcion
     return new Promise((resolve,reject)=>{
-       getIdDoctorUrl()
+       getUrlParams2()
        .then((id)=>{
         let transactionValue=baseDatos.transaction("profiles-pets");
         let objectStore=transactionValue.objectStore("profiles-pets");
@@ -354,6 +356,7 @@ export const obtainDatesPets=(baseDatos)=>{  //Funcion encargada de conseguir ce
 
 export const uploaData=(baseDatos,idDoctorPet,namePets,idOwner)=>{   
     return new Promise((resolve,reject)=>{
+
 
         //Funcion encargada de subir los datos
     let description=document.querySelector(".description").value;
@@ -611,10 +614,27 @@ export const getUrlParams=()=>{
       const id = urlParams.get('id');
 
       if (id) {
+
           // Haces lo que necesites con el ID obtenido
           resolve(id);
       } else {
           reject('No se encontró el parámetro ID en la URL.');
+      }
+    });
+}
+
+
+export const getIdUserUrl=()=>{
+    return new Promise((resolve,reject)=>{
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const id = urlParams.get('id');
+
+      if (id) {
+          // Haces lo que necesites con el ID obtenido
+          resolve(id);
+        } else {
+          reject('No se encontró el parámetro id en la URL.');
       }
     });
 }

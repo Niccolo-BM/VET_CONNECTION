@@ -1,797 +1,623 @@
-import{
-  readFile,
-  getUrlParams
-}
+import { readFile, getUrlParams } from "../../../services/servicesMedic.js";
 
-from "/services/servicesMedic.js"
+let inputPhoto = document.querySelector(".photoClinic");
 
-// let db;
-// let url = new URL(document.URL);
-// let search_params = url.searchParams; 
-// let vetId = search_params.get("id");
-// function initDB(){
-//     let request = indexedDB.open("datos")
+let containerPhoto = document.querySelector("#divProfile");
 
-//     request.addEventListener("error", ShowError);
-//     request.addEventListener("success", Start);
-//     request.addEventListener("upgradeneeded", CreateStores);
-// }
+let otherOptionChange1 = document.querySelector(".left");
+let otherOptionChange2 = document.querySelector(".left2");
 
-// function ShowError(e){
-//   alert(`DB error: 
-//           code: ${e.code}
-//           message: ${e.message}`);
-// }
+let delete1 = document.querySelector(".delete1");
+let delete2 = document.querySelector(".delete2");
 
-// function Start(e){
-//   db = e.target.result;
-//   openDBCursor();
-// }
+let exit = document.querySelector("#exit");
 
-// function CreateStores(e){
-//   let dataBase = e.target.result;
+let buttonForDelete = document.querySelector(".acept");
+let buttonForReturnDelete = document.querySelector(".cancel");
 
-//   let vetStore = dataBase.createObjectStore("Veterinary", {keyPath: "id", autoIncrement: true});
-//   vetStore.createIndex("Veterinary", "id", {unique: true});
+let buttonCreator = document.querySelector("#BtnCreateDoctor");
 
-//   let DoctorStore = dataBase.createObjectStore("Doctor", {keyPath: "id", autoIncrement: true});
-//   DoctorStore.createIndex("Doctor", "id", {unique: true});
-// }
-
-// function openDBCursor(){
-//   let transaction = db.transaction(["Veterinary"], "readwrite");
-//   let store = transaction.objectStore("Veterinary");
-//   let cursor = store.openCursor();
-//   cursor.addEventListener("success", showVeterinaryData);
-// }
-
-// function updateVeterinary(){
-//   let id = vetId;
-//   let name = document.querySelector("#updateName").value;
-//   let address = document.querySelector("#updateAddress").value;
-//   let city = document.querySelector("#updateCity").value;
-//   let nit = document.querySelector("#updateNit").value;
-//   let phone = document.querySelector("#updatePhone").value;
-//   let services = document.querySelector("#updateServices").value;
-//   let representative = document.querySelector("#updateRepresentative").value;
-
-//   let transaction = db.transaction(["Veterinary"], "readwrite");
-//   let store = transaction.objectStore("Veterinary");
-
-//   store.put({
-//       id: parseInt(id),
-//       name: name,
-//       address: address,
-//       city: city,
-//       nit: nit,
-//       phone: phone,
-//       services: services,
-//       representative: representative
-//   });
-
-//   let cursor = store.openCursor();
-//   cursor.addEventListener("success", showVeterinaryData);
-// }
-
-// function loadDoctorSlider(){
-//   let cursor = e.target.result;
-
-//   if (cursor){
-    
-//     cursor.continue();
-//   }
-
-// } 
-
-// function showVeterinaryData(e){
-//   let cursor = e.target.result;
-
-//   if (cursor){
-//     if (cursor.value.id == vetId){
-//       document.querySelector("#Name").innerHTML = cursor.value.name;
-//       document.querySelector("#Address").innerHTML = cursor.value.address;
-//       document.querySelector("#City").innerHTML = cursor.value.city;
-//       document.querySelector("#Nit").innerHTML = cursor.value.nit;
-//       document.querySelector("#Phone").innerHTML = cursor.value.phone;
-//       document.querySelector("#Services").innerHTML = cursor.value.services;
-//       document.querySelector("#Representative").innerHTML = cursor.value.representative;
-//       document.querySelector("#updateName").value = cursor.value.name;
-//       document.querySelector("#updateAddress").value = cursor.value.address;
-//       document.querySelector("#updateCity").value = cursor.value.city;
-//       document.querySelector("#updateNit").value = cursor.value.nit;
-//       document.querySelector("#updatePhone").value = cursor.value.phone;
-//       document.querySelector("#updateServices").value = cursor.value.services;
-//       document.querySelector("#updateRepresentative").value = cursor.value.representative;
-//     }
-//     cursor.continue();
-//   }
-// }
-
-// function saveDoctor(){
-//   let name = document.querySelector("#NameDoctor").value;
-//   let position = document.querySelector("#PositionDoctor").value;
-//   let spec = document.querySelector("#SpecDoctor").value;
-//   let city = document.querySelector("#CityDoctor").value;
-//   let clinic = document.querySelector("#ClinicDoctor").value;
-
-//   let transaction = db.transaction(["Doctor"], "readwrite");
-//   let store = transaction.objectStore("Doctor");
-
-//   store.put({
-//       name: name,
-//       position: position,
-//       spec: spec,
-//       city: city,
-//       clinic: clinic,
-//       veterinary: vetId
-//   });
-
-//   document.querySelector("#NameDoctor").value = "";
-//   document.querySelector("#PositionDoctor").value = "";
-//   document.querySelector("#SpecOption").selected = true;
-//   document.querySelector("#CityDoctor").value = "";
-//   document.querySelector("#ClinicDoctor").value = "";
-
-//   cursor.addEventListener("success", loadDoctorSlider);
-// }
-
-let inputPhoto=document.querySelector(".photoClinic");
-
-let containerPhoto=document.querySelector("#divProfile");
-
-
-let otherOptionChange1=document.querySelector(".left");
-let otherOptionChange2=document.querySelector(".left2");
-
-let delete1=document.querySelector(".delete1");
-let delete2=document.querySelector(".delete2");
-
-let exit=document.querySelector("#exit");
-
-let buttonForDelete=document.querySelector(".acept");
-let buttonForReturnDelete=document.querySelector(".cancel");
-
-let buttonCreator=document.querySelector("#BtnCreateDoctor");
-
-let iconSearch=document.querySelector("#searchIcon");
+let iconSearch = document.querySelector("#searchIcon");
 
 // start db
 var db;
 
-var solicitud=indexedDB.open("datos");
+var solicitud = indexedDB.open("datos");
 
-solicitud.onerror=()=>{
+solicitud.onerror = () => {
   console.log("Error");
-}
+};
 
-
-solicitud.onsuccess=()=>{
-  db=solicitud.result;
+solicitud.onsuccess = () => {
+  db = solicitud.result;
   console.log("todo perfecto");
 
-
-  
   showPhotoInContainer()
-  .then((url)=>{
-      containerPhoto.innerHTML=`<img src='${url}'  class="show" alt='Poner una foto'>`;
-  })
-  .catch((err)=>{alert(err);});
-
-
-// ________________________________________________
+    .then((url) => {
+      containerPhoto.innerHTML = `<img src='${url}'  class="show" alt='Poner una foto'>`;
+    })
+    .catch((err) => {
+      alert(err);
+    });
 
   validateHomeUser()
-  .then(()=>{})
-  .catch();
-// ________________________________________________
+    .then(() => {})
+    .catch();
 
-
-
-
-buttonForDelete.addEventListener("click",()=>{
-  idVet()
-  .then((id)=>{
-      deleteVet(id)
-      .then(()=>{
-          window.location.replace("/src/components/accessPage/index.html");;
+  buttonForDelete.addEventListener("click", () => {
+    idVet()
+      .then((id) => {
+        deleteVet(id)
+          .then(() => {
+            window.location.replace("/src/components/accessPage/index.html");
+          })
+          .catch();
       })
-      .catch()
-  })
-  .catch(()=>{
-      alert("No se pudo eliminar el perfil");
-  })
-});
+      .catch(() => {
+        alert("No se pudo eliminar el perfil");
+      });
+  });
 
+  buttonForReturnDelete.addEventListener("click", () => {
+    containerDeleteProfiles.classList.toggle("viewForm");
+  });
 
-buttonForReturnDelete.addEventListener("click",()=>{
-  containerDeleteProfiles.classList.toggle("viewForm");
-});
+  // Eventos encargados para que todo lo que tenga que ver con cambio de foto salga bien
 
-// ________________________________________________
-
-  
-    // Eventos encargados para que todo lo que tenga que ver con cambio de foto salga bien
-  
-inputPhoto.addEventListener("change",(e)=>{
-  let question=confirm("Quieres establecer esta foto?");
-  if(question){   
-      readFile(inputPhoto.files[0])           //mandamos como parametro el primer archiv seleccionado 
-      .then((url)=>{
-          changeUrlPhoto(url)     //Esta funcion le pasamos como parametro url de la imagen para que haga la actualizacion
-          .then(()=>{
+  inputPhoto.addEventListener("change", (e) => {
+    let question = confirm("Quieres establecer esta foto?");
+    if (question) {
+      readFile(inputPhoto.files[0]) //mandamos como parametro el primer archiv seleccionado
+        .then((url) => {
+          changeUrlPhoto(url) //Esta funcion le pasamos como parametro url de la imagen para que haga la actualizacion
+            .then(() => {
               // alert(url);
               location.reload();
+            })
+            .catch((err) => alert("No se pudo cambiar la foto "));
+        })
+        .catch();
+    }
+  });
+
+  obtainIdVet()
+    .then((nit) => {
+      showMedics(nit);
+    })
+    .catch();
+
+  obtainIdVet()
+    .then((nit) => {
+      buttonCreator.addEventListener("click", (e) => {
+        createProfileMedic(nit)
+          .then(() => {
+            location.reload();
           })
-          .catch((err)=>alert("No se pudo cambiar la foto "))
-          
+          .catch(() => {
+            console.log("SALIO  MAL");
+          });
+      });
+    })
+    .catch();
+
+  iconSearch.addEventListener("click", () => {
+    let containerDoctors = document.querySelector(".slider-wrapper");
+    obtainIdVet()
+      .then((nit) => {
+        searchProfiles(nit)
+          .then()
+          .catch(() => {
+            containerDoctors.innerHTML = `<h1>EL medico no esta registrado</h1> `;
+          });
       })
       .catch();
-  }
-});
-
-// ________________________________________________
-
-obtainIdVet()
-.then((nit)=>{
-  let containerDoctors=document.querySelector(".slider-wrapper");
-  showMedics(nit)
-  .then((data)=>{
-    containerDoctors.innerHTML="";
-    containerDoctors.innerHTML=data;
-  })
-  .catch(()=>{
-    containerDoctors.innerHTML=`<h1>No hay medicos registrados</h1>`;
-  });
-})
-.catch();
-
-
-obtainIdVet()
-.then((nit)=>{
-  buttonCreator.addEventListener("click",(e)=>{
-    createProfileMedic(nit)
-    .then(()=>{
-      location.reload();
-    })
-    .catch(()=>{
-      console.log("SALIO  MAL");
-    });
   });
 
-})
-.catch();
+  let containerDoctors = document.querySelector(".slider-wrapper");
 
-// ________________________________________________
+  containerDoctors.addEventListener("click", (e) => {
+    let event = e.target;
+    let parent = event.parentElement;
+    let parent2 = parent.previousElementSibling;
 
-
-iconSearch.addEventListener("click",()=>{
-  let containerDoctors=document.querySelector(".slider-wrapper");
-  obtainIdVet()
-  .then((nit)=>{
-    searchProfiles(nit)
-    .then()
-    .catch(()=>{
-      containerDoctors.innerHTML=`<h1>EL medico no esta registrado</h1> `
-    });
-  })
-  .catch();
-});
-
-// ________________________________________________
-
-
-let containerDoctors=document.querySelector(".slider-wrapper");
-
-containerDoctors.addEventListener("click",(e)=>{
-
-  let event=e.target;
-  let parent=event.parentElement;
-  let parent2=parent.previousElementSibling;
- 
-  if(event.className.includes("fa-bars")){
-    parent2.classList.toggle("viewOptionsProfile");
-  }
-  else if(event.className.includes("deleteMedic")){
-    let parent3=event.parentElement;
-    let finallyParent=parent3.parentElement
-    let listOfClass=finallyParent.className.split(" ");
-    console.log(listOfClass[1]);
-  }
-});
-
-
-
-
-
-// ________________________________________________
-
-    //Evento para cuando cierren sesion desactivar el perfil
-    
-    exit.addEventListener("click",(e)=>{      
-     window.location.replace("/src/components/accessPage/index.html");
+    if (event.className.includes("fa-bars")) {
+      parent2.classList.toggle("viewOptionsProfile");
+    } else if (event.className.includes("deleteMedic")) {
+      let parent3 = event.parentElement;
+      let finallyParent = parent3.parentElement;
+      let listOfClass = finallyParent.className.split(" ");
+      console.log(listOfClass[1]);
+    }
   });
 
+  // ________________________________________________
 
-}
+  //Evento para cuando cierren sesion desactivar el perfil
 
+  exit.addEventListener("click", (e) => {
+    window.location.replace("/src/components/accessPage/index.html");
+  });
+};
 
 // Start functions
 
-const validateHomeUser=()=>{
-  return new Promise((resolve,reject)=>{
+const validateHomeUser = () => {
+  return new Promise((resolve, reject) => {
     getUrlParams()
-    .then((id)=>{
-      let transaction=db.transaction("veterinarys");
-      let objectStore=transaction.objectStore("veterinarys");
-      let cursor=objectStore.openCursor();
+      .then((id) => {
+        let transaction = db.transaction("veterinarys");
+        let objectStore = transaction.objectStore("veterinarys");
+        let cursor = objectStore.openCursor();
 
-      cursor.onsuccess=(e)=>{
-          let puntero=e.target.result;
-          if(puntero){
-              if(puntero.key==id){
-                  let value=puntero.value;
-                  document.querySelector("#Name").innerHTML = puntero.value.veterinaryName;
-                  document.querySelector("#Address").innerHTML = puntero.value.veterinaryAdress;
-                  document.querySelector("#City").innerHTML = puntero.value.veterinaryCity;
-                  document.querySelector("#Nit").innerHTML = puntero.value.veterinaryNit;
-                  document.querySelector("#Phone").innerHTML = puntero.value.veterinaryPhone;
-                  // transaction.oncomplete=()=>{
-                  //   resolve([value.veterinaryName , value.veterinaryAdress , value.veterinaryCity,value.veterinaryNit,value.veterinaryPhone]);
-                  // }
-                  resolve();
-
-              }
-              puntero.continue();
-          }
-          else{
-              reject("No se pudo encontrar la informacion");
-          }
-      }
-    })
-
-    .catch();
-  });
-}
-
-// ________________________________________________
-
-
-const showPhotoInContainer=()=>{
-  return new Promise((resolve,reject)=>{
-      getUrlParams()
-      .then((id)=>{
-        let transaction=db.transaction("veterinarys");
-        let objectStore=transaction.objectStore("veterinarys");
-        let cursor=objectStore.openCursor();
-
-        cursor.onsuccess=(e)=>{
-            let puntero=e.target.result;
-            if(puntero){
-                if(puntero.key==id){
-                    resolve(puntero.value.urlPhotoVeterinary);
-                }                                                   //EXPORTAR
-                puntero.continue();
+        cursor.onsuccess = (e) => {
+          let puntero = e.target.result;
+          if (puntero) {
+            if (puntero.key == id) {
+              let value = puntero.value;
+              document.querySelector("#Name").innerHTML = puntero.value.veterinaryName;
+              document.querySelector("#Address").innerHTML = puntero.value.veterinaryAdress;
+              document.querySelector("#City").innerHTML = puntero.value.veterinaryCity;
+              document.querySelector("#Nit").innerHTML = puntero.value.veterinaryNit;
+              document.querySelector("#Phone").innerHTML = puntero.value.veterinaryPhone;
+              document.querySelector("#Representative").innerHTML = puntero.value.veterinaryRepresentative;
+              document.querySelector("#updateName").value = puntero.value.veterinaryName;
+              document.querySelector("#updateAddress").value = puntero.value.veterinaryAdress;
+              document.querySelector("#updateCity").value = puntero.value.veterinaryCity;
+              document.querySelector("#updateNit").value = puntero.value.veterinaryNit;
+              document.querySelector("#updatePhone").value = puntero.value.veterinaryPhone;
+              document.querySelector("#updateRepresentative").value = puntero.value.veterinaryRepresentative;
+              // transaction.oncomplete=()=>{
+              //   resolve([value.veterinaryName , value.veterinaryAdress , value.veterinaryCity,value.veterinaryNit,value.veterinaryPhone]);
+              // }
+              resolve();
             }
-            else{
-                reject("no hay ninguna url");
-            }
-        }
-      })
-      .catch()
-  });
-}
-
-// ________________________________________________
-
-
-
-const changeUrlPhoto=(url)=>{
-  return new Promise((resolve,reject)=>{
-      let transaction=db.transaction("veterinarys","readwrite");
-      let objectStore=transaction.objectStore("veterinarys");
-      let cursor=objectStore.openCursor();
-
-      cursor.onsuccess=(e)=>{
-          let puntero=e.target.result;
-          if(puntero){
-              if(puntero.value.veterinaryStart==true){              //EXPORTAR
-                  let valueChange=puntero.value;
-                  valueChange.urlPhotoVeterinary=url;
-                  puntero.update(valueChange);
-                  setTimeout(()=>{
-                      resolve();
-                  },2000);
-              }
-              puntero.continue();
+            puntero.continue();
+          } else {
+            reject("No se pudo encontrar la informacion");
           }
-      }
-      cursor.onerror=()=>{
-          reject("No se pudo cambiar la foto de perfil");
-      }
-  });
-}
-
-// ________________________________________________
-
-
-
-
-// const changeStartedSessionValue=()=>{
-//   return new Promise((resolve,reject)=>{
-//   let transaccionFalse=db.transaction("veterinarys","readwrite");
-//   let objetStore=transaccionFalse.objectStore("veterinarys");
-
-//   });
-// }
-
-// ________________________________________________
-
-const idVet=()=>{
-  return new Promise((resolve,reject)=>{
-      getUrlParams()
-      .then((id)=>{
-        
-      let transaction=db.transaction("veterinarys");
-      let objectStore=transaction.objectStore("veterinarys");
-      let cursor=objectStore.openCursor();
-                                                                      //EXPORTAR
-      cursor.onsuccess=(e)=>{
-          let puntero=e.target.result;
-          if(puntero){
-              if(puntero.key==id){
-                  resolve(puntero.key);
-              }
-              puntero.continue();
-          }
-      }
-
+        };
       })
-      .catch(()=>{
 
-        reject("no se enocntro nada");
-
-      });
-
-
+      .catch();
   });
-}
+};
 
-// ________________________________________________
-
-
-const deleteVet=(id)=>{
-  return new Promise((resolve,reject)=>{
-      let transaction=db.transaction("veterinarys","readwrite");
-      let objectStore=transaction.objectStore("veterinarys");
-       objectStore.delete(id);    
-
-       transaction.oncomplete=()=>{
-          resolve();
-       }
-
-       transaction.onerror=()=>{
-          reject();
-       }
-  });                                      //EXPORTAR
-}
-
-
-// ________________________________________________
-
-
-const updateData=()=>{
-  return new Promise((resolve,reject)=>{
+const showPhotoInContainer = () => {
+  return new Promise((resolve, reject) => {
     getUrlParams()
-    .then((id)=>{
-      let name=document.querySelector(".updateName").value;
-    let address=document.querySelector(".updateAddress").value;
-    let city=document.querySelector(".updateCity").value;
-    let Nit=document.querySelector(".updateNit").value;
-    let phone=document.querySelector(".updatePhone").value;
+      .then((id) => {
+        let transaction = db.transaction("veterinarys");
+        let objectStore = transaction.objectStore("veterinarys");
+        let cursor = objectStore.openCursor();
 
-    let transaction=db.transaction("veterinarys","readwrite");
-    let openStore=transaction.objectStore("veterinarys");
+        cursor.onsuccess = (e) => {
+          let puntero = e.target.result;
+          if (puntero) {
+            if (puntero.key == id) {
+              resolve(puntero.value.urlPhotoVeterinary);
+            } //EXPORTAR
+            puntero.continue();
+          } else {
+            reject("no hay ninguna url");
+          }
+        };
+      })
+      .catch();
+  });
+};
 
-    let cursor=openStore.openCursor();
+const changeUrlPhoto = (url) => {
+  return new Promise((resolve, reject) => {
+    let transaction = db.transaction("veterinarys", "readwrite");
+    let objectStore = transaction.objectStore("veterinarys");
+    let cursor = objectStore.openCursor();
 
-    cursor.addEventListener("click",(e)=>{
-      let puntero=e.target.result;
-      if(puntero){
-        if(puntero.key==id){
-          let value2=puntero.value;
-          value2.veterinaryName=name;
-          value2.veterinaryAdress=address;
-          value2.veterinaryCity=city;
-          value2.veterinaryPhone=phone;
-          value2.veterinaryNit=Nit;
-
-          transaction.oncomplete=()=>{
-            puntero.update(value2);
+    cursor.onsuccess = (e) => {
+      let puntero = e.target.result;
+      if (puntero) {
+        if (puntero.value.veterinaryStart == true) {
+          //EXPORTAR
+          let valueChange = puntero.value;
+          valueChange.urlPhotoVeterinary = url;
+          puntero.update(valueChange);
+          setTimeout(() => {
             resolve();
-          }
+          }, 2000);
         }
-
         puntero.continue();
       }
-      else{
-        reject("No se puedo hacer nada");
-      }
-
-    })
-
-    })
-    .catch(()=>{
-      throw new Error("No se pudo identificar ninguna id activa");
-    });
-
+    };
+    cursor.onerror = () => {
+      reject("No se pudo cambiar la foto de perfil");
+    };
   });
-}
+};
 
-// ________________________________________________
+const idVet = () => {
+  return new Promise((resolve, reject) => {
+    getUrlParams()
+      .then((id) => {
+        let transaction = db.transaction("veterinarys");
+        let objectStore = transaction.objectStore("veterinarys");
+        let cursor = objectStore.openCursor();
+        //EXPORTAR
+        cursor.onsuccess = (e) => {
+          let puntero = e.target.result;
+          if (puntero) {
+            if (puntero.key == id) {
+              resolve(puntero.key);
+            }
+            puntero.continue();
+          }
+        };
+      })
+      .catch(() => {
+        reject("no se enocntro nada");
+      });
+  });
+};
+
+const deleteVet = (id) => {
+  return new Promise((resolve, reject) => {
+    let transaction = db.transaction("veterinarys", "readwrite");
+    let objectStore = transaction.objectStore("veterinarys");
+    objectStore.delete(id);
+
+    transaction.oncomplete = () => {
+      resolve();
+    };
+
+    transaction.onerror = () => {
+      reject();
+    };
+  }); //EXPORTAR
+};
+
+const updateData = () => {
+  return new Promise((resolve, reject) => {
+    getUrlParams()
+      .then((id) => {
+        let name = document.querySelector(".updateName").value;
+        let address = document.querySelector(".updateAddress").value;
+        let city = document.querySelector(".updateCity").value;
+        let Nit = document.querySelector(".updateNit").value;
+        let phone = document.querySelector(".updatePhone").value;
+
+        let transaction = db.transaction("veterinarys", "readwrite");
+        let openStore = transaction.objectStore("veterinarys");
+
+        let cursor = openStore.openCursor();
+
+        cursor.addEventListener("click", (e) => {
+          let puntero = e.target.result;
+          if (puntero) {
+            if (puntero.key == id) {
+              let value2 = puntero.value;
+              value2.veterinaryName = name;
+              value2.veterinaryAdress = address;
+              value2.veterinaryCity = city;
+              value2.veterinaryPhone = phone;
+              value2.veterinaryNit = Nit;
+
+              transaction.oncomplete = () => {
+                puntero.update(value2);
+                resolve();
+              };
+            }
+
+            puntero.continue();
+          } else {
+            reject("No se puedo hacer nada");
+          }
+        });
+      })
+      .catch(() => {
+        throw new Error("No se pudo identificar ninguna id activa");
+      });
+  });
+};
+
+const createProfileMedic = (NitVeterinary) => {
+  return new Promise((resolve, reject) => {
+    let name = document.querySelector("#NameDoctor").value;
+    let specialty = document.querySelector("#SpecDoctor").value;
+    let cityDoctor = document.querySelector("#CityDoctor").value;
+    let emailDoctor = document.querySelector("#emailDoctor").value;
+    let idDoctor = document.querySelector("#idDoctor").value;
+    let clinic = document.querySelector("#ClinicDoctor").value;
 
 
-const createProfileMedic=(NitVeterinary)=>{
-  return new Promise((resolve,reject)=>{
-    let name=document.querySelector("#NameDoctor").value;
-    let specialty=document.querySelector("#SpecDoctor").value;
-    let cityDoctor=document.querySelector("#CityDoctor").value;
-    let emailDoctor=document.querySelector("#emailDoctor").value;
-    let idDoctor=document.querySelector("#idDoctor").value;
-
-    let transaction=db.transaction(["medical-profiles"],"readwrite");
-    let objectStore=transaction.objectStore("medical-profiles");
-
+    let transaction = db.transaction(["medical-profiles"], "readwrite");
+    let objectStore = transaction.objectStore("medical-profiles");
 
     objectStore.add({
-      name:name,
-      specialtyDoctor:specialty,
-      city:cityDoctor,
-      id:idDoctor,
-      start:false,
-      email:emailDoctor,
-      nitVete:NitVeterinary,
-      urlPhotoDoctor:""
+      name: name,
+      specialtyDoctor: specialty,
+      city: cityDoctor,
+      id: idDoctor,
+      start: false,
+      email: emailDoctor,
+      medicalCenter:clinic,
+      nitVete: NitVeterinary,
+      urlPhotoDoctor: "",
     });
 
+    let name2 = (document.querySelector("#NameDoctor").value = "");
+    let specialty2 = (document.querySelector("#SpecDoctor").value = "");
+    let cityDoctor2 = (document.querySelector("#CityDoctor").value = "");
+    let clinic2 = (document.querySelector("#ClinicDoctor").value = "");
+    let emailDoctor2 = (document.querySelector("#emailDoctor").value = "");
+    let idDoctor2 = (document.querySelector("#idDoctor").value = "");
 
-    let name2=document.querySelector("#NameDoctor").value="";
-    let specialty2=document.querySelector("#SpecDoctor").value="";
-    let cityDoctor2=document.querySelector("#CityDoctor").value="";
-    let clinic2=document.querySelector("#ClinicDoctor").value="";
-    let emailDoctor2=document.querySelector("#emailDoctor").value="";
-    let idDoctor2=document.querySelector("#idDoctor").value="";
-    
-    transaction.oncomplete=()=>{
+    transaction.oncomplete = () => {
       resolve();
-    }
-    transaction.onerror=()=>{
+    };
+    transaction.onerror = () => {
       reject();
+    };
+  });
+};
+
+const showMedics = (nit) => {
+  let transaction = db.transaction("medical-profiles");
+  let objectStore = transaction.objectStore("medical-profiles");
+
+  let cursor = objectStore.openCursor();
+  let count = 0;
+  let prevSlide = 1;
+  let slideCount = 1;
+  let newSlide = false;
+  let slide = "";
+  let resultHTML = document.querySelector("#slides-container");
+
+  cursor.onsuccess = (e) => {
+    let puntero = e.target.result;
+    if (puntero) {
+      if (puntero.value.nitVete == nit) {
+        if (slideCount == 1 || slideCount == prevSlide + 3) {
+          resultHTML.innerHTML += `
+            <li class="slide" id="slide${slideCount}">            
+              <div class="doctorCard" id="${puntero.value.id}">
+                <div class="containerOptionsProfiles">
+                  <p class="deleteMedic" id="delete${puntero.value.id}">Eliminar Perfil</p>
+                  <input type="file" id="photo${puntero.value.id}" class="hiddenFile">
+                  <p class="updateMedic" id="update${puntero.value.id}">Actualizar Foto</p>
+                </div>
+
+                <section class="doctorSection doctorSection-top">
+                  <i class="fa fa-bars doctorMenu"></i>
+                  <p>${puntero.value.name}</p>
+                </section>
+                <section class="doctorSection doctorSection-middle">
+                  <img src="${puntero.value.urlPhotoDoctor}" alt="Sin foto" class="show2">
+                </section>
+                <section class="doctorSection doctorSection-bottom">
+                  ${puntero.value.specialtyDoctor}
+                </section>
+              </div>
+            `;
+          prevSlide = slideCount;
+          newSlide = true;
+        } else {
+          alert("Se entro al segundo");
+          slide = document.querySelector(`#slide${prevSlide}`);
+          slide.innerHTML += `         
+              <div class="doctorCard" id="${puntero.value.id}">
+                <div class="containerOptionsProfiles">
+                  <p class="deleteMedic" id="delete${puntero.value.id}">Eliminar Perfil</p>
+                  <input type="file" id="photo${puntero.value.id}" class="hiddenFile">
+                  <p class="updateMedic" id="update${puntero.value.id}">Actualizar Foto</p>
+                </div>
+                <section class="doctorSection doctorSection-top">
+                  <i class="fa fa-bars doctorMenu"></i>
+                  <p>${puntero.value.name}</p>
+                </section>
+                <section class="doctorSection doctorSection-middle">
+                  <img src="${puntero.value.urlPhotoDoctor}" alt="Sin foto" class="show2">
+                </section>
+                <section class="doctorSection doctorSection-bottom">
+                  ${puntero.value.specialtyDoctor}
+                </section>
+              </div>
+            `;
+        }
+
+        if (slideCount == prevSlide + 2) {
+          resultHTML.innerHTML += `
+            </li>            
+            `;
+          newSlide = false;
+        }
+
+        count++;
+        slideCount++;
+        document.querySelector(`#delete${puntero.value.id}`).addEventListener("click", ()=> {deleteMedicFunction(puntero.value.id)});
+        document.querySelector(`#update${puntero.value.id}`).addEventListener("click", ()=> {photoMedicFunction(puntero.value.id)});
+      }
+      puntero.continue();
+    } else {      
+      if (count == 0){
+        let containerDoctors=document.querySelector(".slider-wrapper");
+        containerDoctors.innerHTML=`<h1>No hay medicos registrados</h1>`;
+      }
+      sliderFunction();
+    }
+  };
+};
+
+const obtainIdVet = () => {
+  return new Promise((resolve, reject) => {
+    getUrlParams()
+      .then((id) => {
+        let transaction = db.transaction("veterinarys");
+        let objectStore = transaction.objectStore("veterinarys");
+
+        let cursor = objectStore.openCursor();
+
+        cursor.onsuccess = (e) => {
+          let puntero = e.target.result;
+
+          if (puntero) {
+            if (puntero.key == id) {
+              resolve(puntero.value.veterinaryNit);
+            }
+            puntero.continue();
+          } else {
+            reject("Error");
+          }
+        };
+      })
+
+      .catch();
+  });
+};
+
+const searchProfiles = (nitVete) => {
+  return new Promise((resolve, reject) => {
+    let inputSearch = document.querySelector("#inputSearch").value;
+    if (inputSearch == ""){
+      location.reload();
     }
 
-  });
-}
+    let transaction = db.transaction("medical-profiles");
+    let objectStore = transaction.objectStore("medical-profiles");
+    let cursor = objectStore.openCursor();
 
-// ________________________________________________
-
-
-const result=[];
-const showMedics=(nit)=>{
-  return new Promise((resolve,reject)=>{
-    let transaction=db.transaction("medical-profiles");
-    let objectStore=transaction.objectStore("medical-profiles");
-
-    let cursor=objectStore.openCursor();
-    let count=0;
-
-    cursor.onsuccess=(e)=>{
-      let puntero=e.target.result;
-      if(puntero){
-        if(puntero.value.nitVete==nit){
-          const resultHTML=`
-          <div class="doctorCard ${puntero.value.id}">
-
-          <div class="containerOptionsProfiles">
-          <p class="deleteMedic">Eliminar Perfil</p>
-          <p class="updateMedic">Actualizar Perfil</p>
-          </div>
-
-          <section class="doctorSection doctorSection-top">
-              <i class="fa fa-bars doctorMenu"></i>
-              <p>${puntero.value.name}</p>
-          </section>
-
-          <section class="doctorSection">
-              <img src="${puntero.value.urlPhotoDoctor}" alt="Sin foto" class="show2">
-          </section>
-
-       
-
-          <section class="doctorSection doctorSection-bottom">
-              ${puntero.value.specialtyDoctor}
-          </section>
-
-        </div>
+    cursor.onsuccess = (e) => {
+      let puntero = e.target.result;
+      let containerDoctors = document.querySelector("#slides-container");
+      if (puntero) {
+        if (puntero.value.nitVete === nitVete && puntero.value.id == inputSearch) {
+          containerDoctors.innerHTML = `
+            <li class="slide" id="slide1">            
+              <div class="doctorCard" id="${puntero.value.id}">
+                <div class="containerOptionsProfiles">
+                  <p class="deleteMedic" id="delete${puntero.value.id}">Eliminar Perfil</p>
+                  <input type="file" id="photo${puntero.value.id}" class="hiddenFile">
+                  <p class="updateMedic" id="update${puntero.value.id}">Actualizar Foto</p>
+                </div>
+                <section class="doctorSection doctorSection-top">
+                  <i class="fa fa-bars doctorMenu"></i>
+                  <p>${puntero.value.name}</p>
+                </section>
+                <section class="doctorSection doctorSection-middle">
+                  <img src="${puntero.value.urlPhotoDoctor}" alt="Sin foto" class="show2">
+                </section>
+                <section class="doctorSection doctorSection-bottom">
+                  ${puntero.value.specialtyDoctor}
+                </section>
+              </div>
+            </li>  
           `;
-          count++;
-            result.push(resultHTML);
+          document.querySelector(`#delete${puntero.value.id}`).addEventListener("click", ()=> {deleteMedicFunction(puntero.value.id)});
+          document.querySelector(`#update${puntero.value.id}`).addEventListener("click", ()=> {photoMedicFunction(puntero.value.id)});
+          resolve();          
         }
         puntero.continue();
-      }
-      else if(count==0){
+      } else {
         reject();
       }
-      else{
-        resolve(result.reverse());
+    };
+  });
+};
+
+function deleteMedicFunction(id){
+    let transaction = db.transaction("medical-profiles", "readwrite");
+    let objectStore = transaction.objectStore("medical-profiles");
+
+    let cursor = objectStore.openCursor();
+
+    cursor.onsuccess = (e) => {
+    let puntero = e.target.result;
+    if (puntero) {
+      if (puntero.value.id == id) {
+        puntero.delete();
+        setTimeout(() => {
+          location.reload();
+        }, 300); 
       }
 
+      puntero.continue();
     }
-  })
+  };
 }
 
+function photoMedicFunction(id){
+  let photoButton = document.querySelector(`#photo${id}`);
+  let fileUploader = document.querySelector(`#photo${id}`);
+  photoButton.click();
+  photoButton.addEventListener("change", (e) => {
+    let question = confirm("Quieres establecer esta foto?");
+    if (question) {
+      readFile(fileUploader.files[0]) //mandamos como parametro el primer archiv seleccionado
+        .then((url) => {
+          changeDoctorUrlPhoto(id, url) //Esta funcion le pasamos como parametro url de la imagen para que haga la actualizacion
+            .then(() => {
+              // alert(url);
+              location.reload();
+            })
+            .catch((err) => alert("No se pudo cambiar la foto "));
+        })
+        .catch();
+    }
+  });
+  let transaction = db.transaction("medical-profiles", "readwrite");
+  let objectStore = transaction.objectStore("medical-profiles");
+  let cursor = objectStore.openCursor();  
+}
 
+const changeDoctorUrlPhoto = (id, url) => {
+  return new Promise((resolve, reject) => {
+    let transaction = db.transaction("medical-profiles", "readwrite");
+    let objectStore = transaction.objectStore("medical-profiles");
+    let cursor = objectStore.openCursor();
 
-// ________________________________________________
-
-
-
-const obtainIdVet=()=>{
-  return new Promise((resolve,reject)=>{
-   getUrlParams()
-   .then((id)=>{
-    let transaction=db.transaction("veterinarys");
-    let objectStore=transaction.objectStore("veterinarys");
-
-    let cursor=objectStore.openCursor();
-    
-    cursor.onsuccess=(e)=>{
-      let puntero=e.target.result;
-      
-      if(puntero){
-        if(puntero.key==id){
-          resolve(puntero.value.veterinaryNit);
+    cursor.onsuccess = (e) => {
+      let puntero = e.target.result;
+      if (puntero) {
+        if (puntero.value.id == id) {
+          //EXPORTAR
+          let valueChange = puntero.value;
+          valueChange.urlPhotoDoctor = url;
+          puntero.update(valueChange);
+          setTimeout(() => {
+            resolve();
+          }, 2000);
         }
         puntero.continue();
       }
-      else{
-        reject("Error");
-      }
-    }
-   })
-
-   .catch();
+    };
+    cursor.onerror = () => {
+      reject("No se pudo cambiar la foto de perfil");
+    };
   });
-}
-// ________________________________________________
+};
 
 
 
-const searchProfiles=(nitVete)=>{
-  return new Promise((resolve,reject)=>{
-    let inputSearch=document.querySelector("#inputSearch").value;
-    let transaction=db.transaction("medical-profiles");
-    let objectStore=transaction.objectStore("medical-profiles");
-    let cursor=objectStore.openCursor();
-
-    
-
-    cursor.onsuccess=(e)=>{ 
-      let puntero=e.target.result;
-      let containerDoctors=document.querySelector(".slider-wrapper");
-      if(puntero){
-        if(puntero.value.nitVete===nitVete && puntero.value.id==inputSearch){
-          containerDoctors.innerHTML=`
-          <div class='doctorCard '>
-
-          <div class="containerOptionsProfiles">
-          <p class="deleteMedic">Eliminar Perfil</p>
-          <p class="updateMedic">Actualizar Perfil</p>
-          </div>
-
-          <section class="doctorSection doctorSection-top">
-              <i class="fa fa-bars doctorMenu"></i>
-              <p>${puntero.value.name}</p>
-          </section>
-
-          <section class="doctorSection">
-              <img src="${puntero.value.urlPhotoDoctor}" alt="Sin foto" class="show2">
-          </section>
-
-          <section class="doctorSection doctorSection-bottom">
-              ${puntero.value.specialtyDoctor}
-          </section>
-
-        </div>
-          `
-          resolve();
-        }
-        puntero.continue();
-
-      }
-      else{
-        reject();
-      }
-    }
-  });
-}
-// ________________________________________________
-
-
-
-const deleteMedic=(id)=>{
-  return new Promise((resolve,reject)=>{
-    let transaction=db.transaction("medical-profiles","readwrite");
-    let objectStore=transaction.objectStore("medical-profiles");
-
-    let cursor=objectStore.openCursor();
-
-    cursor.onsuccess=(e)=>{
-      let puntero=e.target.result;
-      if(puntero){
-        if(puntero.value.id==id){
-
-        }
-        puntero.continue();
-      }
-    }
-  });
-}
-
-
-
-
-
-// ________________________________________________
-
-containerPhoto.addEventListener("click",()=>{
+containerPhoto.addEventListener("click", () => {
   inputPhoto.click();
 });
 
-
-
-otherOptionChange1.addEventListener("click",()=>{
+otherOptionChange1.addEventListener("click", () => {
   inputPhoto.click();
-
 });
 
-otherOptionChange2.addEventListener("click",()=>{
+otherOptionChange2.addEventListener("click", () => {
   inputPhoto.click();
-
 });
 
-
-delete1.addEventListener("click",()=>{
-  document.querySelector(".containerDeleteProfiles").classList.toggle("viewForm");
-
+delete1.addEventListener("click", () => {
+  document
+    .querySelector(".containerDeleteProfiles")
+    .classList.toggle("viewForm");
 });
 
-delete2.addEventListener("click",()=>{
-  document.querySelector(".containerDeleteProfiles").classList.toggle("viewForm");
+delete2.addEventListener("click", () => {
+  document
+    .querySelector(".containerDeleteProfiles")
+    .classList.toggle("viewForm");
 });
-
-
-
-
-
-
-// let body2=document.querySelector(".body");
-
-// body2.addEventListener("click",(e)=>{
-//   alert(e.clientX + " Y EL VERTICAL ES " + e.clientY) ;
-// });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //Header y footer
 
@@ -811,7 +637,6 @@ search.addEventListener("click", (e) => {
   menuHidden.classList.remove("viewMenu");
   searchHidden.classList.toggle("viewSearch");
 });
-
 
 //CLINIC PROFILE
 //Section 1
@@ -900,6 +725,8 @@ updateButton.addEventListener("click", (e) => {
   saveVetButton.style.display = "block";
 });
 
+
+
 let saveVetButton = document.querySelector("#saveVetButton");
 saveVetButton.addEventListener("click", (e) => {
   let vetFields = document.querySelectorAll(".vetFields");
@@ -915,11 +742,101 @@ saveVetButton.addEventListener("click", (e) => {
   updateButton.style.display = "block";
   saveVetButton.style.display = "none";
 
-  updateVeterinary();
+  updateVeterinary()
+    .then((a) => {})
+    .catch((err) => alert("No se pudo actualizar el veterinario"));
 });
 
+function sliderFunction() {
+  const slidesContainer = document.getElementById("slides-container");
+  const slide = document.querySelector(".slide");
+  const prevButton = document.getElementById("slide-arrow-prev");
+  const nextButton = document.getElementById("slide-arrow-next");
+
+  nextButton.addEventListener("click", () => {
+    const slideWidth = slide.clientWidth;
+    slidesContainer.scrollLeft += slideWidth;
+  });
+
+  prevButton.addEventListener("click", () => {
+    const slideWidth = slide.clientWidth;
+    slidesContainer.scrollLeft -= slideWidth;
+  });
+}
 
 
 
+const updateVeterinary = () => {
+  return new Promise((resolve, reject) => {
+    let name = document.querySelector("#updateName").value;
+    let address = document.querySelector("#updateAddress").value;
+    let city = document.querySelector("#updateCity").value;
+    let nit = document.querySelector("#updateNit").value;
+    let phone = document.querySelector("#updatePhone").value;
+    let representative = document.querySelector("#updateRepresentative").value;
 
+    let transaction = db.transaction(["veterinarys"], "readwrite");
+    let store = transaction.objectStore("veterinarys");
 
+    let cursor = store.openCursor();
+    cursor.onsuccess = (e) => {
+      let puntero = e.target.result;
+      if (puntero) {
+        if (puntero.value.veterinaryStart == true) {
+          let veterynary = puntero.value;
+          veterynary.veterinaryName = name;
+          veterynary.veterinaryAdress = address;
+          veterynary.veterinaryCity = city;
+          veterynary.veterinaryNit = nit;
+          veterynary.veterinaryPhone = phone;
+          veterynary.veterinaryRepresentative = representative;
+          puntero.update(veterynary);
+          document.querySelector("#Name").innerHTML = name;
+          document.querySelector("#Address").innerHTML = address;
+          document.querySelector("#City").innerHTML = city;
+          document.querySelector("#Nit").innerHTML = nit;
+          document.querySelector("#Phone").innerHTML = phone;
+          document.querySelector("#Representative").innerHTML = representative;
+          document.querySelector("#updateName").value = name;
+          document.querySelector("#updateAddress").value = address;
+          document.querySelector("#updateCity").value = city;
+          document.querySelector("#updateNit").value = nit;
+          document.querySelector("#updatePhone").value = phone;
+          document.querySelector("#updateRepresentative").value = representative;
+          setTimeout(() => {
+            resolve();
+            showVeterinaryData();
+          }, 2000);
+        }
+        puntero.continue();
+      }
+    };
+    cursor.onerror = () => {
+      reject("no se pudo actualizar perfil");
+    };
+  });
+};
+
+function showVeterinaryData(e) {
+  let cursor = e.target.result;
+
+  if (cursor) {
+    if (cursor.value.id == vetId) {
+      document.querySelector("#Name").innerHTML = cursor.value.name;
+      document.querySelector("#Address").innerHTML = cursor.value.address;
+      document.querySelector("#City").innerHTML = cursor.value.city;
+      document.querySelector("#Nit").innerHTML = cursor.value.nit;
+      document.querySelector("#Phone").innerHTML = cursor.value.phone;
+      document.querySelector("#Services").innerHTML = cursor.value.services;
+      document.querySelector("#Representative").innerHTML = cursor.value.representative;
+      document.querySelector("#updateName").value = cursor.value.name;
+      document.querySelector("#updateAddress").value = cursor.value.address;
+      document.querySelector("#updateCity").value = cursor.value.city;
+      document.querySelector("#updateNit").value = cursor.value.nit;
+      document.querySelector("#updatePhone").value = cursor.value.phone;
+      document.querySelector("#updateServices").value = cursor.value.services;
+      document.querySelector("#updateRepresentative").value = cursor.value.representative;
+    }
+    cursor.continue();
+  }
+}
