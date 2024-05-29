@@ -58,14 +58,14 @@ a{
 .ri-arrow-up-double-fill{
     font-size: 80px;
     position: fixed;
-    bottom: 25%;
+    bottom: 8%;
     left: 2%;
 }
 
 .ri-arrow-down-double-line{
     font-size: 80px;
     position: fixed;
-    bottom: 25%;
+    bottom: 8%;
     left: 93%;
 }
 
@@ -473,69 +473,113 @@ a{
 
 
 /* CONTAINER OF INFORMATION DOCTOR*/
-.container_information{
-    width: 30%;
-    height: 45vh;
+
+/*div Clinic Data*/
+#gridClinicData{
+    display:grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto auto auto auto auto auto;
+    border: 4px solid #c3dfc8;
+    width: 350px;
+    height: 300px;
+    padding-top: 20px;
+    padding-left: 20px;
+    margin-top:40px;
+    border-radius: 10%;
     background-color: #d7f6dc;
-    border-radius: 20px;
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    color: #017991;
+    font-size: 15px;
     position: relative;
-    transform: translateY(-18%);
-}
+  }
+  
+  .vetFields {
+      display: block;
+  }
+  
+  .updateFields {
+      display: none;
+      border: 1px solid #017991;
+      border-radius: 10px;
+      height: 29px;
+      font-family: "Roboto", sans-serif;
+      font-style: normal;
+      padding-left: 10px;
+  }
+  
+  /*Update Button*/
+  #updateButton{
+      display:block;
+      font-family: "Roboto", sans-serif;
+      font-style: normal;
+      font-size: 15px;
+      color:#ffffff;
+      background-color: #017991;
+      border: none;
+      border-radius:20px;
+      height: 40px;
+      margin-right: 10%;
+      position: absolute;
+      right: -40px;
+      bottom: -60px;
+      width: 40%;
+  }
+  
+  /*Save vet Button*/
+  #saveVetButton{
+      display: none;
+      font-family: "Roboto", sans-serif;
+      font-style: normal;
+      font-size: 15px;
+      color:#ffffff;
+      background-color: #017991;
+      border: none;
+      border-radius:20px;
+      height: 40px;
+      margin-right: 10%;
+      position: absolute;
+      right: -40px;
+      bottom: -60px;
+      width: 40%;
+  }
+  
+  /*subMenu*/
+  #gridSubMenu{
+      font-size: 16px;
+      display: none;
+      grid-template-columns: auto auto auto auto;
+      grid-template-rows: auto auto;
+      border: 2px solid #017991;
+      background-color: #d7f6dc;
+      position: absolute;
+      top: -30px;
+      left: 180px;
+      width: 1%;
+      height: 70px;
+      border-radius: 10px;
+      text-align: center;
+      overflow: hidden;
+      white-space: nowrap;
+      transition: width 2s;
+      font-family: "Roboto", sans-serif;
+      font-style: normal;
+      color:#017991;
+  }
+  
+  .top{
+      padding-top:12px;
+  }
+  
+  .left{
+      padding-left: 8px;
+  }
+  
+  .bottom{
+      padding-bottom:12px;
+  }
 
-.innerPart{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
 
-}
-
-.updateData{
-    position: absolute;
-    bottom: -20%;
-    right: 0;
-    background-color: #017991;
-    width: 50%;
-    height: 13%;
-    border-radius: 10px;
-    color: #f1f9ff;
-}
-
-ul{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    list-style: none;
-    font-size:14px ;
-    justify-content:space-between;
-    padding: 20px;
-}
-
-ul input{
-    width: 50%;
-    height: 100%;
-    border: none;
-    font-size: 20px;
-    color: black;
-}
-
-li{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    color: black;
-}
-
-strong{
-    color: #128397;
-
-}
-
-input:focus{
-    outline: none;
-}
 
 .signOut{
     cursor: pointer;

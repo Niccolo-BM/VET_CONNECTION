@@ -308,7 +308,6 @@ a{
 
 .show{
     background-size: contain;
-    height: 100%;
     display: flex;
     align-items: center;
 }
@@ -748,15 +747,26 @@ padding: 0 12%;
     align-items: center;
     justify-content: center;
     gap: 10%;
+    background-color: #017991d0;
+    color: white;
+    transition: .6s;
+
 }
 
 
+.carta:hover{
+    transition: .6s;
+    background-color: #017991;
+
+}
+
 
 .valor{
-    background-color:#edf2fb;
+    background-color:transparent;
     border: none;
     outline: none;
     color: black;
+    
 }
 
 
@@ -772,10 +782,11 @@ padding: 0 12%;
     font-size: 15px;
     display: flex;
     flex-direction: column;
+    color: white;
 }
 
 .carta2 strong{
-    color: #017991;
+    color: white;
 }
 
 .ocultar{
