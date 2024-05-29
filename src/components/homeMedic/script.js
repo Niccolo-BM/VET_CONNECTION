@@ -178,7 +178,6 @@ solicitud.onsuccess=function(){
     obtainMedicalId()
     
     .then((id)=>{
-        containerPatients.classList.add("viewContainer");
         
         showPatients(id);
         viewReallyProfiles.addEventListener("click",(e)=>{
@@ -543,7 +542,7 @@ const showPatients=(idvet)=>{ //Esta funcion se encarga de mostrar los medicos a
                     <p><strong>Nombre del acudiente:</strong>
                     <input value='${puntero.value.ownerName}' class="valor" disabled></p><br>
 
-                    <input type="button" class="${puntero.key}" value="borrar"></div>
+                    <input type="button" class="${puntero.key}" id="deleteButton" value="borrar"></div>
                     </div>     
                     `;
                     mostrado++;
@@ -863,13 +862,3 @@ containerPhoto.addEventListener("click",(e)=>{
 
 //__________________________________________________
 
-
-
-let link=document.querySelector(".link");
-link.innerHTML=`<h1>TODOS SOMOS SDSSDSDSD</h1>`;
-link.href = "";
-link.download = 'nombre_documento.pdf';
-
-// Simular clic en el enlace de descarga
-
-link.click();

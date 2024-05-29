@@ -380,6 +380,7 @@ const showMedics = (nit) => {
                   <input type="file" id="photo${puntero.value.id}" class="hiddenFile">
                   <p class="updateMedic" id="update${puntero.value.id}">Actualizar Foto</p>
                 </div>
+
                 <section class="doctorSection doctorSection-top">
                   <i class="fa fa-bars doctorMenu"></i>
                   <p>${puntero.value.name}</p>
@@ -395,6 +396,7 @@ const showMedics = (nit) => {
           prevSlide = slideCount;
           newSlide = true;
         } else {
+          alert("Se entro al segundo");
           slide = document.querySelector(`#slide${prevSlide}`);
           slide.innerHTML += `         
               <div class="doctorCard" id="${puntero.value.id}">
@@ -482,7 +484,7 @@ const searchProfiles = (nitVete) => {
       let puntero = e.target.result;
       let containerDoctors = document.querySelector("#slides-container");
       if (puntero) {
-        if (puntero.value.nitVete === nitVete && puntero.value.name == inputSearch) {
+        if (puntero.value.nitVete === nitVete && puntero.value.id == inputSearch) {
           containerDoctors.innerHTML = `
             <li class="slide" id="slide1">            
               <div class="doctorCard" id="${puntero.value.id}">
@@ -587,24 +589,6 @@ const changeDoctorUrlPhoto = (id, url) => {
     };
   });
 };
-
-/*
-inputPhoto.addEventListener("change", (e) => {
-    let question = confirm("Quieres establecer esta foto?");
-    if (question) {
-      readFile(inputPhoto.files[0]) //mandamos como parametro el primer archiv seleccionado
-        .then((url) => {
-          changeUrlPhoto(url) //Esta funcion le pasamos como parametro url de la imagen para que haga la actualizacion
-            .then(() => {
-              // alert(url);
-              location.reload();
-            })
-            .catch((err) => alert("No se pudo cambiar la foto "));
-        })
-        .catch();
-    }
-  });
-*/
 
 
 
@@ -774,6 +758,8 @@ function sliderFunction() {
     slidesContainer.scrollLeft -= slideWidth;
   });
 }
+
+
 
 const updateVeterinary = () => {
   return new Promise((resolve, reject) => {
