@@ -202,18 +202,7 @@ buttonForReturnDelete.addEventListener("click",()=>{
     //Evento para cuando cierren sesion desactivar el perfil
     
     exit.addEventListener("click",(e)=>{
-        changeStartedSessionValue(baseDatos)
-        .then(()=>{
-
-            changeValueEntity(baseDatos)
-            .then(()=>{
-                window.location.replace("/nuevo prototipo/Acces.html");
-            })
-            .catch()
-
-        }).catch((err)=>{
-            console.log(err);
-        })
+        window.location.replace("/src/components/accessPage/index.html");
     });
     
    
