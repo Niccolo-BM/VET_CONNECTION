@@ -92,6 +92,7 @@ a{
     transition: .3s;
     margin-top: 2.5%;
     transform: translateX(-65%);
+    
 }
 #imgSlider{
     z-index: -999;
@@ -114,6 +115,11 @@ a{
     text-align: center;
     align-items: center;
 }
+
+aside{
+    align-items: center;
+}
+
 aside:hover{
     display: flex;
     justify-content: center;
@@ -554,7 +560,7 @@ a{
 /*Container for create new Profiles*/
 
 .containerCreateProfiles{
-    margin-top: 340px;
+    margin-top: 420px;
     transition: .6s;
     width: 30%;
     transform: translateX(100vw);
@@ -569,8 +575,6 @@ a{
     gap: 5%;
     transition: .6s;
     padding: 10px;
-
-
 }
 
 .viewForm{   /*Clase en css para activar container para create nuevos profiles veterinarios*/
