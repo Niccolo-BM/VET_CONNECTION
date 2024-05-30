@@ -1,4 +1,5 @@
-import { readFile, getUrlParams } from "../../../services/servicesMedic.js";
+// Import functions from the file (concept called inheritance)
+import { readFile, getUrlParams } from "../../../services/servicesMedic.js"; 
 
 /* elements that are going to be used since the page loads */
 let inputPhoto = document.querySelector(".photoClinic");
