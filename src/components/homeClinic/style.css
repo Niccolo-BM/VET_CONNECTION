@@ -476,7 +476,6 @@ input{
 
 .show{
     background-size: cover;
-    height: 100%; 
     font-size: 42px;
     border-radius: 15px;
     object-fit: cover;

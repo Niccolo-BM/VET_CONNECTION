@@ -165,10 +165,10 @@ solicitud.onsuccess = () => {
   exit.addEventListener("click", (e) => {
     changeStartedSessionValue()
     .then(()=>{
-      window.location.replace("/src/components/accessPage/index.html");
+      alert("asa");
     })
     .catch((e)=>{
-      console.log(e.message);
+      console.log(e);
     });
   });
 };
@@ -789,6 +789,7 @@ function sliderFunction() {
   const nextButton = document.getElementById("slide-arrow-next");
 
   nextButton.addEventListener("click", () => {
+    alert("sdsd");
     const slideWidth = slide.clientWidth;
     slidesContainer.scrollLeft += slideWidth;
   });
@@ -989,33 +990,38 @@ const changeStartedSessionValue=()=>{
   return new Promise((resolve,reject)=>{
   getUrlParams()
   .then((id)=>{
-    let transaction=baseDatos.transaction("veterinarys","readwrite");
+    let transaction=db.transaction("veterinarys","readwrite");
   let objetStore=transaction.objectStore("veterinarys");
 
+
   transaction.oncomplete=()=>{
+    window.location.replace("/src/components/accessPage/index.html");
     resolve();
   }
 
   let cursorStopped=false;
   let cursor=objetStore.openCursor();
+
   cursor.addEventListener("success",(e)=>{
       let puntero=e.target.result;
+      console.log(puntero);
       if(puntero && !cursorStopped){
           let valor=puntero.value;
           if(puntero.key==id){
             if(puntero.value.veterinaryStart==true){
-              
-              valor.startProfile = false; // Modificar la propiedad inicio a true
+              valor.veterinaryStart= false; // Modificar la propiedad inicio a true
               puntero.update(valor);
               cursorStopped=true;
-            }
             
+
+            }           
           }
           puntero.continue();
-          }
-          else{
-          reject(new notFoundId("El correo no existe"));
       }
+        else{
+          reject("El correo no existe");
+        }
+      
       
   });
   })
