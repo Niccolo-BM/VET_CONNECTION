@@ -478,6 +478,7 @@ input{
     font-size: 42px;
     border-radius: 15px;
     object-fit: cover;
+    width: 100%;
 }
 
 
