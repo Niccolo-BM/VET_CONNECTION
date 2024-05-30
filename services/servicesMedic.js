@@ -184,20 +184,20 @@ export const viewMedicalHistory=(baseDatos,idOwner,namePet,idDoctor)=>{
                     const resultsHTML=
                     `<div class="grid">
                 <div class="containerHistory">
-                <h2> Historia clinica </h2><br> 
+                <h2> HISTORIA CLINICA </h2><br> 
                 <div class="containerText">
                    
-                    <strong>description :</strong>  <p>${puntero.value.descriptionPet}</p> <br> <br>
+                    <strong>Descripcion :</strong>  <p>${puntero.value.descriptionPet}</p> <br> 
                     
-                    <strong> exam physical :</strong> <p>${puntero.value.physicalExam}</p> <br> <br>
-                    <strong> diagnosis :</strong> <p>${puntero.value.diagnosisPet}</p> <br> <br>
-                    <strong> treatment :</strong> <p>${puntero.value.treatmentPet}</p> <br> <br>
-                    <strong> medical Motoring :</strong> <p>${puntero.value.medicalMotoringPet}</p> <br> <br>
+                    <strong> Examen fisico :</strong> <p>${puntero.value.physicalExam}</p> <br> 
+                    <strong> Diagnostico :</strong> <p>${puntero.value.diagnosisPet}</p> <br> 
+                    <strong> Tratamiento :</strong> <p>${puntero.value.treatmentPet}</p> <br> 
+                    <strong> Seguimiento :</strong> <p>${puntero.value.medicalMotoringPet}</p> <br> 
                     </div>
                 </div>
 
                 <div class="containerComments">
-                    <h2> comments</h2> <br> 
+                    <h2> COMENTARIOS</h2> <br> 
 
                     <div class="containerText">
                     <p> ${puntero.value.commentsPet}</p>

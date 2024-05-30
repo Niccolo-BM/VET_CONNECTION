@@ -746,11 +746,12 @@ a{
 
 
 .containerHistory h2{
-    font-size: 30px;
+    font-size: 25px;
     border-bottom: 2px solid #79b7a9;
     width: 100%;
     padding: 10px;
     color: #017991;
+    font-weight: 500;
 
 }
 
@@ -761,18 +762,22 @@ a{
     flex-direction: column;
     align-items: start;
     overflow-wrap: break-word;
-    padding:  20px 30px;
+    padding:  20px 20px;
 }
 
 
 p{
+   
     max-width: 100%;
     max-height: 100%;
-    font-size: 15px;
+    font-size: 18px;
+    color: #426b62;
 }
 
 .containerText strong{
     font-size: 20px;
+    color: #79b7a9;
+    font-weight: 900;
 }
 
 .containerComments{
@@ -788,11 +793,12 @@ p{
 }
 
 .containerComments h2{
-    font-size: 30px;
+    font-size: 25px;
     border-bottom: 2px solid #79b7a9;
     width: 100%;
     padding: 10px;
     color: #017991;
+    font-weight: 500;
 
 }
 

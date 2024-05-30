@@ -1,3 +1,5 @@
+
+
 // page header and footer script
 let icon=document.querySelector(".material-symbols-outlined");
 let menuHidden=document.querySelector(".menuHidden");
