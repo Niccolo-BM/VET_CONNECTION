@@ -72,7 +72,7 @@ class inicioNotFound extends Error{
 let icon=document.querySelector(".material-symbols-outlined");
 let menuHidden=document.querySelector(".menuHidden");
 let searchHidden=document.querySelector(".searchHidden");
-// let body=document.querySelector(".body");
+let body=document.querySelector(".body");
 
 icon.addEventListener("click",(e)=>{
     menuHidden.classList.toggle("viewMenuOptions");
@@ -86,7 +86,12 @@ search.addEventListener("click",(e)=>{
     searchHidden.classList.toggle("viewSearch");
 });
 
-
+body.addEventListener("click",(e)=>{
+    let event=e.target;
+    if(!event.className.includes("material-symbols-outlined") && !event.className.includes("searchHidden")){
+        searchHidden.classList.remove("viewSearch");
+    }
+});
 
 
 /*ZONA ELEMENTOS HTML*/

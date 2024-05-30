@@ -4,7 +4,7 @@
 let icon=document.querySelector(".material-symbols-outlined");
 let menuHidden=document.querySelector(".menuHidden");
 let searchHidden=document.querySelector(".searchHidden");
-// let body=document.querySelector(".body");
+let body=document.querySelector(".body");
 
 icon.addEventListener("click",(e)=>{
     menuHidden.classList.toggle("viewMenu");
@@ -18,14 +18,13 @@ search.addEventListener("click",(e)=>{
     searchHidden.classList.toggle("viewSearch");
 });
 
-// body.addEventListener("click",(e)=>{
-//     let evento=e.target;
-//     if(!evento.className.includes("material-symbols-outlined") && !evento.className.includes("material-symbols-outlined1") ){
-//         menuHidden.classList.remove("viewMenu");
-//         searchHidden.classList.remove("viewSearch");
-//     }
+body.addEventListener("click",(e)=>{
+    let event=e.target;
+    if(!event.className.includes("material-symbols-outlined") && !event.className.includes("searchHidden")){
+        searchHidden.classList.remove("viewSearch");
+    }
+});
 
-// });
 
 
 //main
@@ -104,7 +103,7 @@ let viewHistory=document.querySelector(".viewHistory"); // bottom de create prof
 let equis=document.querySelector(".equis");
 
 
-let viewMenu=document.querySelector(".viewMenu"); //bottom para view profiles
+let viewMenu=document.querySelector(".viewMenu2"); //bottom para view profiles
 
 
 let optionsNav=document.querySelector(".containerOptions");
