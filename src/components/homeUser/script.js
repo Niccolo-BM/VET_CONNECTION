@@ -29,13 +29,9 @@ search.addEventListener("click",(e)=>{
 //main
 import { 
     readFile ,
-    changeUrlPhoto ,
-    changeStartedSessionValue ,
-    idPet , 
     deletePet,
     viewMedicalHistory,
-    changeValueEntity,
-    getIdUserUrl
+    getUrlParams
 } from "/services/servicesMedic.js";
 
 
@@ -147,17 +143,15 @@ solicitud.onsuccess=function(){
 
 
 buttonForDelete.addEventListener("click",()=>{
-    idPet(baseDatos)
+    getUrlParams()
     .then((id)=>{
         deletePet(baseDatos,id)
         .then(()=>{
-            window.location.replace("/nuevo prototipo/Acces.html");;
+            window.location.replace("/src/components/accessPage/index.html");;
         })
         .catch()
     })
-    .catch(()=>{
-        alert("No se pudo eliminar el perfil");
-    })
+    .catch();
 });
 
 
@@ -179,14 +173,6 @@ buttonForReturnDelete.addEventListener("click",()=>{
     
     validateloginUser(baseDatos)  //Activamos funcion para extraer del medico:nombre,id,correo,Numero nit 
     .then((information)=>{  //information equivale a todo lo antes dichos envuelto en una array
-      
-        document.querySelector(".namePet").value=information[0];
-        document.querySelector(".nameOwner").value=information[2];
-        document.querySelector(".phoneOwner").value=information[3];
-        document.querySelector(".agePet").value=information[4];
-        document.querySelector(".addressPet").value=information[5];
-        document.querySelector(".idOwner").value=information[1];
-        document.querySelector(".raza").value=information[6];
        
     })
     .catch((error)=>{
@@ -216,7 +202,7 @@ inputPhoto.addEventListener("change",(e)=>{
     if(question){   
         readFile(inputPhoto.files[0])           //mandamos como parametro el primer archiv seleccionado 
         .then((url)=>{
-            changeUrlPhoto(baseDatos,url)     //Esta funcion le pasamos como parametro url de la imagen para que haga la actualizacion
+            changeUrlPhoto(url)     //Esta funcion le pasamos como parametro url de la imagen para que haga la actualizacion
             .then(()=>{
                 // alert(url);
                 location.reload();
@@ -229,7 +215,7 @@ inputPhoto.addEventListener("change",(e)=>{
 });
 
 
-returnActivePet(baseDatos)
+returnActivePet()
 .then((dates)=>{
    let container=document.querySelector(".containerFeed");
 
@@ -247,6 +233,31 @@ returnActivePet(baseDatos)
     alert("no hay nada");
 });
 
+
+
+let saveVetButton = document.querySelector("#saveVetButton");
+
+saveVetButton.addEventListener("click", (e) => {
+  let vetFields = document.querySelectorAll(".vetFields");
+  vetFields.forEach(function (element) {
+    element.style.display = "block";
+  });
+
+  let updateFields = document.querySelectorAll(".updateFields");
+  updateFields.forEach(function (element) {
+    element.style.display = "none";
+  });
+
+  updateButton.style.display = "block";
+  saveVetButton.style.display = "none";
+
+  updateData()
+    .then(() => {
+        location.reload();
+    })
+    .catch((err) => alert(err));
+});
+ 
 
 
 
@@ -297,65 +308,9 @@ viewHistory.addEventListener("click",()=>{
 
 
 
-
-const dataDoctor=()=>{
-    let transaccion=baseDatos.transaction("medical-profiles","readwrite");
-    let objectStore=transaccion.objectStore("medical-profiles");
-    objectStore.add({
-        clave : new Date().toISOString(),
-            name : "jhoatan",
-            id : "1020222769",
-            nitVete:"123456789",
-            email : "jhona@gmail.com",
-            password : "1020222769",
-            specialtyDoctor : "general",
-            city :"medellin",
-            start:true,
-            urlPhotoDoctor:''
-    });
-}
-
-
-const dataPet=()=>{
-    let transaccion=baseDatos.transaction("profiles-pets","readwrite");
-    let objectStore=transaccion.objectStore("profiles-pets");
-    objectStore.add({
-        fecha : new Date().toISOString(),
-            name : "mike",
-            idOwnerPet : "0000000000",
-            specie:"canina",
-            raza : "pitbull",
-            edad : "4",
-            directionHouse : "calle 9 a sur",
-            ownerPhone :"3165820442",
-            passwordPet:"Mike123",
-            startProfile:true,
-            medicalIdInCharge:"1020222769",
-            ownerName:"julian garcia",
-            urlPhotoPets:""
-    });
-}
-
-
-
-const dataVete=()=>{
-    let transaccion=baseDatos.transaction("veterinarys","readwrite");
-    let objectStore=transaccion.objectStore("veterinarys");
-    objectStore.add({
-        id : new Date().toISOString(),
-        veterinaryName: "perrunos",
-        veterinaryNit : "123456789",
-        veterinaryEmail:"perrunos@gmail.com",
-        veterinaryPassword: "El966",
-        veterinaryStart : true,
-        urlPhotoVeterinary:""
-    });
-}
-
-
 const showPhotoInContainer=(baseDatos)=>{
     return new Promise((resolve,reject)=>{
-       getIdUserUrl()
+       getUrlParams()
        .then((id)=>{
         let transaction=baseDatos.transaction("profiles-pets");
         let objectStore=transaction.objectStore("profiles-pets");
@@ -381,35 +336,37 @@ const showPhotoInContainer=(baseDatos)=>{
 
 const validateloginUser=(baseDatos)=>{
     return new Promise((resolve,reject)=>{
-       getIdUserUrl()
+       getUrlParams()
        .then((id)=>{
         let transaccionFalse=baseDatos.transaction("profiles-pets");
         let objectStore=transaccionFalse.objectStore("profiles-pets");
         
         let cursor=objectStore.openCursor();
         
-        cursor.addEventListener("success",(e)=>{
-            let puntero= e.target.result;
-            if(puntero){
-                if(puntero.key==id){
-                    let value2=puntero.value;
-                    resolve([
-                        value2.name,
-                        value2.idOwnerPet,
-                        value2.ownerName,
-                        value2.ownerPhone,
-                        value2.age,
-                        value2.directionHouse,
-                        value2.raza,
-                    ]);
-                }
-                puntero.continue();
-            }
-            else{
-            reject(new notFoundId("no se ecnotro el correo"));
+        cursor.onsuccess = (e) => {
+            let puntero = e.target.result;
+            if (puntero) {
+              if (puntero.key == id) {
+                let value = puntero.value;
+                document.querySelector("#Name").innerHTML = puntero.value.name;
+                document.querySelector("#Specie").innerHTML = puntero.value.specie;
+                document.querySelector("#raza").innerHTML = puntero.value.raza;
+                document.querySelector("#age").innerHTML = puntero.value.age;
+                document.querySelector("#address").innerHTML = puntero.value.directionHouse;
+                document.querySelector("#phone").innerHTML = puntero.value.ownerPhone;
+                document.querySelector("#owner").innerHTML = puntero.value.ownerName;
 
-            }
-        });
+                document.querySelector("#updateName").value = puntero.value.name;
+                document.querySelector("#updateAge").value = puntero.value.age;
+                document.querySelector("#updatePhone").value = puntero.value.ownerPhone;
+                document.querySelector("#updateOwner").value = puntero.value.ownerName;
+                document.querySelector("#updateAddress").value = puntero.value.directionHouse;
+              
+                resolve();
+              }
+              puntero.continue();
+            } 
+          }   
        })
 
        .catch();
@@ -417,9 +374,9 @@ const validateloginUser=(baseDatos)=>{
 }
 
 
-const returnActivePet=(baseDatos)=>{
+const returnActivePet=()=>{
     return new Promise((resolve,reject)=>{
-        getIdUserUrl()
+        getUrlParams()
         .then((id)=>{
             let transaction=baseDatos.transaction("profiles-pets");
             let objectStore=transaction.objectStore("profiles-pets");
@@ -446,3 +403,118 @@ const returnActivePet=(baseDatos)=>{
     });
  }
  
+
+ 
+const updateData = () => {
+    return new Promise((resolve, reject) => {
+        getUrlParams()
+        .then((id) => {
+          let name = document.querySelector("#updateName").value;
+          let age = document.querySelector("#updateAge").value;
+          let phone = document.querySelector("#updatePhone").value;
+          let owner = document.querySelector("#updateOwner").value;
+          let address = document.querySelector("#updateAddress").value;
+  
+          let transaction = baseDatos.transaction("profiles-pets", "readwrite");
+          let openStore = transaction.objectStore("profiles-pets");
+  
+          let cursor = openStore.openCursor();
+
+          
+
+          transaction.onerror=()=>{
+            reject("ERROR");
+          }
+
+          let cursorStopped=false;
+  
+          cursor.addEventListener("success", (e) => {
+            let puntero = e.target.result;
+            if (puntero && !cursorStopped) {
+              if (puntero.key == id) {
+
+                let value2 = puntero.value;
+                value2.name = name;
+                value2.age = age;
+                value2.ownerPhone = phone;
+                value2.ownerName = owner;
+                value2.directionHouse = address;
+                
+                puntero.update(value2);
+                transaction.oncomplete = () => {
+                    resolve();
+                  };
+
+
+                cursorStopped=true;
+               
+              }
+  
+              puntero.continue();
+            } 
+          });
+        })
+
+        .catch((err) => {
+
+          throw new Error("No se pudo identificar ninguna id activa");
+        });
+
+    });
+  };
+
+
+  const changeUrlPhoto=(url)=>{
+    return new Promise((resolve,reject)=>{
+       getUrlParams()
+       .then((id)=>{
+        let transaction=baseDatos.transaction("profiles-pets","readwrite");
+        let objectStore=transaction.objectStore("profiles-pets");
+        let cursor=objectStore.openCursor();
+
+        cursor.onsuccess=(e)=>{
+            let puntero=e.target.result;
+            if(puntero){
+                if(puntero.key==id){              //EXPORTAR
+                    let valueChange=puntero.value;
+
+                    valueChange.urlPhotoPets=url;
+                    puntero.update(valueChange);
+                   
+                    transaction.oncomplete=()=>{
+                        resolve();
+                    }
+                }
+                puntero.continue();
+            }
+        }
+        cursor.onerror=()=>{
+            reject("No se pudo cambiar la foto de perfil");
+        }
+       })
+
+       .catch();
+    });
+}
+
+
+
+  
+let updateButton = document.querySelector("#updateButton");
+updateButton.addEventListener("click", (e) => {
+  let vetFields = document.querySelectorAll(".vetFields");
+  vetFields.forEach(function (element) {
+    element.style.display = "none";
+  });
+
+  let updateFields = document.querySelectorAll(".updateFields");
+  updateFields.forEach(function (element) {
+    element.style.display = "block";
+  });
+
+  updateButton.style.display = "none";
+
+  let saveVetButton = document.querySelector("#saveVetButton");
+  saveVetButton.style.display = "block";
+});
+

@@ -89,13 +89,42 @@ solicitud.onsuccess = () => {
   obtainIdVet()
     .then((nit) => {
       buttonCreator.addEventListener("click", (e) => {
-        createProfileMedic(nit)
-          .then(() => {
-            location.reload();
+
+        
+        verifyOtherData()
+          .then(()=>{
+
+            verifyId()
+            .then(()=>{
+
+              createProfileMedic(nit)
+            .then(() => {
+              
+              location.reload();
+            })
+
+            .catch(() => {
+              console.log("SALIO  MAL");
+            });   
+            })
+            .catch((e)=>{
+              let mistakes=document.querySelector(".mistakes");
+              mistakes.innerHTML=e;
+              setTimeout(()=>{
+                mistakes.innerHTML="";
+              },3000);
+            });
+            
           })
-          .catch(() => {
-            console.log("SALIO  MAL");
-          });
+
+          .catch((e)=>{
+            let mistakes=document.querySelector(".mistakes");
+          mistakes.innerHTML=e;
+          setTimeout(()=>{
+            mistakes.innerHTML="";
+          },3000);
+          })
+
       });
     })
     .catch();
@@ -107,7 +136,7 @@ solicitud.onsuccess = () => {
         searchProfiles(nit)
           .then()
           .catch(() => {
-            containerDoctors.innerHTML = `<h1>EL medico no esta registrado</h1> `;
+            containerDoctors.innerHTML = `<h1>El médico no está registrado</h1> `;
           });
       })
       .catch();
@@ -126,7 +155,6 @@ solicitud.onsuccess = () => {
       let parent3 = event.parentElement;
       let finallyParent = parent3.parentElement;
       let listOfClass = finallyParent.className.split(" ");
-      console.log(listOfClass[1]);
     }
   });
 
@@ -135,7 +163,13 @@ solicitud.onsuccess = () => {
   //Evento para cuando cierren sesion desactivar el perfil
 
   exit.addEventListener("click", (e) => {
-    window.location.replace("/src/components/accessPage/index.html");
+    changeStartedSessionValue()
+    .then(()=>{
+      window.location.replace("/src/components/accessPage/index.html");
+    })
+    .catch((e)=>{
+      console.log(e.message);
+    });
   });
 };
 
@@ -386,7 +420,7 @@ const showMedics = (nit) => {
 
                 <section class="doctorSection doctorSection-top">
                   <i class="fa fa-bars doctorMenu"></i>
-                  <p>${puntero.value.name}</p>
+                  <p>${puntero.value.name.toUpperCase()}</p>
                 </section>
                 <section class="doctorSection doctorSection-middle">
                   <img src="${puntero.value.urlPhotoDoctor}" alt="Sin foto" class="show2">
@@ -399,7 +433,6 @@ const showMedics = (nit) => {
           prevSlide = slideCount;
           newSlide = true;
         } else {
-          alert("Se entro al segundo");
           slide = document.querySelector(`#slide${prevSlide}`);
           slide.innerHTML += `         
               <div class="doctorCard" id="${puntero.value.id}">
@@ -410,7 +443,7 @@ const showMedics = (nit) => {
                 </div>
                 <section class="doctorSection doctorSection-top">
                   <i class="fa fa-bars doctorMenu"></i>
-                  <p>${puntero.value.name}</p>
+                  <p>${puntero.value.name.toUpperCase()}</p>
                 </section>
                 <section class="doctorSection doctorSection-middle">
                   <img src="${puntero.value.urlPhotoDoctor}" alt="Sin foto" class="show2">
@@ -431,14 +464,15 @@ const showMedics = (nit) => {
 
         count++;
         slideCount++;
-        document.querySelector(`#delete${puntero.value.id}`).addEventListener("click", ()=> {deleteMedicFunction(puntero.value.id)});
-        document.querySelector(`#update${puntero.value.id}`).addEventListener("click", ()=> {photoMedicFunction(puntero.value.id)});
+        let value=puntero.value;
+        document.querySelector(`#delete${puntero.value.id}`).addEventListener("click", ()=> {deleteMedicFunction(value.id)});
+        document.querySelector(`#update${puntero.value.id}`).addEventListener("click", ()=> {photoMedicFunction(value.id)});
       }
       puntero.continue();
     } else {      
       if (count == 0){
         let containerDoctors=document.querySelector(".slider-wrapper");
-        containerDoctors.innerHTML=`<h1>No hay medicos registrados</h1>`;
+        containerDoctors.innerHTML=`<h1>No hay médicos registrados</h1>`;
       }
       sliderFunction();
     }
@@ -487,7 +521,7 @@ const searchProfiles = (nitVete) => {
       let puntero = e.target.result;
       let containerDoctors = document.querySelector("#slides-container");
       if (puntero) {
-        if (puntero.value.nitVete === nitVete && puntero.value.id == inputSearch) {
+        if (puntero.value.nitVete === nitVete && puntero.value.name.toLowerCase().includes(inputSearch.toLowerCase())) {
           containerDoctors.innerHTML = `
             <li class="slide" id="slide1">            
               <div class="doctorCard" id="${puntero.value.id}">
@@ -498,7 +532,7 @@ const searchProfiles = (nitVete) => {
                 </div>
                 <section class="doctorSection doctorSection-top">
                   <i class="fa fa-bars doctorMenu"></i>
-                  <p>${puntero.value.name}</p>
+                  <p>${puntero.value.name.toUpperCase()}</p>
                 </section>
                 <section class="doctorSection doctorSection-middle">
                   <img src="${puntero.value.urlPhotoDoctor}" alt="Sin foto" class="show2">
@@ -509,8 +543,9 @@ const searchProfiles = (nitVete) => {
               </div>
             </li>  
           `;
-          document.querySelector(`#delete${puntero.value.id}`).addEventListener("click", ()=> {deleteMedicFunction(puntero.value.id)});
-          document.querySelector(`#update${puntero.value.id}`).addEventListener("click", ()=> {photoMedicFunction(puntero.value.id)});
+          let value=puntero.value;
+          document.querySelector(`#delete${puntero.value.id}`).addEventListener("click", ()=> {deleteMedicFunction(value.id)});
+          document.querySelector(`#update${puntero.value.id}`).addEventListener("click", ()=> {photoMedicFunction(value.id)});
           resolve();          
         }
         puntero.continue();
@@ -768,7 +803,9 @@ function sliderFunction() {
 
 const updateVeterinary = () => {
   return new Promise((resolve, reject) => {
-    let name = document.querySelector("#updateName").value;
+    getUrlParams()
+    .then((id)=>{
+      let name = document.querySelector("#updateName").value;
     let address = document.querySelector("#updateAddress").value;
     let city = document.querySelector("#updateCity").value;
     let nit = document.querySelector("#updateNit").value;
@@ -782,7 +819,7 @@ const updateVeterinary = () => {
     cursor.onsuccess = (e) => {
       let puntero = e.target.result;
       if (puntero) {
-        if (puntero.value.veterinaryStart == true) {
+        if (puntero.key==id) {
           let veterynary = puntero.value;
           veterynary.veterinaryName = name;
           veterynary.veterinaryAdress = address;
@@ -805,7 +842,7 @@ const updateVeterinary = () => {
           document.querySelector("#updateRepresentative").value = representative;
           setTimeout(() => {
             resolve();
-            showVeterinaryData();
+            showVeterinaryData(e);
           }, 2000);
         }
         puntero.continue();
@@ -814,6 +851,10 @@ const updateVeterinary = () => {
     cursor.onerror = () => {
       reject("no se pudo actualizar perfil");
     };
+
+    })
+    .catch();
+    
   });
 };
 
@@ -839,4 +880,146 @@ function showVeterinaryData(e) {
     }
     cursor.continue();
   }
+}
+
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+const verifyId=()=>{
+  return new Promise((resolve,reject)=>{
+    let id=document.querySelector("#idDoctor").value;
+    for(let x of id){
+      let convert=parseInt(x);
+      if(isNaN(convert)){
+        reject("En cedula no ingreses ninguna letra");
+      }
+    }
+
+    if(id.length==10){
+      let transaction = db.transaction("medical-profiles");
+      let openStore=transaction.objectStore("medical-profiles");
+      let cursor=openStore.openCursor();
+  
+      cursor.onsuccess=(e)=>{
+        let puntero=e.target.result;
+        if(puntero){
+          if(puntero.value.id==id){
+            reject("El documento ya esta en uso");
+          }
+          puntero.continue()
+        }
+        else{
+          resolve();
+        }
+      }
+    }
+    else{
+      reject("Pon la cantidad de numeros correcta");
+    }
+  });
+}
+
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+const verifyOtherData=()=>{
+  return new Promise((resolve,reject)=>{
+    let estructure=["@gmail.com","@yahoo.com","@hotmail.com"]
+    let name=document.querySelector("#NameDoctor").value;
+    let charge=document.querySelector("#PositionDoctor").value;
+    let city=document.querySelector("#CityDoctor").value;
+    let clinic=document.querySelector("#ClinicDoctor").value;
+    let email=document.querySelector("#emailDoctor").value;
+    
+    try{
+      if(name.length<2){
+          reject("Pon un nombre con mas caracteres");
+      }
+      else{
+          if(charge.length<2){
+              reject("Completa el cargo");
+          }
+          else{   
+            if(city.length<3){
+              reject("Completa la ciudad");
+            }                      
+            else{
+              if(clinic.length<3){
+                reject("Completa la clinica");
+              }
+
+              else{
+                if(email.length<=12){
+                  reject("completa el correo");
+                }
+                else{
+                  if(email.includes("@")){
+                    let index=email.indexOf("@");
+                    let estructureEmails=email.substring(index,200);
+
+                    if(!estructure.includes(estructureEmails)){
+                      reject("El correo ingresado no tiene la estructura correcta");
+                    }
+                    else{
+                        resolve();
+                    }
+                  } 
+
+                  else{
+                    reject("El correo ingresado no tiene la estructura correcta");
+                  }
+                }
+              }
+            } 
+          }
+      }
+  }
+  catch(error){
+      containerMistakes.innerHTML=error.message;
+      setTimeout(()=>{
+          containerMistakes.innerHTML="";
+      },3000);
+  }
+
+
+  });
+}
+
+
+const changeStartedSessionValue=()=>{
+  return new Promise((resolve,reject)=>{
+  getUrlParams()
+  .then((id)=>{
+    let transaction=baseDatos.transaction("veterinarys","readwrite");
+  let objetStore=transaction.objectStore("veterinarys");
+
+  transaction.oncomplete=()=>{
+    resolve();
+  }
+
+  let cursorStopped=false;
+  let cursor=objetStore.openCursor();
+  cursor.addEventListener("success",(e)=>{
+      let puntero=e.target.result;
+      if(puntero && !cursorStopped){
+          let valor=puntero.value;
+          if(puntero.key==id){
+            if(puntero.value.veterinaryStart==true){
+              
+              valor.startProfile = false; // Modificar la propiedad inicio a true
+              puntero.update(valor);
+              cursorStopped=true;
+            }
+            
+          }
+          puntero.continue();
+          }
+          else{
+          reject(new notFoundId("El correo no existe"));
+      }
+      
+  });
+  })
+
+  .catch();
+  });
 }

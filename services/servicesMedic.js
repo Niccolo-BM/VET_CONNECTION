@@ -467,56 +467,28 @@ export const deletePet=(baseDatos,id)=>{
     return new Promise((resolve,reject)=>{
         let transaction=baseDatos.transaction("profiles-pets","readwrite");
         let objectStore=transaction.objectStore("profiles-pets");
-         objectStore.delete(id);    
 
-         transaction.oncomplete=()=>{
+        transaction.oncomplete=()=>{
             resolve();
-         }
+        }
 
-         transaction.onerror=()=>{
+        transaction.onerror=()=>{
             reject();
-         }
+        }
+
+        let cursor=objectStore.openCursor();
+        cursor.onsuccess=(e)=>{
+            let puntero=e.target.result;
+            if(puntero){
+                if(puntero.key==id){
+                    puntero.delete(id);    
+                }
+            }
+        }
+        
     });                                      //EXPORTAR
 }
 
-
-
-// export const activatePatient=(baseDatos)=>{
-//     return new Promise((resolve,reject)=>{
-//         let valueId=document.querySelector(".email").value;
-//         let password=document.querySelector(".password").value;
-//         let transaction=baseDatos.transaction("profiles-pets","readwrite");
-//         let objectStore=transaction.objectStore("profiles-pets");
-
-//         let cursor=objectStore.openCursor();
-
-//         transaction.oncomplete=()=>{
-//             window.location.replace("/page5-USER/sextaPagina.html");
-//             resolve();
-//         }
-//         transaction.onerror=()=>{
-//             reject("No se pudo cambiar la foto de perfil");
-//         }
-
-//         let cursorStopped=false;
-
-//         cursor.onsuccess=(e)=>{
-//             let puntero=e.target.result;
-//             if(puntero && !cursorStopped){
-//                 let value=puntero.value;
-//                 if(value.idOwnerPet==valueId && value.passwordPet == password && value.startProfile==false){
-//                     value.startProfile=true;
-//                     puntero.update(value);
-//                     cursorStopped=true;
-//                 }
-//                 puntero.continue();
-//             }
-//             else{
-//                 reject("no se pudo");
-//             }
-//         }
-//     });
-// }
 
 
 export const activateDoctor=(baseDatos)=>{

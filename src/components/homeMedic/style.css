@@ -314,7 +314,6 @@ a{
 
 .show{
     background-size: contain;
-    height: 100%;
     display: flex;
     align-items: center;
 }
@@ -581,14 +580,14 @@ a{
 .viewForm{   /*Clase en css para activar container para create nuevos profiles veterinarios*/
     position: absolute;
     z-index: 300;
-    top: -50%;
+    top: -30%;
     right: 10%;
     transform: translateX(-20%);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 90vh;
+    height: 70vh;
     gap: 2%;
     background-color: #edf2fb;
     transition: .6s;
@@ -655,21 +654,8 @@ padding: 0 12%;
     border: 1px solid #017991;
 }
 
-/* .viewContainerSearch{
-    width: 100%;
-    height: 10vh;
-    display: flex;
-    align-items: center;
-    background-color:#d7f6dc;
-    position: absolute;
-    top: 110%;
-    gap: 60%;
-padding: 0 12%;
-    border: 1px solid #017991;
-} */
 
 .viewContainer{
-    margin-top: -290px;
 }
 
 .containerSearchPatients h2{
@@ -740,8 +726,8 @@ padding: 0 12%;
 
 .carta{
     margin: 15px 0;
-    width: 30%;
-    height: 40vh;
+    width: 25%;
+    height: 35vh;
     border: 1px solid rgb(0, 0, 0);
     font-size: 20px;
     padding: 20px;
@@ -752,15 +738,26 @@ padding: 0 12%;
     align-items: center;
     justify-content: center;
     gap: 10%;
+    background-color: #017991d0;
+    color: white;
+    transition: .6s;
+
 }
 
 
+.carta:hover{
+    transition: .6s;
+    background-color: #017991;
+
+}
+
 
 .valor{
-    background-color:#edf2fb;
+    background-color:transparent;
     border: none;
     outline: none;
     color: black;
+    
 }
 
 
@@ -773,13 +770,17 @@ padding: 0 12%;
 }
 
 .carta2{
+    width: 50%;
+    height: 100%;
     font-size: 15px;
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
+    color: white;
 }
 
 .carta2 strong{
-    color: #017991;
+    color: white;
 }
 
 .ocultar{

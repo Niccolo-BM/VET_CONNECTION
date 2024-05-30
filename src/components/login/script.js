@@ -50,6 +50,14 @@ class incorrectEmail extends Error{
     }
 }
 
+class sesionStart extends Error{
+    constructor(message){
+        super(message);
+    }
+}
+
+
+
 
 //Selected elements html
 
@@ -91,7 +99,6 @@ solicitud.onsuccess=()=>{
                 validateEmailVeterinary()
 
                 .then((clave)=>{
-                    alert(clave);
                     changeLoggedInValue()
                     .then(()=>{
                         window.location.replace("/src/components/homeClinic/index.html?id="+clave);
@@ -182,8 +189,12 @@ const validateEmailVeterinary=()=>{
             if(puntero){
                
                 if(puntero.value.veterinaryPassword==password && puntero.value.veterinaryEmail==email){
-                    resolve(puntero.key);
-                    return;
+                    if(puntero.value.veterinaryStart==true){
+                        reject(new sesionStart("Ya hay una sesion iniciada"));
+                    }
+                    else{
+                        resolve(puntero.key);
+                    }
                 }
                 puntero.continue();
             }
@@ -222,12 +233,15 @@ const validateEmailMedical=()=>{
         cursor.addEventListener("success",(e)=>{
             let puntero=e.target.result;
             
-            alert("entro");
             if(puntero){
                
                 if(puntero.value.id==password && puntero.value.email==email){
-                    resolve(puntero.key);
-                    return;
+                    if(puntero.value.start==true){
+                        reject(new sesionStart("Ya hay una sesion iniciada"));
+                    }
+                    else{
+                        resolve(puntero.key);
+                    }
                 }
                 puntero.continue();
             }
@@ -260,7 +274,12 @@ const validateEmailPatient=()=>{
             
             if(puntero){
                 if(puntero.value.passwordPet==password && puntero.value.idOwnerPet==email){
-                    resolve(puntero.key);
+                    if(puntero.value.startProfile==true){
+                        reject(new sesionStart("Ya hay una sesion iniciada"));
+                    }
+                    else{
+                        resolve(puntero.key);
+                    }
                     return;
                 }
                 puntero.continue();

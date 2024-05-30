@@ -321,3 +321,13 @@ text-align: center;
 #blogColor{
     color: #017991;
 }
+
+.password{
+    position: relative;
+}
+
+.ri-eye-line{
+    position: absolute;
+    top: 43%;
+    left: 54%;
+}

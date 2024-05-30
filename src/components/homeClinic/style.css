@@ -424,6 +424,15 @@ input{
     top: -60px;
     left: 0px;
     display: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.mistakes{
+    position: absolute;
+    left: 15%;
+    bottom: 8%;
+    font-size: 13px;
 }
 
 #createDoctorForm > h3{
@@ -826,7 +835,7 @@ input{
   }
 
   .fa-bars{
-    padding: 6px 20px 20px 20px;
+    padding: 6px 20px 20px 10px;
   }
   .doctorMenu {
     position: absolute;
@@ -856,8 +865,14 @@ input{
     color: #017991;
     font-weight: bold !important;
     font-size: 20px !important;
-    text-align: center;
-    padding: 12px;
+    /* text-align: center; */
+    padding-top: 12px;
+  }
+
+  .doctorSection-top > p {
+    font-size: 17px;
+    padding-left: 20px;
+    margin-bottom: 30px;
   }
 
   .doctorSection-middle {
@@ -875,7 +890,7 @@ input{
     position: relative;
     bottom: 0;
     z-index: 300;
-    padding: 12px;
+    padding: 8px 16px 16px 16px;
   }
 /*FOOTER*/
 footer{
