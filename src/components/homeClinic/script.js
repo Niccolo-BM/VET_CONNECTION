@@ -1,7 +1,7 @@
 // Import functions from the file (concept called inheritance)
 import { readFile, getUrlParams } from "../../../services/servicesMedic.js"; 
 
-/* elements that are going to be used since the page loads */
+/* Elements that are going to be used since the page loads */
 let inputPhoto = document.querySelector(".photoClinic");
 let containerPhoto = document.querySelector("#divProfile");
 let otherOptionChange1 = document.querySelector(".left");
@@ -14,7 +14,7 @@ let buttonForReturnDelete = document.querySelector(".cancel");
 let buttonCreator = document.querySelector("#BtnCreateDoctor");
 let iconSearch = document.querySelector("#searchIcon");
 
-// start db
+// Start db
 var db;
 var solicitud = indexedDB.open("datos");
 
