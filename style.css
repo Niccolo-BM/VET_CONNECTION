@@ -377,17 +377,13 @@ text-align: center;
     
 }
 #img3{
-<<<<<<< HEAD
-    width: 30px;
-    height: 30px;
-=======
     width: 25px;
     height: 25px;
->>>>>>> 27efc33f01772dd18ee71c305e03ccef63bded84
     margin: 3px;
     filter:invert(100%);
     background-color: bcd8c1d;
 }
+
 #imgSlider{
     z-index: -999;
 }
