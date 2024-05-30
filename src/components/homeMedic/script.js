@@ -562,7 +562,7 @@ const showPatients=(idvet)=>{ //Esta funcion se encarga de mostrar los medicos a
                 puntero.continue();
         }
         else if(mostrado==0){
-            containerPatients.innerHTML=`<h1 class="textBig"> Aun no has creado Ningun Perfil</h1>`  
+            containerPatients.innerHTML=`<h3 class="textBig"> Aun no has creado Ningun Perfil</h3>`  
         } 
 
     });
