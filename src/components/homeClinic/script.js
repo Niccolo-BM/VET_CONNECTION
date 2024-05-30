@@ -1,27 +1,20 @@
 import { readFile, getUrlParams } from "../../../services/servicesMedic.js";
 
+/* elements that are going to be used since the page loads */
 let inputPhoto = document.querySelector(".photoClinic");
-
 let containerPhoto = document.querySelector("#divProfile");
-
 let otherOptionChange1 = document.querySelector(".left");
 let otherOptionChange2 = document.querySelector(".left2");
-
 let delete1 = document.querySelector(".delete1");
 let delete2 = document.querySelector(".delete2");
-
 let exit = document.querySelector("#exit");
-
 let buttonForDelete = document.querySelector(".acept");
 let buttonForReturnDelete = document.querySelector(".cancel");
-
 let buttonCreator = document.querySelector("#BtnCreateDoctor");
-
 let iconSearch = document.querySelector("#searchIcon");
 
 // start db
 var db;
-
 var solicitud = indexedDB.open("datos");
 
 solicitud.onerror = () => {
@@ -30,8 +23,7 @@ solicitud.onerror = () => {
 
 solicitud.onsuccess = () => {
   db = solicitud.result;
-  console.log("todo perfecto");
-
+  //show veterinary photo when the page loads
   showPhotoInContainer()
     .then((url) => {
       containerPhoto.innerHTML = `<img src='${url}'  class="show" alt='Poner una foto'>`;
@@ -44,6 +36,7 @@ solicitud.onsuccess = () => {
     .then(() => {})
     .catch();
 
+  //deletes the veterinary from database and send the user to the access page 
   buttonForDelete.addEventListener("click", () => {
     idVet()
       .then((id) => {
@@ -62,16 +55,16 @@ solicitud.onsuccess = () => {
     containerDeleteProfiles.classList.toggle("viewForm");
   });
 
-  // Eventos encargados para que todo lo que tenga que ver con cambio de foto salga bien
-
+  //add event click to upload the veterinary photo
   inputPhoto.addEventListener("change", (e) => {
     let question = confirm("Quieres establecer esta foto?");
     if (question) {
-      readFile(inputPhoto.files[0]) //mandamos como parametro el primer archiv seleccionado
+      //reads the photo that is being uploaded
+      readFile(inputPhoto.files[0])
         .then((url) => {
-          changeUrlPhoto(url) //Esta funcion le pasamos como parametro url de la imagen para que haga la actualizacion
+          //if the photo is ok, then it changes the url of the veterinary photo in database
+          changeUrlPhoto(url) 
             .then(() => {
-              // alert(url);
               location.reload();
             })
             .catch((err) => alert("No se pudo cambiar la foto "));
@@ -80,31 +73,29 @@ solicitud.onsuccess = () => {
     }
   });
 
+  //gets the veterinary id to show the asociated doctors
   obtainIdVet()
     .then((nit) => {
-      showMedics(nit);
+      showMedics(nit)
+      .then(() =>{
+        //once the doctor cards are created, this function gives the functionality to the delete an update button
+        cardFunctions();
+      });
     })
     .catch();
 
   obtainIdVet()
     .then((nit) => {
       buttonCreator.addEventListener("click", (e) => {
-
-        
         verifyOtherData()
           .then(()=>{
-
             verifyId()
             .then(()=>{
-
               createProfileMedic(nit)
-            .then(() => {
-              
+            .then(() => {  
               location.reload();
             })
-
             .catch(() => {
-              console.log("SALIO  MAL");
             });   
             })
             .catch((e)=>{
@@ -129,6 +120,7 @@ solicitud.onsuccess = () => {
     })
     .catch();
 
+  //adds the click event for the search doctor bar on the icon to search a medic by name
   iconSearch.addEventListener("click", () => {
     let containerDoctors = document.querySelector(".slider-wrapper");
     obtainIdVet()
@@ -160,12 +152,11 @@ solicitud.onsuccess = () => {
 
   // ________________________________________________
 
-  //Evento para cuando cierren sesion desactivar el perfil
-
+  //adds a click event to the exit button to close the veterinary session
   exit.addEventListener("click", (e) => {
     changeStartedSessionValue()
     .then(()=>{
-      alert("asa");
+      console.log('profile deactivated');
     })
     .catch((e)=>{
       console.log(e);
@@ -173,8 +164,7 @@ solicitud.onsuccess = () => {
   });
 };
 
-// Start functions
-
+// loads the veterinary data in the right side of the section 1
 const validateHomeUser = () => {
   return new Promise((resolve, reject) => {
     getUrlParams()
@@ -200,9 +190,6 @@ const validateHomeUser = () => {
               document.querySelector("#updateNit").value = puntero.value.veterinaryNit;
               document.querySelector("#updatePhone").value = puntero.value.veterinaryPhone;
               document.querySelector("#updateRepresentative").value = puntero.value.veterinaryRepresentative;
-              // transaction.oncomplete=()=>{
-              //   resolve([value.veterinaryName , value.veterinaryAdress , value.veterinaryCity,value.veterinaryNit,value.veterinaryPhone]);
-              // }
               resolve();
             }
             puntero.continue();
@@ -216,6 +203,7 @@ const validateHomeUser = () => {
   });
 };
 
+//if the veterinary photo exists, when the page is loaded, this function displays the veterinary photo
 const showPhotoInContainer = () => {
   return new Promise((resolve, reject) => {
     getUrlParams()
@@ -240,6 +228,7 @@ const showPhotoInContainer = () => {
   });
 };
 
+//modifies the photo url for the current veterinary
 const changeUrlPhoto = (url) => {
   return new Promise((resolve, reject) => {
     let transaction = db.transaction("veterinarys", "readwrite");
@@ -267,6 +256,7 @@ const changeUrlPhoto = (url) => {
   });
 };
 
+//gets the veterinary id for multiple purposes (some functions uses the veterinary id to update in database)
 const idVet = () => {
   return new Promise((resolve, reject) => {
     getUrlParams()
@@ -291,6 +281,7 @@ const idVet = () => {
   });
 };
 
+//deletes the veterinary on database
 const deleteVet = (id) => {
   return new Promise((resolve, reject) => {
     let transaction = db.transaction("veterinarys", "readwrite");
@@ -304,9 +295,10 @@ const deleteVet = (id) => {
     transaction.onerror = () => {
       reject();
     };
-  }); //EXPORTAR
+  });
 };
 
+//updates veterinary data on database
 const updateData = () => {
   return new Promise((resolve, reject) => {
     getUrlParams()
@@ -351,6 +343,7 @@ const updateData = () => {
   });
 };
 
+//creates a doctor profile on database and refresh the doctor slider
 const createProfileMedic = (NitVeterinary) => {
   return new Promise((resolve, reject) => {
     let name = document.querySelector("#NameDoctor").value;
@@ -392,7 +385,9 @@ const createProfileMedic = (NitVeterinary) => {
   });
 };
 
+//show all the doctors asociated to the veterinary in the slider when the page loads
 const showMedics = (nit) => {
+  return new Promise((resolve, reject) => {
   let transaction = db.transaction("medical-profiles");
   let objectStore = transaction.objectStore("medical-profiles");
 
@@ -423,7 +418,7 @@ const showMedics = (nit) => {
                   <p>${puntero.value.name.toUpperCase()}</p>
                 </section>
                 <section class="doctorSection doctorSection-middle">
-                  <img src="${puntero.value.urlPhotoDoctor}" alt="Sin foto" class="show2">
+                  <img src="${puntero.value.urlPhotoDoctor}" alt="Sin foto" class="show2"  onerror=" this.src='../../assets/img/sinFotoPerfil.png'">
                 </section>
                 <section class="doctorSection doctorSection-bottom">
                   ${puntero.value.specialtyDoctor}
@@ -446,7 +441,7 @@ const showMedics = (nit) => {
                   <p>${puntero.value.name.toUpperCase()}</p>
                 </section>
                 <section class="doctorSection doctorSection-middle">
-                  <img src="${puntero.value.urlPhotoDoctor}" alt="Sin foto" class="show2">
+                  <img src="${puntero.value.urlPhotoDoctor}" alt="Sin foto" class="show2" onerror=" this.src='../../assets/img/sinFotoPerfil.png'">
                 </section>
                 <section class="doctorSection doctorSection-bottom">
                   ${puntero.value.specialtyDoctor}
@@ -463,10 +458,7 @@ const showMedics = (nit) => {
         }
 
         count++;
-        slideCount++;
-        let value=puntero.value;
-        document.querySelector(`#delete${puntero.value.id}`).addEventListener("click", ()=> {deleteMedicFunction(value.id)});
-        document.querySelector(`#update${puntero.value.id}`).addEventListener("click", ()=> {photoMedicFunction(value.id)});
+        slideCount++;    
       }
       puntero.continue();
     } else {      
@@ -475,10 +467,13 @@ const showMedics = (nit) => {
         containerDoctors.innerHTML=`<h1>No hay médicos registrados</h1>`;
       }
       sliderFunction();
+      resolve();
     }
   };
+});
 };
 
+//gets the veterinary id from database
 const obtainIdVet = () => {
   return new Promise((resolve, reject) => {
     getUrlParams()
@@ -506,6 +501,7 @@ const obtainIdVet = () => {
   });
 };
 
+//search a doctor by name (part of the name should be included in the search bar at least)
 const searchProfiles = (nitVete) => {
   return new Promise((resolve, reject) => {
     let inputSearch = document.querySelector("#inputSearch").value;
@@ -535,7 +531,7 @@ const searchProfiles = (nitVete) => {
                   <p>${puntero.value.name.toUpperCase()}</p>
                 </section>
                 <section class="doctorSection doctorSection-middle">
-                  <img src="${puntero.value.urlPhotoDoctor}" alt="Sin foto" class="show2">
+                  <img src="${puntero.value.urlPhotoDoctor}" alt="Sin foto" class="show2"  onerror=" this.src='../../assets/img/sinFotoPerfil.png'">
                 </section>
                 <section class="doctorSection doctorSection-bottom">
                   ${puntero.value.specialtyDoctor}
@@ -544,8 +540,9 @@ const searchProfiles = (nitVete) => {
             </li>  
           `;
           let value=puntero.value;
-          document.querySelector(`#delete${puntero.value.id}`).addEventListener("click", ()=> {deleteMedicFunction(value.id)});
-          document.querySelector(`#update${puntero.value.id}`).addEventListener("click", ()=> {photoMedicFunction(value.id)});
+          console.log("funcionalidad a tarjeta: " + value.id);
+          document.querySelector(`#delete${value.id}`).addEventListener("click", ()=> {deleteMedicFunction(value.id)});
+          document.querySelector(`#update${value.id}`).addEventListener("click", ()=> {photoMedicFunction(value.id)});
           resolve();          
         }
         puntero.continue();
@@ -556,6 +553,7 @@ const searchProfiles = (nitVete) => {
   });
 };
 
+//deletes doctor by id in database
 function deleteMedicFunction(id){
     let transaction = db.transaction("medical-profiles", "readwrite");
     let objectStore = transaction.objectStore("medical-profiles");
@@ -577,7 +575,9 @@ function deleteMedicFunction(id){
   };
 }
 
+//updates doctor photo in database
 function photoMedicFunction(id){
+  console.log("funcion foto de: " + id);
   let photoButton = document.querySelector(`#photo${id}`);
   let fileUploader = document.querySelector(`#photo${id}`);
   photoButton.click();
@@ -601,6 +601,7 @@ function photoMedicFunction(id){
   let cursor = objectStore.openCursor();  
 }
 
+//updates the photo if exists in database
 const changeDoctorUrlPhoto = (id, url) => {
   return new Promise((resolve, reject) => {
     let transaction = db.transaction("medical-profiles", "readwrite");
@@ -628,8 +629,7 @@ const changeDoctorUrlPhoto = (id, url) => {
   });
 };
 
-
-
+// click events required to trigger previous functions
 containerPhoto.addEventListener("click", () => {
   inputPhoto.click();
 });
@@ -654,8 +654,7 @@ delete2.addEventListener("click", () => {
     .classList.toggle("viewForm");
 });
 
-//Header y footer
-
+//Header and footer
 let icon = document.querySelector(".material-symbols-outlined");
 let menuHidden = document.querySelector(".menuHidden");
 let searchHidden = document.querySelector(".searchHidden");
@@ -710,7 +709,7 @@ window.addEventListener("click", function (e) {
   }
 });
 
-//Event Search Pet
+//Event to the search pet bar
 let searchPetClinicArray = document.querySelectorAll(".eventSearchPet");
 searchPetClinicArray.forEach(function (searchPetClinic) {
   searchPetClinic.addEventListener("click", (e) => {
@@ -723,25 +722,28 @@ searchPetClinicArray.forEach(function (searchPetClinic) {
   });
 });
 
-//Close Search Pet
+//Close Search Pet div
 let closeSearchPet = document.querySelector("#closeSearchPet");
 closeSearchPet.addEventListener("click", (e) => {
   let searchPet = document.querySelector("#searchPet");
   searchPet.style.display = "none";
 });
 
+// close doctor creation form
 let closeCreateDoctor = document.querySelector("#closeCreateDoctor");
 closeCreateDoctor.addEventListener("click", (e) => {
   let createDoctor = document.querySelector("#createDoctorForm");
   createDoctor.style.display = "none";
 });
 
+// open doctor creation form
 let createDoctor = document.querySelector("#createDoctor");
 createDoctor.addEventListener("click", (e) => {
   let createDoctorForm = document.querySelector("#createDoctorForm");
   createDoctorForm.style.display = "block";
 });
 
+// hide veterinary paragraphs on the right side of the section one and show the input fields to update the veterinary data
 let updateButton = document.querySelector("#updateButton");
 updateButton.addEventListener("click", (e) => {
   let vetFields = document.querySelectorAll(".vetFields");
@@ -760,8 +762,7 @@ updateButton.addEventListener("click", (e) => {
   saveVetButton.style.display = "block";
 });
 
-
-
+//save veterinary data on the right side of the section 1
 let saveVetButton = document.querySelector("#saveVetButton");
 saveVetButton.addEventListener("click", (e) => {
   let vetFields = document.querySelectorAll(".vetFields");
@@ -782,6 +783,7 @@ saveVetButton.addEventListener("click", (e) => {
     .catch((err) => alert("No se pudo actualizar el veterinario"));
 });
 
+// all the slider arrow functionality
 function sliderFunction() {
   const slidesContainer = document.getElementById("slides-container");
   const slide = document.querySelector(".slide");
@@ -789,7 +791,6 @@ function sliderFunction() {
   const nextButton = document.getElementById("slide-arrow-next");
 
   nextButton.addEventListener("click", () => {
-    alert("sdsd");
     const slideWidth = slide.clientWidth;
     slidesContainer.scrollLeft += slideWidth;
   });
@@ -800,8 +801,7 @@ function sliderFunction() {
   });
 }
 
-
-
+//update the veterinary data on database
 const updateVeterinary = () => {
   return new Promise((resolve, reject) => {
     getUrlParams()
@@ -859,6 +859,7 @@ const updateVeterinary = () => {
   });
 };
 
+//show veterinary data on the right side of the section one
 function showVeterinaryData(e) {
   let cursor = e.target.result;
 
@@ -884,7 +885,7 @@ function showVeterinaryData(e) {
 }
 
 // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
+// create doctor id field validations
 const verifyId=()=>{
   return new Promise((resolve,reject)=>{
     let id=document.querySelector("#idDoctor").value;
@@ -919,9 +920,7 @@ const verifyId=()=>{
   });
 }
 
-// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
+//veterinary data other fields validations
 const verifyOtherData=()=>{
   return new Promise((resolve,reject)=>{
     let estructure=["@gmail.com","@yahoo.com","@hotmail.com"]
@@ -980,19 +979,16 @@ const verifyOtherData=()=>{
           containerMistakes.innerHTML="";
       },3000);
   }
-
-
   });
 }
 
-
+//change the veterinary session in true after the access page send the user to the homeclinic page
 const changeStartedSessionValue=()=>{
   return new Promise((resolve,reject)=>{
   getUrlParams()
   .then((id)=>{
     let transaction=db.transaction("veterinarys","readwrite");
   let objetStore=transaction.objectStore("veterinarys");
-
 
   transaction.oncomplete=()=>{
     window.location.replace("/src/components/accessPage/index.html");
@@ -1020,12 +1016,30 @@ const changeStartedSessionValue=()=>{
       }
         else{
           reject("El correo no existe");
-        }
-      
-      
+        }    
   });
   })
-
   .catch();
   });
+}
+
+//doctor card functionalities to be added once the cards are loaded in screen
+function cardFunctions(){
+  let updateCards = document.querySelectorAll('.updateMedic');
+  updateCards.forEach(function (card) {
+  let updateCard = document.querySelector(`#${card.id}`);
+  if(updateCard){
+    document.querySelector(`#${card.id}`).addEventListener("click", ()=> {photoMedicFunction(card.id.replace("update", ""))});
+    
+  }
+});
+
+let deleteCards = document.querySelectorAll('.deleteMedic');
+deleteCards.forEach(function (card) {
+  let deleteCard = document.querySelector(`#${card.id}`);
+
+  if(deleteCard){
+    document.querySelector(`#${card.id}`).addEventListener("click", ()=> {deleteMedicFunction(card.id.replace("delete", ""))});
+  }
+});
 }

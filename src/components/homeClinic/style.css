@@ -424,7 +424,6 @@ input{
     top: -60px;
     left: 0px;
     display: none;
-    display: flex;
     flex-direction: column;
 }
 
@@ -817,7 +816,7 @@ input{
     z-index: 400;
     background-color: #017991;
     color: white;
-    height: 20%;
+    height: 28%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
