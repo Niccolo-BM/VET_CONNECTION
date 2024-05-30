@@ -670,8 +670,6 @@ a{
 }
 
 
-.viewContainer{
-}
 
 .containerSearchPatients h2{
     color: #017991;
@@ -784,7 +782,7 @@ a{
 .carta2{
     width: 50%;
     height: 100%;
-    font-size: 15px;
+    font-size: 12px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
