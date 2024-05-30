@@ -163,7 +163,13 @@ solicitud.onsuccess = () => {
   //Evento para cuando cierren sesion desactivar el perfil
 
   exit.addEventListener("click", (e) => {
-    window.location.replace("/src/components/accessPage/index.html");
+    changeStartedSessionValue()
+    .then(()=>{
+      window.location.replace("/src/components/accessPage/index.html");
+    })
+    .catch((e)=>{
+      console.log(e.message);
+    });
   });
 };
 
@@ -975,5 +981,45 @@ const verifyOtherData=()=>{
   }
 
 
+  });
+}
+
+
+const changeStartedSessionValue=()=>{
+  return new Promise((resolve,reject)=>{
+  getUrlParams()
+  .then((id)=>{
+    let transaction=baseDatos.transaction("veterinarys","readwrite");
+  let objetStore=transaction.objectStore("veterinarys");
+
+  transaction.oncomplete=()=>{
+    resolve();
+  }
+
+  let cursorStopped=false;
+  let cursor=objetStore.openCursor();
+  cursor.addEventListener("success",(e)=>{
+      let puntero=e.target.result;
+      if(puntero && !cursorStopped){
+          let valor=puntero.value;
+          if(puntero.key==id){
+            if(puntero.value.veterinaryStart==true){
+              
+              valor.startProfile = false; // Modificar la propiedad inicio a true
+              puntero.update(valor);
+              cursorStopped=true;
+            }
+            
+          }
+          puntero.continue();
+          }
+          else{
+          reject(new notFoundId("El correo no existe"));
+      }
+      
+  });
+  })
+
+  .catch();
   });
 }
