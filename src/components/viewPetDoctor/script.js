@@ -69,13 +69,27 @@ class inicioNotFound extends Error{
 
 //end personality erros
 
+let icon=document.querySelector(".material-symbols-outlined");
+let menuHidden=document.querySelector(".menuHidden");
+let searchHidden=document.querySelector(".searchHidden");
+// let body=document.querySelector(".body");
+
+icon.addEventListener("click",(e)=>{
+    menuHidden.classList.toggle("viewMenuOptions");
+    searchHidden.classList.remove("viewSearch");
+});
+
+let search=document.querySelector(".material-symbols-outlined1");
+
+search.addEventListener("click",(e)=>{
+    menuHidden.classList.remove("viewMenuOptions");
+    searchHidden.classList.toggle("viewSearch");
+});
+
+
 
 
 /*ZONA ELEMENTOS HTML*/
-
-
-
-
 
 
 
@@ -95,7 +109,7 @@ let viewHistory=document.querySelector(".viewHistory"); // bottom de create prof
 let equis2=document.querySelector(".equis2");
 
 
-let viewMenu=document.querySelector(".viewMenu"); //bottom para view profiles
+let viewMenu=document.querySelector(".viewMenu2"); //bottom para view profiles
 
 
 let optionsNav=document.querySelector(".containerOptions");

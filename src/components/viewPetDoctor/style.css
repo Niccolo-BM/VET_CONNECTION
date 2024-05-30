@@ -106,6 +106,16 @@ input{
 .menuHidden{
     visibility: hidden;
     position: absolute;
+    font-size: 20px;
+    padding: 20px;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    position: absolute;
+    background-color: #7af1d0d7;
+    border-radius: 10px;
+    transition: .3s;
+    transform: translateX(-25%);
 }
 
 .searchHidden{
@@ -113,7 +123,7 @@ input{
     position: absolute;
 }
 
-.viewMenu{
+.viewMenuOptions{
     visibility: initial;
     padding: 20px;
     display: flex;
@@ -125,19 +135,22 @@ input{
     transition: .3s;
     margin-top: 2.5%;
     transform: translateX(-65%);
-    transform: translatez(20%);
-
-    
-
+    font-size: 20px;
 }
+
+.ri-menu-line{
+    font-size: 25px;
+}
+
+
 .material-symbols-outlined{
     display: flex;
     justify-content: center;
     width: 50px;
     height: 50px;
     border-radius: 100%;
-    text-align: center;
     align-content: center;
+    padding: 10px;
 }
 .material-symbols-outlined1{
     display: flex;
@@ -365,12 +378,12 @@ a{
 
 /*BUTTONS*/
 
-.viewMenu{
+.viewMenu2{
     width: 9.5%;
     height: 21%;
     position: absolute;
-    top: 31.5%;
-    left:21.8%;
+    top: 36%;
+    left:15.3%;
     font-size: 33px;
     z-index: 20;
     border-radius: 50%;
@@ -388,7 +401,7 @@ a{
     font-weight: 700;
 }
 
-.viewMenu:hover{
+.viewMenu2:hover{
 
     transition: .5s;
     z-index: 10;
