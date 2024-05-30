@@ -224,10 +224,7 @@ const validateEmailMedical=()=>{
         let transaction=baseDatos.transaction("medical-profiles");
         let objetStore=transaction.objectStore("medical-profiles");
 
-        // let indice=objetStore.index("veterinaryNitIndex");
-
-        // let rango=IDB.only(email);
-
+        
         let cursor=objetStore.openCursor();
 
         cursor.addEventListener("success",(e)=>{
@@ -250,8 +247,6 @@ const validateEmailMedical=()=>{
 
             }
         })
-     
-
     })
 }
 

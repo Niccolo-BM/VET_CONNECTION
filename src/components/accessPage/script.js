@@ -460,11 +460,11 @@ const resetValuesEntitys=()=>{
         let objectStore=transaction.objectStore("entity");
         let cursor=objectStore.openCursor();
 
-        let cursorStopped=false;
+        
 
         cursor.onsuccess=(e)=>{
             let puntero=e.target.result;
-            if(puntero && !cursorStopped){
+            if(puntero ){
                 let values=puntero.value;
 
                 values.activateVeterinary=false;
