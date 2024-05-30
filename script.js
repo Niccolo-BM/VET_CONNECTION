@@ -14,7 +14,7 @@ let search=document.querySelector(".material-symbols-outlined1");
 let imgSearch=document.querySelector("#img3");
 
 imgSearch.addEventListener("click",(e)=>{
-    alert("entra");
+    // alert("entra");
     menuHidden.classList.remove("viewMenu");
     searchHidden.classList.toggle("viewSearch");
 });
