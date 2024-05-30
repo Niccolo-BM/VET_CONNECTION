@@ -610,3 +610,14 @@ export const getIdUserUrl=()=>{
       }
     });
 }
+
+
+export const otherPets=()=>{
+    return new Promise((resolve,reject)=>{
+        getUrlParams2()
+        .then(()=>{
+            
+        })
+        .catch();
+    });
+}

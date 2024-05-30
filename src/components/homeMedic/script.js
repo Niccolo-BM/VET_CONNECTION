@@ -412,15 +412,15 @@ const obtainMedicalId=()=>{
 
  const addPetsInDateBase=(medicalIdInCharge)=>{ /*Funcion para meter nuevos profiles vets a la base de datos*/
  return new Promise((resolve, reject) => {
-    let name=document.querySelector(".name").value;
-    let name2=document.querySelector(".ownerName").value;
-    let id=document.querySelector(".id").value;     //Recogemos todos los valores ingresados
+    let name=document.querySelector(".name").value.toLowerCase();
+    let name2=document.querySelector(".ownerName").value.toLowerCase();
+    let id=document.querySelector(".id").value.toLowerCase();     //Recogemos todos los valores ingresados
     let password=document.querySelector(".password").value;
-    let specie=document.querySelector(".specie").value;
-    let raza=document.querySelector(".raza").value;
-    let agePet=document.querySelector(".age").value;
-    let address=document.querySelector(".address").value;
-    let phone=document.querySelector(".telephone").value;
+    let specie=document.querySelector(".specie").value.toLowerCase();
+    let raza=document.querySelector(".raza").value.toLowerCase();
+    let agePet=document.querySelector(".age").value.toLowerCase();
+    let address=document.querySelector(".address").value.toLowerCase();
+    let phone=document.querySelector(".telephone").value.toLowerCase();
 
     //Incio de la transaccionFalse para agregar datos al almacen de medical-profiles
     let transaccionFalse=baseDatos.transaction("profiles-pets","readwrite");
